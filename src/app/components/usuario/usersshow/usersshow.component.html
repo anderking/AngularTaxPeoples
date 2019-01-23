@@ -1,0 +1,19 @@
+<div class="container" *ngIf="user">
+
+	<div class="image" >
+		<img src="{{url+'get-image-user/'+user.image}}"/>
+	</div>
+	
+	<div class="data">
+		<h1>Nombre: {{user.name}}</h1>
+		<h3>Descripcion: {{user.description}}</h3>
+		<h3>Trabajo: {{user.job}}</h3>
+		<h3>Web:{{user.web}}</h3>
+		<h3>Proyectos {{ total }}</h3>
+		<ul>
+			<li *ngFor="let project of projects"><a [routerLink]="['/proyectos/show', project._id] ">{{ project.name}}</a></li>
+		</ul>
+		<button (click)="goBack()" class=" center button-primary">Regresar</button>
+	</div>
+
+</div>

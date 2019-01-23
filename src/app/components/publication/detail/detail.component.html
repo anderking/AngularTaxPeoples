@@ -1,0 +1,37 @@
+<div class="container" *ngIf="project">
+
+	<div class="image" *ngIf="project.image">
+		<img src="{{url+'get-image-project/'+project.image}}"/>
+	</div>
+	<div class="image" *ngIf="!project.image">
+		<img src="{{url+'get-image-project/'+project.image}}"/>
+	</div>
+	<div class="data">
+		<h1>{{project.name}}</h1>
+		<h3>{{project.description}}</h3>
+		<p>{{project.category}}</p>
+		<p>{{project.langs}}</p>
+		<p>{{project.year}}</p>
+		<div *ngIf="user">
+			<p *ngIf="confirm == false">
+				<button *ngIf=" user.tipo=='member' || user.tipo=='admin' " [routerLink]="['/proyectos/edit', project._id]" class="button-edit">Editar</button>
+				<button *ngIf=" user.tipo=='member' || user.tipo=='admin' " (click)="setConfirm(true)" class="button-delete">Borrar</button>
+			</p>
+			
+			<p *ngIf="confirm == true">
+				<span class="confirm">¿Estas seguro de eliminar este proyecto?</span><br>
+				<button (click)="setConfirm(false)" class="button-edit">No</button>
+				<button (click)="deleteProject(project._id)" class="button-delete">Si</button>
+			</p>
+			<p *ngIf="confirm == false">
+				<button *ngIf=" user.tipo=='member' " [routerLink]="['/proyectos/user/',resID]" class="center button-primary">Regresar</button>
+				<button *ngIf=" user.tipo=='client' || user.tipo=='admin' " [routerLink]="['/proyectos/']" class="center button-primary">Regresar</button>
+			</p>
+
+		<button class="center button-primary" *ngIf="!likebool" (click)="upLikes()" > Me gusta</button>
+		<button class="center button-primary" *ngIf="likebool" (click)="disLikes()" > No me gusta</button>
+		<h1>{{ likes }}</h1>
+		</div>
+	</div>
+
+</div>

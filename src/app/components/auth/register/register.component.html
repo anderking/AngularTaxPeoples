@@ -1,0 +1,64 @@
+<ngx-spinner
+bdColor = "rgba(51, 51, 51, 0.8)"
+size = "large"
+color = "#fff"
+type = "ball-clip-rotate"
+></ngx-spinner>
+
+<main class="main_register">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+
+        <div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
+          {{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <h2 *ngIf="!isError" class="text-center mb-3">Registrate</h2>
+
+        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+          <div class="form-row">
+
+            <div class="col-md-12 mb-3">
+
+              <label for="email">Email</label>
+
+              <input type="email" [ngClass]="{'is-invalid': validationEmail.touched && !validationEmail.valid, 'is-valid': validationEmail.touched && validationEmail.valid}" class="form-control" name="email" #validationEmail="ngModel" placeholder="Email" [(ngModel)]="email" required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" >
+
+              <div class="invalid-feedback" *ngIf="validationEmail.touched && !validationEmail.valid">
+                <div *ngIf="validationEmail.errors.required">Por favor, introduzca un Email</div>
+                <div *ngIf="validationEmail.errors.pattern">El Email no es correcto, Ejemplo: name@company.com</div>
+              </div>
+
+            </div>
+
+            <div class="col-md-12 mb-3">
+
+              <label for="password">Password</label>
+
+              <input type="password" [ngClass]="{'is-invalid': validationPassword.touched && !validationPassword.valid, 'is-valid': validationPassword.touched && validationPassword.valid}" class="form-control" name="password" #validationPassword="ngModel" placeholder="Password" [(ngModel)]="password" required minlength="4" maxlength="25" pattern="(?=[#$-/:-?{-~!'^_`\[\]a-zA-Z]*([0-9#$-/:-?{-~!'^_`\[\]]))(?=[#$-/:-?{-~!'^_`\[\]a-zA-Z0-9]*[a-zA-Z])[#$-/:-?{-~!'^_`\[\]a-zA-Z0-9]{4,}">
+
+              <div class="invalid-feedback" *ngIf="validationPassword.touched && !validationPassword.valid">
+                <div *ngIf="validationPassword.errors.required">Por favor, introduzca un Password</div>
+                <div *ngIf="validationPassword.errors.minlength">El password debe contener minimo 4 caracteres</div>
+                <div *ngIf="validationPassword.errors.maxlength">El password debe contener maximo 25 caracteres</div>
+                <div *ngIf="validationPassword.errors.pattern">El password no es correcto, debe contener letras y numeros o caracteres especiales Ejemplo: 1234f / 1Pass / pass*#</div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registrate</button>
+          <button type="reset" class="btn btn-secondary">Cancelar</button>
+          <a class="btn btn-dark" [routerLink]="['/login']" role="button">Regresar</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

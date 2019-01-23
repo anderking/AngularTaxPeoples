@@ -1,0 +1,142 @@
+<main class="main_edit_persona">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+
+        <div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
+          {{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <h2 *ngIf="!isError" class="text-center mb-3">Persona Natural</h2>
+        <div *ngIf="persona">
+          <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+            <div class="form-row">
+              
+              <div class="col-md-12 mb-3">
+
+                <label for="name">Nombre</label>
+
+                <input type="text" [ngClass]="{'is-invalid': validationName.touched && !validationName.valid, 'is-valid': validationName.touched && validationName.valid}" class="form-control" name="name" #validationName="ngModel" placeholder="Nombre" [(ngModel)]="persona.name" required>
+
+                <div class="invalid-feedback" *ngIf="validationName.touched && !validationName.valid">
+                  <div *ngIf="validationName.errors.required">Por favor, introduzca un Nombre completo</div>
+                </div>
+
+              </div>
+              
+
+              <div class="col-md-12 mb-3">
+
+                <label for="fechaNacimiento">Fecha de Nacimiento</label>
+
+                <input type="date" id="inputDate" [ngClass]="{'is-invalid': validationFechaNacimiento.touched && !validationFechaNacimiento.valid, 'is-valid': validationFechaNacimiento.touched && validationFechaNacimiento.valid}" class="form-control" name="fechaNacimiento" #validationFechaNacimiento="ngModel" [(ngModel)]="persona.fechaNacimiento" [max]=" fechaActual " required>
+                
+                <div class="invalid-feedback" *ngIf="validationFechaNacimiento.touched && !validationFechaNacimiento.valid">
+                  <div *ngIf="validationFechaNacimiento.errors.required">Por favor, introduzca una Fecha valida</div>
+                </div>
+
+              </div>
+
+              <div class="col-md-12 mb-3">
+
+                <label for="telefono">Teléfono</label>
+
+                <input type="text" [ngClass]="{'is-invalid': validationTelefono.touched && !validationTelefono.valid, 'is-valid': validationTelefono.touched && validationTelefono.valid}" class="form-control" name="telefono" #validationTelefono="ngModel" placeholder="Teléfono" [(ngModel)]="persona.telefono" required pattern="^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$">
+
+                <div class="invalid-feedback" *ngIf="validationTelefono.touched && !validationTelefono.valid">
+                  <div *ngIf="validationTelefono.errors.required">Por favor, introduzca un Teléfono</div>
+                  <div *ngIf="validationTelefono.errors.pattern">El telefono no es correcto, Ejemplo: +581234567890</div>
+                  
+
+                </div>
+
+              </div>
+
+
+              <div class="col-md-12 mb-3">
+
+                <label for="direccion">Dirección</label>
+
+                <input type="text" [ngClass]="{'is-invalid': validationDireccion.touched && !validationDireccion.valid, 'is-valid': validationDireccion.touched && validationDireccion.valid}" class="form-control" name="direccion" #validationDireccion="ngModel" placeholder="Dirección" [(ngModel)]="persona.direccion" required>
+
+                <div class="invalid-feedback" *ngIf="validationDireccion.touched && !validationDireccion.valid">
+                  <div *ngIf="validationDireccion.errors.required">Por favor, introduzca una Dirección</div>
+                </div>
+
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <label for="estado">Estado</label>
+                <select [ngClass]="{'is-invalid': validationEstado.touched && !validationEstado.valid, 'is-valid': validationEstado.touched && validationEstado.valid}" name="estado" #validationEstado="ngModel" [(ngModel)]="persona.estado" class="form-control" required>
+                  <option *ngFor="let categoria of categoria" [value]="categoria.id"> {{categoria.name}}</option>
+                </select>
+                
+                <div class="invalid-feedback" *ngIf="validationEstado.touched && !validationEstado.valid">
+                  <div *ngIf="validationEstado.errors.required">Por favor, introduzca un Estado</div>
+                </div>
+
+              </div>
+
+
+              <div class="col-md-12 mb-3">
+
+                <label for="sexo">Sexo</label>
+                <div class="form-check custom-control custom-checkbox">
+                  <input class="form-check-input" type="radio" name="sexo" #validationSexoM="ngModel" [(ngModel)]="persona.sexo" value="M" required [ngClass]="{'is-invalid': validationSexoM.touched && !validationSexoM.valid, 'is-valid': validationSexoM.valid}">
+                  <label class="form-check-label" for="SexoM">
+                    Masculino
+                  </label>
+                  <div class="invalid-feedback" *ngIf="validationSexoM.touched && !validationSexoM.valid">
+                    <div *ngIf="validationSexoM.errors.required">Por favor, introduzca un Sexo</div>
+                  </div>
+                </div>
+                <div class="form-check custom-control custom-checkbox">
+                  <input class="form-check-input" type="radio" name="sexo" #validationSexoF="ngModel" [(ngModel)]="persona.sexo" value="F" required [ngClass]="{'is-invalid': validationSexoF.touched && !validationSexoF.valid, 'is-valid': validationSexoF.valid}">
+                  <label class="form-check-label" for="SexoF">
+                    Femenino
+                  </label>
+                  <div class="invalid-feedback" *ngIf="validationSexoF.touched && !validationSexoF.valid">
+                    <div *ngIf="validationSexoF.errors.required">Por favor, introduzca un Sexo</div>
+                  </div>
+                </div>
+
+              </div>
+
+              <div class="col-md-12 mb-3">
+
+                <label for="edoCivil">Edo civil</label>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="edoCivil" #validationEdocivilS="ngModel" [(ngModel)]="persona.edoCivil" value="S" required [ngClass]="{'is-invalid': validationEdocivilS.touched && !validationEdocivilS.valid, 'is-valid': validationEdocivilS.valid}">
+                  <label class="form-check-label" for="">
+                    Soltero
+                  </label>
+                  <div class="invalid-feedback" *ngIf="validationEdocivilS.touched && !validationEdocivilS.valid">
+                    <div *ngIf="validationEdocivilS.errors.required">Por favor, introduzca un Edo civil</div>
+                  </div>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="edoCivil" #validationEdocivilC="ngModel" [(ngModel)]="persona.edoCivil" value="C" required [ngClass]="{'is-invalid': validationEdocivilC.touched && !validationEdocivilC.valid, 'is-valid': validationEdocivilC.valid}">
+                  <label class="form-check-label" for="">
+                    Casado
+                  </label>
+                  <div class="invalid-feedback" *ngIf="validationEdocivilC.touched && !validationEdocivilC.valid">
+                    <div *ngIf="validationEdocivilC.errors.required">Por favor, introduzca un Edo civil</div>
+                  </div>
+                </div>
+
+              </div>
+
+            </div>
+
+            <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Actualizar</button>
+            <a class="btn btn-dark" [routerLink]="['/register']" role="button">Regresar</a>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

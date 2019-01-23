@@ -1,0 +1,105 @@
+<ngx-spinner
+bdColor = "rgba(51, 51, 51, 0.8)"
+size = "large"
+color = "#fff"
+type = "ball-clip-rotate"
+></ngx-spinner>
+
+<main class="main_registerJ">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
+
+        <div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
+          {{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <h2 *ngIf="!isError" class="text-center mb-3">Persona Jurídica</h2>
+
+        <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+          <div class="form-row">
+            
+            <div class="col-md-12 mb-3">
+
+              <label for="name">Nombre Empresa</label>
+
+              <input type="text" [ngClass]="{'is-invalid': validationName.touched && !validationName.valid, 'is-valid': validationName.touched && validationName.valid}" class="form-control" name="name" #validationName="ngModel" placeholder="Nombre Empresa" [(ngModel)]="name" required>
+
+              <div class="invalid-feedback" *ngIf="validationName.touched && !validationName.valid">
+                <div *ngIf="validationName.errors.required">Por favor, introduzca un Nombre completo</div>
+              </div>
+
+            </div>
+            
+            <div class="col-md-12 mb-3">
+
+              <label for="rif">RIF</label>
+
+              <input type="text" [ngClass]="{'is-invalid': validationRIF.touched && !validationRIF.valid, 'is-valid': validationRIF.touched && validationRIF.valid}" class="form-control" name="rif" #validationRIF="ngModel" placeholder="RIF" [(ngModel)]="rif" required maxlength="11" pattern="^([JPG]{1})([0-9]{7,10})$">
+
+              <div class="invalid-feedback" *ngIf="validationRIF.touched && !validationRIF.valid">
+                
+                <div *ngIf="validationRIF.errors.required">Por favor, introduzca un RIF</div>
+                <div *ngIf="validationRIF.errors.maxlength">El RIF debe contener maximo 9 caracteres</div>
+                <div *ngIf="validationRIF.errors.pattern">El RIF no es correcto, Ejemplo: J123456789, P123456789 ó G123456789</div>
+
+              </div>
+
+            </div>
+
+
+            <div class="col-md-12 mb-3">
+
+              <label for="telefono">Teléfono</label>
+
+              <input type="text" [ngClass]="{'is-invalid': validationTelefono.touched && !validationTelefono.valid, 'is-valid': validationTelefono.touched && validationTelefono.valid}" class="form-control" name="telefono" #validationTelefono="ngModel" placeholder="Teléfono" [(ngModel)]="telefono" required pattern="^\s*(?:\+?(\d{1,3}))?([-. (]*(\d{3})[-. )]*)?((\d{3})[-. ]*(\d{2,4})(?:[-.x ]*(\d+))?)\s*$">
+
+              <div class="invalid-feedback" *ngIf="validationTelefono.touched && !validationTelefono.valid">
+                <div *ngIf="validationTelefono.errors.required">Por favor, introduzca un Teléfono</div>
+                <div *ngIf="validationTelefono.errors.pattern">El telefono no es correcto, Ejemplo: +581234567890</div>
+                
+
+              </div>
+
+            </div>
+
+
+            <div class="col-md-12 mb-3">
+
+              <label for="direccion">Dirección</label>
+
+              <input type="text" [ngClass]="{'is-invalid': validationDireccion.touched && !validationDireccion.valid, 'is-valid': validationDireccion.touched && validationDireccion.valid}" class="form-control" name="direccion" #validationDireccion="ngModel" placeholder="Dirección" [(ngModel)]="direccion" required>
+
+              <div class="invalid-feedback" *ngIf="validationDireccion.touched && !validationDireccion.valid">
+                <div *ngIf="validationDireccion.errors.required">Por favor, introduzca una Dirección</div>
+              </div>
+
+            </div>
+
+            <div class="col-md-12 mb-3">
+              <label for="estado">Estado</label>
+              <select [ngClass]="{'is-invalid': validationEstado.touched && !validationEstado.valid, 'is-valid': validationEstado.touched && validationEstado.valid}" name="estado" #validationEstado="ngModel" [(ngModel)]="categoriaSelected" class="form-control" required>
+                <option *ngFor="let categoria of categoria" [value]="categoria.id"> {{categoria.name}}</option>
+              </select>
+              
+              <div class="invalid-feedback" *ngIf="validationEstado.touched && !validationEstado.valid">
+                <div *ngIf="validationEstado.errors.required">Por favor, introduzca un Estado</div>
+              </div>
+
+            </div>
+
+
+          </div>
+
+          <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registrate</button>
+          <button type="reset" class="btn btn-secondary">Cancelar</button>
+          <a class="btn btn-dark" [routerLink]="['/register/',resID]" role="button">Regresar</a>
+
+        </form>
+      </div>
+    </div>
+  </div>
+</main>

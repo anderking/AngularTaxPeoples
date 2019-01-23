@@ -1,0 +1,18 @@
+<h1 class="center title">{{total}} Usuarios</h1>
+<hr>
+<div class="container">
+	<ul *ngIf="users">
+		<li *ngFor="let user of users" class="project">
+			<a [routerLink]="['/users/show', user._id]">
+				<div class="image">
+					<img src="{{url+'get-image-user/'+user.image}}" />
+				</div>
+				<h2>{{ user.name }}</h2>
+				<h3>{{ user.tipo }}</h3>
+			</a>
+		</li>
+	</ul>
+	<h2 *ngIf="!users">No hay proyectos</h2>
+</div>
+
+<router-outlet></router-outlet>

@@ -1,0 +1,155 @@
+@import url("../font-awesome/css/font-awesome.css");
+
+body,html{
+	background: #f5f8fa;
+}
+
+.main {
+    padding: 6em 0 4em 0;
+    min-height: 100vh;
+}
+.main_register,.main_registerN,.main_registerJ,.main_edit_user,.main_edit_persona,.main_edit_empresa{
+	padding: 3em 0;
+	min-height: 100vh;
+}
+.main_perfil{
+	min-height: 100vh;	
+}
+.main_perfil .container-fluid,.main_perfil .col-12{
+	padding-left: 0;
+	padding-right: 0;
+}
+.main_perfil .row{
+	margin-right: 0;
+    margin-left: 0;
+}
+footer{
+	color: #FFFFFF;
+	background: #343a40 !important;
+}
+
+footer p{
+	padding: 1.5em;
+	margin: 0;
+}
+a,a:hover{
+	text-decoration: none;
+}
+a.btn, button.btn{
+	margin-right: 1em;
+}
+header .navbar{
+
+}
+.img_profiel {
+    height: 50px !important;
+    width: 50px !important;
+    margin: 5px !important;
+    border: 2px solid hsla(0,0%,100%,.8) !important;
+    border-radius: 50%;
+}
+.dropdown-toggle::after{
+	content: none;
+}
+
+.dropdown-menu {
+    left: auto;
+    right: 0;
+    margin-top: 7px;
+}
+.dropdown-menu a:hover,.dropdown-menu a:focus,.dropdown-menu a:active,.dropdown-menu a:visited{
+	background-color: #E6E6E6;
+	color: #212529;
+}
+i{
+	margin-right: 5px;
+}
+
+.box_flot {
+    border-radius: 2px;
+    background-clip: padding-box;
+    box-shadow: 0 7px 12px rgba(0,0,0,0.45);
+}
+
+.pz {
+    position: relative;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    min-width: 0;
+    word-wrap: break-word;
+    background-color: #fff;
+    background-clip: border-box;
+    min-height: 100vh;
+}
+.afl {
+    margin-bottom: 1.5rem !important;
+}
+
+.bpi .qf {
+    height: 250px;
+    background-size: cover;
+}
+
+.qf {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+ }
+
+ .avz {
+    text-align: center !important;
+}
+
+.qa {
+    -webkit-box-flex: 1;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    padding: 1.25rem;
+}
+.bpj {
+    width: 200px;
+    height: 200px;
+    margin-top: -70px;
+    margin-bottom: 5px;
+    border: 3px solid #fff;
+    border-radius: 100%;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+.bpi .qb {
+    margin-bottom: 5px;
+}
+.bpk {
+    list-style: none;
+    padding: 0;
+}
+.bpl {
+    display: inline-block;
+    padding: 0 10px;
+    border-right: 1px solid #d4dbe0;
+}
+.bpl:last-child {
+    border-right: 0;
+}
+
+.black-overlay{
+	position: fixed !important;
+}
+
+.show-password{
+    margin-right: 0 !important;
+}
+
+.custom-file-label::after{
+    content: "Buscar" !important;
+    overflow: hidden !important;
+}
+
+.custom-file-label{
+    overflow: hidden !important;
+}
