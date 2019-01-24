@@ -31,15 +31,12 @@ export class RegisterComponent implements OnInit {
 		private authService: AuthService,
 		private _userService: UserService,
     	private spinner: NgxSpinnerService,
-
 	)
 	{		
-
 	}
 
 	ngOnInit()
 	{
-		console.log("dasds")
 	}
 
 	register(form: NgForm)

@@ -1,0 +1,53 @@
+<main class="main_rutas_edit">
+	<div class="container">
+		<div class="row justify-content-center">
+			<div class="col-12 col-sm-10 col-md-8 col-lg-6">
+
+				<div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
+					{{message}}
+					<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+
+				<h2 *ngIf="!isError" class="text-center mb-3">Actualice la ruta</h2>
+				
+				<div *ngIf="ruta">
+
+					<form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+						<div class="form-row">
+
+							<div class="col-md-12 mb-3">
+
+								<label for="name">Nombre</label>
+								<input type="text" [ngClass]="{'is-invalid': validationName.touched && !validationName.valid, 'is-valid': validationName.touched && validationName.valid}" class="form-control" name="name" #validationName="ngModel" placeholder="Nombre" [(ngModel)]="ruta.name" required>
+
+								<div class="invalid-feedback" *ngIf="validationName.touched && !validationName.valid">
+									<div *ngIf="validationName.errors.required">Por favor, introduzca un Nombre</div>
+								</div>
+
+							</div>
+
+							<div class="col-md-12 mb-3">
+
+								<label for="password">Descripción</label>
+								<input type="text" [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}" class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción" [(ngModel)]="ruta.description" required>
+
+								<div class="invalid-feedback" *ngIf="validationDescription.touched && !validationDescription.valid">
+									<div *ngIf="validationDescription.errors.required">Por favor, introduzca un Descripción completo</div>
+								</div>
+
+							</div>
+
+						</div>
+
+						<button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Actualizar</button>
+						<button (click)="goBack()" class="btn btn-dark">Regresar</button>
+					
+					</form>
+					
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

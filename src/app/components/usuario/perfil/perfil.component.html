@@ -29,6 +29,7 @@
 									</div>
 								</div>
 							</form>
+							<p class="afo">{{ user.description }}</p>
 							<hr>
 
 							<p class="afo"><b>Cedula: </b>{{ persona.cedula }}</p>
@@ -44,7 +45,7 @@
 								<span *ngIf=" persona.edoCivil=='C' ">Casado</span>
 							</p>
 							<p class="afo"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento }}</p>
-							<p class="afo"><b>Tipo de Usuario: </b><span class="badge badge-primary">{{ user.tipo }}</span></p>
+							<p class="afo"><b>Tipo de Usuario: </b><span class="badge" [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }" >{{ rolID }}</span></p>
 
 
 							<ul class="bpk">
@@ -62,8 +63,8 @@
 									</a>
 								</li>
 							</ul>
-            				<a class="btn btn-info" [routerLink]="['/perfil/'+resID+'/persona/edit', resID]" role="button">Editar Información</a>
-            				<a class="btn btn-info" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</a>
+            				<button class="btn btn-primary" [routerLink]="['/perfil/'+resID+'/persona/edit', resID]" role="button">Editar Información</button>
+            				<button class="btn btn-primary" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</button>
 
 						</div>
 					</div>
@@ -96,13 +97,14 @@
 									</div>
 								</div>
 							</form>
+							<p class="afo">{{ user.description }}</p>
 							<hr>
 
 							<p class="afo"><b>RIF: </b>{{ empresa.rif }}</p>
 							<p class="afo"><b>Telefono: </b>{{ empresa.telefono }}</p>
 							<p class="afo"><b>Direccion: </b>{{ empresa.direccion }}</p>
 							<p class="afo"><b>Estado: </b>{{ empresa.estado }}</p>
-							<p class="afo"><b>Tipo de Usuario: </b><span class="badge" [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro' }" >{{ rolID }}</span></p>
+							<p class="afo"><b>Tipo de Usuario: </b><span class="badge" [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }" >{{ rolID }}</span></p>
 
 
 							<ul class="bpk">
@@ -120,8 +122,9 @@
 									</a>
 								</li>
 							</ul>
-            				<a class="btn btn-info" [routerLink]="['/perfil/'+resID+'/empresa/edit', resID]" role="button">Editar Información</a>
-            				<a class="btn btn-info" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</a>
+            				<button class="btn btn-primary" [routerLink]="['/perfil/'+resID+'/persona/edit', resID]" role="button">Editar Información</button>
+            				<button class="btn btn-primary" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</button>
+            				<button class="btn btn-primary" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis publicaciones</button>
 
 						</div>
 					</div>

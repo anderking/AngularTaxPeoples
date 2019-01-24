@@ -1,6 +1,11 @@
 import { ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
+import { AuthGuard } from './auth.guard';
+import { RoleGuard } from './role.guard';
+import { RedirectAuthGuard } from './redirect-auth.guard';
+
+import { RestringidoComponent } from './components/restringido/restringido.component';
 import { ErrorComponent } from './components/error/error.component';
 
 import { LoginComponent } from './components/auth/login/login.component';
@@ -12,7 +17,6 @@ import { RegisterJComponent } from './components/auth/register-j/register-j.comp
 import { LoginspinnerComponent } from './components/auth/loginspinner/loginspinner.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
 
-
 import { CreateComponent } from './components/publication/create/create.component';
 import { ProjectsComponent } from './components/publication/projects/projects.component';
 import { DetailComponent } from './components/publication/detail/detail.component';
@@ -20,21 +24,36 @@ import { EditarComponent } from './components/publication/editar/editar.componen
 import { ProjectspadreComponent } from './components/publication/projectspadre/projectspadre.component';
 import { ProjectsusersComponent } from './components/publication/projectsusers/projectsusers.component';
 
+import { UserspadreComponent } from './components/usuario/userspadre/userspadre.component';
 import { UsersComponent } from './components/usuario/users/users.component';
-import { EdituserComponent } from './components/usuario/edituser/edituser.component';
+import { UsersshowComponent } from './components/usuario/usersshow/usersshow.component';
+import { UserseditComponent } from './components/usuario/usersedit/usersedit.component';
+import { UsersdeleteComponent } from './components/usuario/usersdelete/usersdelete.component';
+
+import { PerfilpadreComponent } from './components/usuario/perfilpadre/perfilpadre.component';
+import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { EditpersonaComponent } from './components/usuario/editpersona/editpersona.component';
 import { EditempresaComponent } from './components/usuario/editempresa/editempresa.component';
+import { EdituserComponent } from './components/usuario/edituser/edituser.component';
 
-import { PerfilComponent } from './components/usuario/perfil/perfil.component';
-import { UsersshowComponent } from './components/usuario/usersshow/usersshow.component';
-import { UserspadreComponent } from './components/usuario/userspadre/userspadre.component';
-import { PerfilpadreComponent } from './components/usuario/perfilpadre/perfilpadre.component';
+import { CategoriaspadreComponent } from './components/categoria/categoriaspadre/categoriaspadre.component';
+import { CategoriasComponent } from './components/categoria/categorias/categorias.component';
+import { CategoriascreateComponent } from './components/categoria/categoriascreate/categoriascreate.component';
+import { CategoriasshowComponent } from './components/categoria/categoriasshow/categoriasshow.component';
+import { CategoriaseditComponent } from './components/categoria/categoriasedit/categoriasedit.component';
+import { CategoriasdeleteComponent } from './components/categoria/categoriasdelete/categoriasdelete.component';
 
-import { RestringidoComponent } from './components/restringido/restringido.component';
+import { RutaspadreComponent } from './components/ruta/rutaspadre/rutaspadre.component';
+import { RutasComponent } from './components/ruta/rutas/rutas.component';
+import { RutascreateComponent } from './components/ruta/rutascreate/rutascreate.component';
+import { RutaseditComponent } from './components/ruta/rutasedit/rutasedit.component';
+import { RutasshowComponent } from './components/ruta/rutasshow/rutasshow.component';
+import { RutasdeleteComponent } from './components/ruta/rutasdelete/rutasdelete.component';
 
-import { AuthGuard } from './auth.guard';
-import { RoleGuard } from './role.guard';
-import { RedirectAuthGuard } from './redirect-auth.guard';
+import { TimelinepadreComponent } from './components/timeline/timelinepadre/timelinepadre.component';
+import { TimelineComponent } from './components/timeline/timeline/timeline.component';
+
+
 
 
 // Array de rutas
@@ -57,12 +76,50 @@ const appRoutes: Routes = [
 			{path: 'persona/edit/:id', component: EditpersonaComponent},
 			{path: 'empresa/edit/:id', component: EditempresaComponent},
 			{path: 'user/configure/:id', component: EdituserComponent},
-
 		]
-
 	},
 	
-	{path: 'proyectos', component: ProjectspadreComponent, canActivate: [AuthGuard],
+	{path: 'users', component: UserspadreComponent, canActivate: [AuthGuard],
+		children:
+		[
+			{path: '', component: UsersComponent},
+			{path: 'show/:id', component: UsersshowComponent},
+			{path: 'edit/:id', component: UserseditComponent},
+			{path: 'delete/:id', component: UsersdeleteComponent},
+		]
+	},
+
+	{path: 'categorias', component: CategoriaspadreComponent, canActivate: [AuthGuard],
+		children:
+		[
+			{path: '', component: CategoriasComponent},
+			{path: 'create', component: CategoriascreateComponent},
+			{path: 'show/:id', component: CategoriasshowComponent},
+			{path: 'edit/:id', component: CategoriaseditComponent},
+			{path: 'delete/:id', component: CategoriasdeleteComponent},
+		]
+	},
+
+	{path: 'rutas', component: RutaspadreComponent, canActivate: [AuthGuard],
+		children:
+		[
+			{path: '', component: RutasComponent},
+			{path: 'create', component: RutascreateComponent},
+			{path: 'show/:id', component: RutasshowComponent},
+			{path: 'edit/:id', component: RutaseditComponent},
+			{path: 'delete/:id', component: RutasdeleteComponent},
+		]
+	},
+
+	{path: 'timeline', component: TimelinepadreComponent, canActivate: [AuthGuard] ,
+		children:
+		[
+			{path: '', component: TimelineComponent},
+			{path: 'categoria/:id', component: EditpersonaComponent},
+		]
+	},
+	
+	{path: 'publicaciones', component: ProjectspadreComponent, canActivate: [AuthGuard],
 		data: {id: localStorage.getItem('resID')},
 		children:
 		[
@@ -73,16 +130,7 @@ const appRoutes: Routes = [
 			{path: 'edit/:id', component: EditarComponent},
 		]
 	},
-	
-	{path: 'users', component: UserspadreComponent, canActivate: [AuthGuard], canActivateChild: [AuthGuard],
-		data: {id: localStorage.getItem('resID')},
-		children:
-		[
-			{path: '', component: UsersComponent},
-			{path: 'show/:id', component: UsersshowComponent},
-		]
-	},
-	
+
 	{path: 'restringido', component: RestringidoComponent},
 	{path: '**', component: ErrorComponent},
 

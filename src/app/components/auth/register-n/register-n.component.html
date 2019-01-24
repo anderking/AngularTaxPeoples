@@ -93,7 +93,7 @@ type = "ball-clip-rotate"
             <div class="col-md-12 mb-3">
               <label for="estado">Estado</label>
               <select [ngClass]="{'is-invalid': validationEstado.touched && !validationEstado.valid, 'is-valid': validationEstado.touched && validationEstado.valid}" name="estado" #validationEstado="ngModel" [(ngModel)]="categoriaSelected" class="form-control" required>
-                <option *ngFor="let categoria of categoria" [value]="categoria.id"> {{categoria.name}}</option>
+                <option *ngFor="let categoria of categoria" [value]="categoria._id"> {{categoria.name}}</option>
               </select>
               
               <div class="invalid-feedback" *ngIf="validationEstado.touched && !validationEstado.valid">

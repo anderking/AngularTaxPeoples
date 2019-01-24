@@ -27,7 +27,7 @@
                 </div>
 
               </div>
-            
+
               <div class="col-md-12 mb-3">
 
                 <label for="password">Password</label>
@@ -37,23 +37,32 @@
                   <div class="input-group-append">
                     <button class="btn btn-outline-primary show-password" type="button" (click)="toggleShow()"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
                   </div>
-                <div class="invalid-feedback" *ngIf="validationPassword.touched && !validationPassword.valid">
-                  <div *ngIf="validationPassword.errors.required">Por favor, introduzca un Password</div>
-                  <div *ngIf="validationPassword.errors.minlength">El password debe contener minimo 4 caracteres</div>
-                  <div *ngIf="validationPassword.errors.maxlength">El password debe contener maximo 25 caracteres</div>
-                  <div *ngIf="validationPassword.errors.pattern">El password no es correcto, debe contener letras y numeros o caracteres especiales Ejemplo: 1234f / 1Pass / pass*#</div>
+                  <div class="invalid-feedback" *ngIf="validationPassword.touched && !validationPassword.valid">
+                    <div *ngIf="validationPassword.errors.required">Por favor, introduzca un Password</div>
+                    <div *ngIf="validationPassword.errors.minlength">El password debe contener minimo 4 caracteres</div>
+                    <div *ngIf="validationPassword.errors.maxlength">El password debe contener maximo 25 caracteres</div>
+                    <div *ngIf="validationPassword.errors.pattern">El password no es correcto, debe contener letras y numeros o caracteres especiales Ejemplo: 1234f / 1Pass / pass*#</div>
+                  </div>
                 </div>
-                </div>
-
 
               </div>
               
-              
+              <div class="col-md-12 mb-3">
 
+                <label for="description">Descripción</label>
+
+                <input type="text" [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}" class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción" [(ngModel)]="user.description" required>
+
+                <div class="invalid-feedback" *ngIf="validationDescription.touched && !validationDescription.valid">
+                  <div *ngIf="validationDescription.errors.required">Por favor, introduzca un Descripción completo</div>
+                </div>
+
+              </div>
+              
             </div>
 
             <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Actualizar</button>
-            <a class="btn btn-dark" [routerLink]="['/register']" role="button">Regresar</a>
+            <button (click)="goBack()" class="btn btn-dark">Regresar</button>
 
           </form>
         </div>

@@ -14,6 +14,9 @@ export class ProjectService{
 		this.url = Global.url;
 	}
 
+	testService(){
+		return 'Probando el servicio de Angular';
+	}
 	saveProject(project: Project): Observable<any>{
 		let params = JSON.stringify(project);
 		let headers = new HttpHeaders().set('Content-Type','application/json');
