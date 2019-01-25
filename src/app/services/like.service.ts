@@ -14,26 +14,40 @@ export class LikeService{
 		this.url = Global.url;
 	}
 
-	upLikes(projectID:string, userID:string): Observable<any>
+	upLike(publicationID:string, userID:string): Observable<any>
 	{
-		return this._http.post(this.url+'likes/'+projectID, {projectID: projectID, userID: userID});
+		return this._http.post(this.url+'like/'+publicationID, {publicationID: publicationID, userID: userID});
 	}
 
-	disLikes(projectID:string, userID:string): Observable<any>
+	disLike(publicationID:string, userID:string): Observable<any>
 	{
-		return this._http.put(this.url+'likes/'+projectID, {projectID: projectID, userID: userID});
+		return this._http.put(this.url+'like/'+publicationID, {publicationID: publicationID, userID: userID});
 	}
 
-	getLikes(id): Observable<any>
+	getLikesPublication(id): Observable<any>
 	{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-		return this._http.get(this.url+'likes/'+id, {headers: headers});
+		return this._http.get(this.url+'likesPublications/'+id, {headers: headers});
 	}
 
-	isLike(userID:string, projectID:string): Observable<any>
+	getLikesUsers(id): Observable<any>
 	{
-		return this._http.get(this.url+'islikes/'+userID+'/'+projectID);
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'likesUsers/'+id, {headers: headers});
+	}
+
+	getLikes(): Observable<any>
+	{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'likes/', {headers: headers});
+	}
+
+	isLike(userID:string, publicationID:string): Observable<any>
+	{
+		return this._http.get(this.url+'islikes/'+userID+'/'+publicationID);
 	}
 
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../../../models/project';
-import { ProjectService } from '../../../services/project.service';
+import { Publication } from '../../../models/publication';
+import { PublicationService } from '../../../services/publication.service';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { Global } from '../../../services/global';
@@ -9,17 +9,17 @@ import {Location} from '@angular/common';
 import { LikeService } from '../../../services/like.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
-@Component({ 
-  selector: 'app-detail',
-  templateUrl: './detail.component.html',
-  styleUrls: ['./detail.component.css'],
-  providers:[ProjectService,LikeService]
+@Component({
+  selector: 'app-publicationsshow',
+  templateUrl: './publicationsshow.component.html',
+  styleUrls: ['./publicationsshow.component.css']
 })
-export class DetailComponent implements OnInit {
+
+export class PublicationsshowComponent implements OnInit {
 	
 	public user: User;
+	public publication: Publication;
 	public url: string;
-	public project: Project;
 	public confirm: boolean;
 	public resID:string;
 	public likes:number=0;
@@ -27,14 +27,12 @@ export class DetailComponent implements OnInit {
 
 	constructor
 	(
-		private _projectService: ProjectService,
+		private _publicationService: PublicationService,
 		private _userService: UserService,
 		private _likeService: LikeService,
 		private _router: Router,
 		private _route: ActivatedRoute,
 		private _location: Location
-
-
 	)
 	{
 		this.url = Global.url;
@@ -49,8 +47,8 @@ export class DetailComponent implements OnInit {
 			params =>
 			{
 				let id = params.id;
-				this.getProject(id);
-				this.getLikes(id);
+				this.getPublication(id);
+				this.getLikesPublication(id);
 				this.islike(id)
 			}
 		);
@@ -58,13 +56,16 @@ export class DetailComponent implements OnInit {
 
 	}
 
-	getProject(id)
+	getPublication(id)
 	{
-		this._projectService.getProject(id).subscribe
+		this._publicationService.getPublication(id).subscribe
 		(
 			response =>
 			{
-				this.project = response.project;
+				this.publication = response.publication;
+				console.log(this.publication);
+				this.publication.create_at = this.publication.create_at.split("T")[0];;
+
 			},
 			error =>
 			{
@@ -88,13 +89,13 @@ export class DetailComponent implements OnInit {
 		)
 	}
 
-	getLikes(id)
+	getLikesPublication(id)
 	{
 		this._likeService.getLikesPublication(id).subscribe
 		(
 			response =>
 			{
-				this.likes = response.likes.length;
+				this.likes = response.likesPublication.length;
 			},
 			error =>
 			{
@@ -103,37 +104,25 @@ export class DetailComponent implements OnInit {
 		)
 	}
 
-    islike(id){
-    	this._likeService.isLike(this.resID,id).subscribe(
+	deletePublication(id){
+		this._publicationService.deletePublication(id).subscribe(
 			response =>
 			{
-				if(response)
-          			this.likebool=true;
-          		else
-          			this.likebool=false;
-					
-			},
-			error =>
-			{
-				console.log(<any>error);
-			}
-		);
-    }
-
-	deleteProject(id){
-		this._projectService.deleteProject(id).subscribe(
-			response => {
-				if(response.project){
-					if(this.user.tipo=="member")
+				if(response.publication)
+				{
+					if(this.user.tipo=="miembro")
 					{
-						this._router.navigate(['/proyectos/user/'+this.user._id+'']);
+						this._router.navigate(['/publicaiones/user/'+this.user._id+'']);
 					}
 
 					if(this.user.tipo=="admin")
 					{
-						this._router.navigate(['/proyectos/']);
+						this._router.navigate(['/publicaciones/']);
 					}
 				}
+				$('body').removeClass('modal-open');
+				$("body").removeAttr("style");
+				$('.modal-backdrop.fade.show').css('display','none');
 			},
 			error => {
 				console.log(<any>error);
@@ -150,12 +139,31 @@ export class DetailComponent implements OnInit {
      this._location.back(); 
     }
 
-    upLikes(){
-    	this._likeService.upLike(this.project._id,this.resID).subscribe(
+    islike(id){
+    	this._likeService.isLike(this.resID,id).subscribe(
+			response =>
+			{
+				if(response)
+          			this.likebool=true;
+          		else
+          			this.likebool=false;
+
+          		console.log(this.likebool);
+					
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		);
+    }
+
+    upLike(){
+    	this._likeService.upLike(this.publication._id,this.resID).subscribe(
     		response =>
 			{
-				this.getLikes(this.project._id);
-				this.islike(this.project._id);
+				this.getLikesPublication(this.publication._id);
+				this.islike(this.publication._id);
 
 			},
 			error =>
@@ -165,12 +173,12 @@ export class DetailComponent implements OnInit {
     	);
     }
 
-    disLikes(){
-    	this._likeService.disLike(this.project._id,this.resID).subscribe(
+    disLike(){
+    	this._likeService.disLike(this.publication._id,this.resID).subscribe(
     		response =>
 			{
-				this.getLikes(this.project._id);
-				this.islike(this.project._id);
+				this.getLikesPublication(this.publication._id);
+				this.islike(this.publication._id);
 			},
 			error =>
 			{
@@ -178,6 +186,7 @@ export class DetailComponent implements OnInit {
 			}
     	);
     }
+
 
 
 }

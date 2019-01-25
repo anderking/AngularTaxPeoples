@@ -1,0 +1,115 @@
+<main class="main_publication_user">
+	<div class="container">
+		<div class="row justify-content-center my-3">
+		    <div class="col-12">
+		      <h2 class="text-center">Mis publicaciones</h2>
+		    </div>
+		</div>
+		<div class="row justify-content-center my-3">
+		    <div class="col-12">
+		      <p>
+		      	<a *ngIf="total>0" [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</a>
+		      </p>
+		    </div>
+		</div>
+	
+		<hr>
+		
+		<div class="row">
+			<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 mb-3" *ngFor="let publicationUser of publicationsUser; let i = index">
+
+				<div *ngIf="total<=0">
+					<div class="jumbotron jumbotron-fluid">
+					  <div class="container">
+					    <h2 class="display-4">Mis publicaciones</h2>
+					    <button [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</button>
+					  </div>
+					</div>
+				</div>
+
+				<div *ngIf="total>0">
+
+					<div class="card booking-card">
+						<div class="view overlay">
+							<a [routerLink]="['/publicaciones/show', publicationUser._id]">
+								<img class="card-img-top img-fluid"  src="{{url+'get-image-publication/'+publicationUser.image}}"/>
+							</a>
+						</div>
+						<div class="card-body">
+							  <!--<div class="row justify-content-between">
+							    <div class="col-8">
+							      <h4 class="card-title font-weight-bold"><a>La Sirena restaurant</a></h4>
+							    </div>
+							    <div class="col-4">
+							      <button class="btn btn-primary">Contratar</button>
+							    </div>
+							  </div>-->
+							<h4 class="card-title font-weight-bold"><a [routerLink]="['/publicaciones/show', publicationUser._id]">{{ publicationUser.title }}</a></h4>
+							<hr>
+							<p class="mb-2">{{ publicationUser.description }}</p>
+
+							<!--<p class="mb-2">
+								<i class="fa fa-folder-open-o" aria-hidden="true"></i><b>Tarífa: </b> <span class="badge badge-primary">200$</span>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-folder-open-o" aria-hidden="true"></i><b>Categoría: </b> <span class="badge badge-primary">Cabudare</span>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-tags" aria-hidden="true"></i><b>Tags: </b><span class="badge badge-primary">Centro</span>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-user-o" aria-hidden="true"></i><b>Post by: </b><span class="badge badge-primary">Anderson Diaz</span>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-eye" aria-hidden="true"></i><b>Vistas: </b> <span class="badge badge-primary">13</span>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-clock-o" aria-hidden="true"></i><b>Publicado hace 1 mes</b>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-clock-o" aria-hidden="true"></i><b>Editado hace 4 días</b>
+							</p>
+							<hr>
+							<div class="row justify-content-end">
+								<div class="col-4">
+									<small class="badge badge-dark">{{likes}} likes</small>
+								</div>
+								<div class="col-4">
+									<small class="badge badge-dark">4 comentarios</small>
+								</div>
+								<div class="col-4">
+									<small class="badge badge-dark">4 compartidos</small>
+								</div>
+							</div>
+							
+							<div class="interaction">
+								<div class="row">
+									<div class="col-4">
+										<a href="#likes" data-toggle="modal"><i class="fa fa-thumbs-o-up" aria-hidden="true" *ngIf="!likebool" (click)="upLikes(publicationUser._id);isLikes(publicationUser._id)"></i><small>Me gusta</small></a>
+										<a href="#likes" data-toggle="modal"><i class="fa fa-thumbs-o-up" aria-hidden="true" *ngIf="likebool" (click)="disLikes(publicationUser._id);isLikes(publicationUser._id)"></i><small>No gusta</small></a>
+									</div>
+									<div class="col-4">
+										<a href="#modalComentarios" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-comments" aria-hidden="true"></i><small>Comentar</small></a>
+									</div>
+									<div class="col-4">
+										<div class="dropdown">
+											<a href="#compartir" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
+												<small><i class="fa fa-share" aria-hidden="true"></i>Compartir</small>
+											</a>
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+												<a class="dropdown-item">Compartir</a>
+												<a class="dropdown-item" data-toggle="modal" data-target="#modalRecomendar">Recomendar</a>
+											</ul>
+										</div>
+									</div>
+								</div>
+							</div>
+							-->
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</main>

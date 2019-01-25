@@ -18,11 +18,8 @@ import { LoginspinnerComponent } from './components/auth/loginspinner/loginspinn
 import { LogoutComponent } from './components/auth/logout/logout.component';
 
 import { CreateComponent } from './components/publication/create/create.component';
-import { ProjectsComponent } from './components/publication/projects/projects.component';
 import { DetailComponent } from './components/publication/detail/detail.component';
 import { EditarComponent } from './components/publication/editar/editar.component';
-import { ProjectspadreComponent } from './components/publication/projectspadre/projectspadre.component';
-import { ProjectsusersComponent } from './components/publication/projectsusers/projectsusers.component';
 
 import { UserspadreComponent } from './components/usuario/userspadre/userspadre.component';
 import { UsersComponent } from './components/usuario/users/users.component';
@@ -49,6 +46,14 @@ import { RutascreateComponent } from './components/ruta/rutascreate/rutascreate.
 import { RutaseditComponent } from './components/ruta/rutasedit/rutasedit.component';
 import { RutasshowComponent } from './components/ruta/rutasshow/rutasshow.component';
 import { RutasdeleteComponent } from './components/ruta/rutasdelete/rutasdelete.component';
+
+import { PublicationspadreComponent } from './components/publication/publicationspadre/publicationspadre.component';
+import { PublicationsuserComponent } from './components/publication/publicationsuser/publicationsuser.component';
+import { PublicationscreateComponent } from './components/publication/publicationscreate/publicationscreate.component';
+import { PublicationsshowComponent } from './components/publication/publicationsshow/publicationsshow.component';
+import { PublicationseditComponent } from './components/publication/publicationsedit/publicationsedit.component';
+import { PublicationsdeleteComponent } from './components/publication/publicationsdelete/publicationsdelete.component';
+import { PublicationsComponent } from './components/publication/publications/publications.component';
 
 import { TimelinepadreComponent } from './components/timeline/timelinepadre/timelinepadre.component';
 import { TimelineComponent } from './components/timeline/timeline/timeline.component';
@@ -111,6 +116,18 @@ const appRoutes: Routes = [
 		]
 	},
 
+	{path: 'publicaciones', component: PublicationspadreComponent, canActivate: [AuthGuard],
+		data: {id: localStorage.getItem('resID')},
+		children:
+		[
+			{path: '', component: PublicationsComponent},
+			{path: 'user/:id', component: PublicationsuserComponent},
+			{path: 'show/:id', component: PublicationsshowComponent},
+			{path: 'create', component: PublicationscreateComponent},
+			{path: 'edit/:id', component: PublicationseditComponent},
+		]
+	},
+	
 	{path: 'timeline', component: TimelinepadreComponent, canActivate: [AuthGuard] ,
 		children:
 		[
@@ -119,17 +136,6 @@ const appRoutes: Routes = [
 		]
 	},
 	
-	{path: 'publicaciones', component: ProjectspadreComponent, canActivate: [AuthGuard],
-		data: {id: localStorage.getItem('resID')},
-		children:
-		[
-			{path: '', component: ProjectsComponent},
-			{path: 'user/:id', component: ProjectsusersComponent},
-			{path: 'show/:id', component: DetailComponent},
-			{path: 'create', component: CreateComponent},
-			{path: 'edit/:id', component: EditarComponent},
-		]
-	},
 
 	{path: 'restringido', component: RestringidoComponent},
 	{path: '**', component: ErrorComponent},

@@ -178,7 +178,8 @@ export class PerfilComponent implements OnInit {
 		this.filesToUpload = <Array<File>>fileInput.target.files;
 	}
 
-	preUpload(event: any){
+	preUpload(event: any)
+	{
 	  let file = event.target.files[0];
 	  if (event.target.files.length > 0)
 	  {
@@ -186,7 +187,6 @@ export class PerfilComponent implements OnInit {
 	  }        
 	  this.fileName = file.name;
 	  this.filesToUpload = <Array<File>>event.target.files;
-
 	}
 
 }

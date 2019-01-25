@@ -16,6 +16,7 @@ import { EmpresaService } from './services/empresa.service';
 import { PublicationService } from './services/publication.service';
 import { CategoriaService } from './services/categoria.service';
 import { RutaService } from './services/ruta.service';
+import { LikeService } from './services/like.service';
 
 import { TokenInterceptorService } from './services/token-interceptor.service';
 
@@ -36,11 +37,8 @@ import { LoginspinnerComponent } from './components/auth/loginspinner/loginspinn
 import { LogoutComponent } from './components/auth/logout/logout.component';
 
 import { CreateComponent } from './components/publication/create/create.component';
-import { ProjectsComponent } from './components/publication/projects/projects.component';
 import { DetailComponent } from './components/publication/detail/detail.component';
 import { EditarComponent } from './components/publication/editar/editar.component';
-import { ProjectspadreComponent } from './components/publication/projectspadre/projectspadre.component';
-import { ProjectsusersComponent } from './components/publication/projectsusers/projectsusers.component';
 
 import { UsersComponent } from './components/usuario/users/users.component';
 import { UsersshowComponent } from './components/usuario/usersshow/usersshow.component';
@@ -71,13 +69,20 @@ import { RutaseditComponent } from './components/ruta/rutasedit/rutasedit.compon
 import { RutasshowComponent } from './components/ruta/rutasshow/rutasshow.component';
 import { RutasdeleteComponent } from './components/ruta/rutasdelete/rutasdelete.component';
 
+import { PublicationspadreComponent } from './components/publication/publicationspadre/publicationspadre.component';
+import { PublicationsuserComponent } from './components/publication/publicationsuser/publicationsuser.component';
+import { PublicationscreateComponent } from './components/publication/publicationscreate/publicationscreate.component';
+import { PublicationsshowComponent } from './components/publication/publicationsshow/publicationsshow.component';
+import { PublicationseditComponent } from './components/publication/publicationsedit/publicationsedit.component';
+import { PublicationsdeleteComponent } from './components/publication/publicationsdelete/publicationsdelete.component';
+import { PublicationsComponent } from './components/publication/publications/publications.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
     CreateComponent,
-    ProjectsComponent,
     ErrorComponent,
     DetailComponent,
     EditarComponent,
@@ -86,10 +91,8 @@ import { RutasdeleteComponent } from './components/ruta/rutasdelete/rutasdelete.
     LoginComponent,
     RegisterComponent,
     NavbarComponent,
-    ProjectsusersComponent,
     PerfilComponent,
     UsersshowComponent,
-    ProjectspadreComponent,
     UserspadreComponent,
     LoginspinnerComponent,
     RestringidoComponent,
@@ -118,6 +121,13 @@ import { RutasdeleteComponent } from './components/ruta/rutasdelete/rutasdelete.
     RutaseditComponent,
     RutasshowComponent,
     RutasdeleteComponent,
+    PublicationsuserComponent,
+    PublicationspadreComponent,
+    PublicationscreateComponent,
+    PublicationsshowComponent,
+    PublicationseditComponent,
+    PublicationsdeleteComponent,
+    PublicationsComponent,
   ],
   imports: [
     BrowserModule,
@@ -145,6 +155,7 @@ import { RutasdeleteComponent } from './components/ruta/rutasdelete/rutasdelete.
     PublicationService,
     CategoriaService,
     RutaService,
+    LikeService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass : TokenInterceptorService,
