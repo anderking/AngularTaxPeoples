@@ -34,7 +34,7 @@ export class UsersComponent implements OnInit {
 	{
 		this.resID = localStorage.getItem('resID');
 		this.url = Global.url;
-		this.getUserAll();
+		this.getUserAll(this.resID);
 	}
 
 	getPublicationsUser(id)
@@ -52,9 +52,9 @@ export class UsersComponent implements OnInit {
 		)
 	}
 
-	getUserAll()
+	getUserAll(id)
 	{
-		this._userService.getUsers().subscribe
+		this._userService.getUsersExcept(id).subscribe
 		(
 			response =>
 			{
@@ -84,7 +84,7 @@ export class UsersComponent implements OnInit {
 				this.message = response.message;
 				this.isAlert = true;
 				this.onIsError();
-				this.getUserAll();
+				this.getUserAll(this.resID);
 				$('body').removeClass('modal-open');
 				$("body").removeAttr("style");
 				$('.modal-backdrop.fade.show').css('display','none');

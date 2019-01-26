@@ -1,21 +1,39 @@
 <main class="main_publications">
 	<div class="container">
 
-		<div class="row justify-content-center my-3">
-			<div class="col-12">
-				<h2 class="text-center">TimeLine</h2>
+		<div *ngIf="total>0">
+			<div class="row justify-content-center my-3">
+				<div class="col-12">
+					<h2 class="text-center">Time Line</h2>
+				</div>
 			</div>
-		</div>
-		<div class="row justify-content-center my-3">
-			<div class="col-12">
-				<p>
-					<a *ngIf="total>0" [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</a>
-				</p>
+			<div class="row justify-content-center my-3">
+				<div class="col-12">
+					<button [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</button>
+					<button [routerLink]="['/perfil/',resID]" class="btn btn-dark">Volver a Perfil</button>
+				</div>
 			</div>
+			<hr>
 		</div>
 
-		<hr>
-		
+		<div *ngIf="total<=0">
+			<div class="row justify-content-center my-3">
+				<div class="col-12">
+					<h2 class="text-center">Time Line</h2>
+				</div>
+			</div>
+			<hr>
+			<div class="jumbotron jumbotron-fluid">
+				<div class="container">
+					<h2 class="display-4">No hay publicaciones para mostrar</h2>
+					<button [routerLink]="['/perfil/',resID]" class="btn btn-primary">Volver a Perfil</button>
+					<button [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</button>
+            		<button *ngIf="rolID=='miembro'" class="btn btn-primary" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis publicaciones</button>
+
+				</div>
+			</div>
+		</div>
+				
 		<div class="row">
 			<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 mb-3" *ngFor="let publication of publications; let i = index">
 
@@ -33,7 +51,8 @@
 					<div class="card booking-card">
 						<div class="view overlay">
 							<a [routerLink]="['/publicaciones/show', publication._id]">
-								<img class="card-img-top img-fluid"  src="{{url+'get-image-publication/'+publication.image}}"/>
+								<img *ngIf="publication.image" class="card-img-top img-fluid"  src="{{url+'get-image-publication/'+publication.image}}"/>
+								<img *ngIf="!publication.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="...">
 							</a>
 						</div>
 						<div class="card-body">

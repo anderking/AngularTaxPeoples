@@ -6,6 +6,6 @@ export class User{
 		public description: string,
 		public tipo:string,
 		public image:string,
-		public signupDate:string,
+		public create_at:string,
 	){}
 }

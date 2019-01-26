@@ -1,4 +1,4 @@
-<main class="main_users_edit">
+<main class="main_users_create">
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-12 col-sm-10 col-md-8 col-lg-6">
@@ -10,9 +10,9 @@
           </button>
         </div>
 
-        <h2 *ngIf="!isError" class="text-center mb-3">Actualizar Usuario</h2>
+        <h2 *ngIf="!isError" class="text-center mb-3">Crear Usuario</h2>
         <div *ngIf="user">
-          <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+          <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
             <div class="form-row">
 
               <div class="col-md-12 mb-3">
@@ -74,7 +74,7 @@
               
             </div>
 
-            <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Actualizar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registrar</button>
             <button type="reset" class="btn btn-secondary">Reiniciar</button>
             <button (click)="goBack()" class="btn btn-dark">Regresar</button>
 

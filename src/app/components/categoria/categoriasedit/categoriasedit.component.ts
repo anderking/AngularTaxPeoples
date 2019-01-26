@@ -71,6 +71,7 @@ export class CategoriaseditComponent implements OnInit {
 					if(response.categoria)
 					{
 						this.update_categoria = response.categoria;
+						this.getCategoria(this.update_categoria._id);
 						this.message  = response.message;
 						this.isAlert = true;
 						this.onIsError();

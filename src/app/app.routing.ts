@@ -23,6 +23,7 @@ import { EditarComponent } from './components/publication/editar/editar.componen
 
 import { UserspadreComponent } from './components/usuario/userspadre/userspadre.component';
 import { UsersComponent } from './components/usuario/users/users.component';
+import { UserscreateComponent } from './components/usuario/userscreate/userscreate.component';
 import { UsersshowComponent } from './components/usuario/usersshow/usersshow.component';
 import { UserseditComponent } from './components/usuario/usersedit/usersedit.component';
 import { UsersdeleteComponent } from './components/usuario/usersdelete/usersdelete.component';
@@ -88,6 +89,7 @@ const appRoutes: Routes = [
 		children:
 		[
 			{path: '', component: UsersComponent},
+			{path: 'create', component: UserscreateComponent},
 			{path: 'show/:id', component: UsersshowComponent},
 			{path: 'edit/:id', component: UserseditComponent},
 			{path: 'delete/:id', component: UsersdeleteComponent},

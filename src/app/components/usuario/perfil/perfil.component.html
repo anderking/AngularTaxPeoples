@@ -63,8 +63,12 @@
 									</a>
 								</li>
 							</ul>
-            				<button class="btn btn-primary" [routerLink]="['/perfil/'+resID+'/persona/edit', resID]" role="button">Editar Información</button>
-            				<button class="btn btn-primary" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</button>
+            				<button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/persona/edit', resID]" role="button">Editar Información</button>
+            				<button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</button>
+            				<button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/users']" role="button">Administrar Usuarios</button>
+            				<button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/publicaciones']" role="button">Ver Publicaciones</button>
+            				<button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/categorias']" role="button">Administrar Categorías</button>
+            				<button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/rutas']" role="button">Administrar Rutas</button>
 
 						</div>
 					</div>

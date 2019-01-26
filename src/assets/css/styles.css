@@ -8,7 +8,7 @@ body,html{
     padding: 6em 0 4em 0;
     min-height: 100vh;
 }
-.main_register,.main_registerN,.main_registerJ,.main_edit_user,.main_edit_persona,.main_edit_empresa,.main_timeline,.main_users,.main_users_show,.main_users_edit,.main_rutas,.main_categorias,.main_categorias_create,.main_categorias_show,.main_categorias_edit,.main_rutas,.main_rutas_create,.main_rutas_show,.main_rutas_edit,.main_publications,.main_publication_user,.main_publications_show,.main_publications_create,.main_publications_edit{
+.main_register,.main_registerN,.main_registerJ,.main_edit_user,.main_edit_persona,.main_edit_empresa,.main_timeline,.main_users,.main_users_create,.main_users_show,.main_users_edit,.main_rutas,.main_categorias,.main_categorias_create,.main_categorias_show,.main_categorias_edit,.main_rutas,.main_rutas_create,.main_rutas_show,.main_rutas_edit,.main_publications,.main_publication_user,.main_publications_show,.main_publications_create,.main_publications_edit{
 	padding: 3em 0;
 	min-height: 100vh;
 }

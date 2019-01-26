@@ -1,7 +1,7 @@
 <div class="container" *ngIf="project">
 	<h2 class="center">{{title}}</h2>
 
-	<form #projectForm="ngForm" (ngSubmit)="onSubmit(projectForm)">
+	<form #publicationForm="ngForm" (ngSubmit)="onSubmit(publicationForm)">
 		
 		<div class="message success" *ngIf="status == 'success'">
 			El proyecto se ha creado correctamente, puedes
@@ -57,6 +57,6 @@
 			<input type="file" name="image" placeholder="Subir imagen" (change)="fileChangeEvent($event)"/>
 		</p>
 
-		<input type="submit" value="Crear" [disabled]="!projectForm.form.valid" />
+		<input type="submit" value="Crear" [disabled]="!publicationForm.form.valid" />
 	</form>
 </div>

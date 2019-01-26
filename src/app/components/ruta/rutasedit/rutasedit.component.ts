@@ -69,6 +69,7 @@ export class RutaseditComponent implements OnInit {
 					if(response.ruta)
 					{
 						this.update_ruta = response.ruta;
+						this.getRuta(this.update_ruta._id);
 						this.message  = response.message;
 						this.isAlert = true;
 						this.onIsError();

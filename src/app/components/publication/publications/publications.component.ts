@@ -17,6 +17,7 @@ export class PublicationsComponent implements OnInit {
 	public url:string;
 	public total:number=0;
 	public resID:string;
+	public rolID:string;
 
 	constructor
 	(
@@ -27,6 +28,7 @@ export class PublicationsComponent implements OnInit {
 	{
 		this.url = Global.url;
 		this.resID = localStorage.getItem('resID');
+		this.rolID = localStorage.getItem('rolID');
 	}
 
 	ngOnInit() {
@@ -49,7 +51,6 @@ export class PublicationsComponent implements OnInit {
 				{
 					this.publications = response.publications;
 					this.total = this.publications.length;
-					console.log(this.publications,this.total);
 				}
 			},
 			error => 

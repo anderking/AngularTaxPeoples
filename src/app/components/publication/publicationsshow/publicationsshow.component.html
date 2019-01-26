@@ -1,62 +1,73 @@
 <main class="main_publications_show">
 	<div class="container">
-		<div class="row">
-			<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 mb-3">
-				<div class="card booking-card" *ngIf="publication">
-					<div class="view overlay">
-						<img class="card-img-top img-fluid"  src="{{url+'get-image-publication/'+publication.image}}"/>
-					</div>
-					<div class="card-body">
-						<h4 class="card-title font-weight-bold">{{ publication.title }}</h4>
-						<hr>
-						<p class="mb-2">{{ publication.description }}</p>
-						<hr>
-						<p class="mb-2">
-							<i class="fa fa-folder-open-o" aria-hidden="true"></i><b>Tarífa: </b> <span class="badge badge-primary">{{ publication.tarifa }}</span>
-						</p>
-						<p class="mb-2">
-							<i class="fa fa-folder-open-o" aria-hidden="true"></i><b>Categoría: </b> <span class="badge badge-primary">{{ publication.categoriaID.name }}</span>
-						</p>
-						<p class="mb-2">
-							<i class="fa fa-tags" aria-hidden="true"></i><b>Ruta: </b><span class="badge badge-primary">{{ publication.rutaID.name }}</span>
-						</p>
-						<p class="mb-2">
-							<i class="fa fa-user-o" aria-hidden="true"></i><b>Post by: </b><span class="badge badge-primary">{{ publication.userID.email }}</span>
-						</p>
-						<p class="mb-2">
-							<i class="fa fa-clock-o" aria-hidden="true"></i><b>Publicado el: </b><span class="badge badge-primary">{{ publication.create_at }}</span>
-						</p>
-						<hr>
-						<div class="row justify-content-end">
-							<div class="col-4">
-								<small class="badge badge-dark">{{likes}} likes</small>
-							</div>
-							<div class="col-4">
-								<small class="badge badge-dark">4 comentarios</small>
-							</div>
-							<div class="col-4">
-								<small class="badge badge-dark">4 compartidos</small>
-							</div>
+		<div *ngIf="publication">
+			<div class="row">
+				<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 mb-3">
+					<div class="card booking-card">
+						<div class="view overlay">
+							<img *ngIf="publication.image" class="card-img-top img-fluid"  src="{{url+'get-image-publication/'+publication.image}}"/>
+							<img *ngIf="!publication.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="...">
 						</div>
-						<hr>
-						<div class="interaction">
-							<div class="row">
+						<div class="card-body">
+							<!--<div class="row justify-content-between">
+							    <div class="col-8">
+							      <h4 class="card-title font-weight-bold"><a>La Sirena restaurant</a></h4>
+							    </div>
+							    <div class="col-4">
+							      <button class="btn btn-primary">Contratar</button>
+							    </div>
+							  </div>-->
+							<h4 class="card-title font-weight-bold">{{ publication.title }}</h4>
+							<hr>
+							<p class="mb-2">{{ publication.description }}</p>
+							<hr>
+							<p class="mb-2">
+								<i class="fa fa-folder-open-o" aria-hidden="true"></i><b>Tarífa: </b> <span class="badge badge-primary">{{ publication.tarifa }}</span>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-folder-open-o" aria-hidden="true"></i><b>Categoría: </b> <span class="badge badge-primary">{{ publication.categoriaID.name }}</span>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-tags" aria-hidden="true"></i><b>Ruta: </b><span class="badge badge-primary">{{ publication.rutaID.name }}</span>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-user-o" aria-hidden="true"></i><b>Post by: </b><span class="badge badge-primary">{{ publication.userID.email }}</span>
+							</p>
+							<p class="mb-2">
+								<i class="fa fa-clock-o" aria-hidden="true"></i><b>Publicado el: </b><span class="badge badge-primary">{{ publication.create_at }}</span>
+							</p>
+							<hr>
+							<div class="row justify-content-end">
 								<div class="col-4">
-									<a href="#likes" data-toggle="modal" *ngIf="!likebool" (click)="upLike(publication._id)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><small>Me gusta</small></a>
-									<a href="#likes" data-toggle="modal" *ngIf="likebool" (click)="disLike(publication._id)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><small>No gusta</small></a>
+									<small class="badge badge-dark">{{likes}} likes</small>
 								</div>
 								<div class="col-4">
-									<a href="#modalComentarios" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-comments" aria-hidden="true"></i><small>Comentar</small></a>
+									<small class="badge badge-dark">4 comentarios</small>
 								</div>
 								<div class="col-4">
-									<div class="dropdown">
-										<a href="#compartir" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
-											<small><i class="fa fa-share" aria-hidden="true"></i>Compartir</small>
-										</a>
-										<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-											<a class="dropdown-item">Compartir</a>
-											<a class="dropdown-item" data-toggle="modal" data-target="#modalRecomendar">Recomendar</a>
-										</ul>
+									<small class="badge badge-dark">4 compartidos</small>
+								</div>
+							</div>
+							<hr>
+							<div class="interaction">
+								<div class="row">
+									<div class="col-4">
+										<a href="#likes" data-toggle="modal" *ngIf="!likebool" (click)="upLike(publication._id)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><small>Me gusta</small></a>
+										<a href="#likes" data-toggle="modal" *ngIf="likebool" (click)="disLike(publication._id)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><small>No gusta</small></a>
+									</div>
+									<div class="col-4">
+										<a href="#modalComentarios" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"><i class="fa fa-comments" aria-hidden="true"></i><small>Comentar</small></a>
+									</div>
+									<div class="col-4">
+										<div class="dropdown">
+											<a href="#compartir" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
+												<small><i class="fa fa-share" aria-hidden="true"></i>Compartir</small>
+											</a>
+											<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+												<a class="dropdown-item">Compartir</a>
+												<a class="dropdown-item" data-toggle="modal" data-target="#modalRecomendar">Recomendar</a>
+											</ul>
+										</div>
 									</div>
 								</div>
 							</div>
@@ -64,33 +75,33 @@
 					</div>
 				</div>
 			</div>
-		</div>
-		<div class="row">
-			<div class="col-12">
-				<button class="btn btn-primary" (click)="goBack()">Regresar</button>
-				<button class="btn btn-info" [routerLink]="['/publicaciones/edit',publication._id]" >Editar</button>
-				<a href="#delete-publication-{{publication._id}}" class="btn btn-danger" data-toggle="modal">Eliminar</a>
+			<div class="row">
+				<div class="col-12">
+					<button class="btn btn-info" [routerLink]="['/publicaciones/edit',publication._id]" >Editar</button>
+					<a href="#delete-publication" class="btn btn-danger" data-toggle="modal">Eliminar</a>
+					<div class="modal fade" id="delete-publication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									¿Estas seguro de eliminar esta publicación?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+									<button (click)="deletePublication(publication._id)" type="button" class="btn btn-primary">Si</button>
+								</div>
+							</div>
+						</div>
+					</div>
+					<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+				</div>
 			</div>
 		</div>
 	</div>
 </main>
 
-<div class="modal fade" id="delete-publication-{{publication._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        ¿Estas seguro de eliminar esta categoría?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button (click)="deletePublication(publication._id)" type="button" class="btn btn-primary">Si</button>
-      </div>
-    </div>
-  </div>
-</div>

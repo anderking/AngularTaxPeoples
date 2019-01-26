@@ -60,6 +60,7 @@ export class UsersshowComponent implements OnInit {
 			response =>
 			{
 				this.user = response.user;
+				console.log(this.user);
 				this.getPersona(id);
 				this.getEmpresa(id);
 			},
@@ -79,6 +80,7 @@ export class UsersshowComponent implements OnInit {
 				if(this.user.tipo=="cliente" || this.user.tipo=="admin")
 				{
 					this.persona = response.persona[0];
+					console.log(response.persona);
 				}
 			},
 			error =>
@@ -97,6 +99,7 @@ export class UsersshowComponent implements OnInit {
 				if(this.user.tipo=="miembro")
 				{
 					this.empresa = response.empresa[0];
+					console.log(response.empresa);
 				}
 			},
 			error =>

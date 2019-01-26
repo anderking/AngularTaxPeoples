@@ -26,8 +26,9 @@ type = "ball-clip-rotate"
             <div class="col-md-12 mb-3">
 
               <label for="email">Email</label>
-
+              
               <input type="email" [ngClass]="{'is-invalid': validationEmail.touched && !validationEmail.valid, 'is-valid': validationEmail.touched && validationEmail.valid}" class="form-control" name="email" #validationEmail="ngModel" placeholder="Email" [(ngModel)]="email" required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" >
+              
 
               <div class="invalid-feedback" *ngIf="validationEmail.touched && !validationEmail.valid">
                 <div *ngIf="validationEmail.errors.required">Por favor, introduzca un Email</div>
@@ -39,14 +40,18 @@ type = "ball-clip-rotate"
             <div class="col-md-12 mb-3">
 
               <label for="password">Password</label>
+              <div class="input-group">
+                <input type="{{type}}" [ngClass]="{'is-invalid': validationPassword.touched && !validationPassword.valid, 'is-valid': validationPassword.touched && validationPassword.valid}" class="form-control" name="password" #validationPassword="ngModel" placeholder="Password" [(ngModel)]="password" required minlength="4" maxlength="25">
+                <div class="input-group-append">
+                  <button class="btn btn-outline-primary show-password" type="button" (click)="toggleShow()"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                </div>
 
-              <input type="password" [ngClass]="{'is-invalid': validationPassword.touched && !validationPassword.valid, 'is-valid': validationPassword.touched && validationPassword.valid}" class="form-control" name="password" #validationPassword="ngModel" placeholder="Password" [(ngModel)]="password" required minlength="4" maxlength="25">
-
-              <div class="invalid-feedback" *ngIf="validationPassword.touched && !validationPassword.valid">
-                <div *ngIf="validationPassword.errors.required">Por favor, introduzca un Password</div>
-                <div *ngIf="validationPassword.errors.minlength">El password debe contener minimo 4 caracteres</div>
-                <div *ngIf="validationPassword.errors.maxlength">El password debe contener maximo 25 caracteres</div>
-                <div *ngIf="validationPassword.errors.pattern">El password no es correcto</div>
+                <div class="invalid-feedback" *ngIf="validationPassword.touched && !validationPassword.valid">
+                  <div *ngIf="validationPassword.errors.required">Por favor, introduzca un Password</div>
+                  <div *ngIf="validationPassword.errors.minlength">El password debe contener minimo 4 caracteres</div>
+                  <div *ngIf="validationPassword.errors.maxlength">El password debe contener maximo 25 caracteres</div>
+                  <div *ngIf="validationPassword.errors.pattern">El password no es correcto</div>
+                </div>
               </div>
 
             </div>

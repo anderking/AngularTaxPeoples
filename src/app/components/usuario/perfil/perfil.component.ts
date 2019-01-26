@@ -69,9 +69,15 @@ export class PerfilComponent implements OnInit {
 				this.user = response.user;
 				localStorage.setItem('rolID', this.user.tipo);
 				this.rolID = localStorage.getItem('rolID');
-				this.getPersona(id);
-				this.getEmpresa(id);
-
+				
+				if(this.rolID=="null")
+				{
+					this._router.navigate(["/register/"+this.resID]);
+				}else
+				{
+					this.getPersona(id);
+					this.getEmpresa(id);
+				}
 			},
 			error =>
 			{
@@ -88,10 +94,9 @@ export class PerfilComponent implements OnInit {
 			{
 				if(this.rolID=="cliente" || this.rolID=="admin")
 				{
-					console.log("Persona: ",response.persona)
 					if(response.persona.length==0)
 					{
-						this._router.navigate(["/register/"+this.resID]);
+						this._router.navigate(["/registerN/"+this.resID]);
 					}
 					else
 					{
@@ -116,10 +121,9 @@ export class PerfilComponent implements OnInit {
 			{
 				if(this.rolID=="miembro")
 				{
-				console.log("Empresa: ",response.empresa)
 					if(response.empresa.length==0)
 					{
-						this._router.navigate(["/register/"+this.resID]);
+						this._router.navigate(["/registerJ/"+this.resID]);
 					}
 					else
 					{

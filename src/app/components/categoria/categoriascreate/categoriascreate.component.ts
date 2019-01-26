@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Categoria } from '../../../models/categoria';
 import { CategoriaService } from '../../../services/categoria.service';
 import {NgForm} from '@angular/forms';
@@ -24,6 +24,7 @@ export class CategoriascreateComponent implements OnInit {
 	public isError:boolean = false;
 	public isAlert:boolean = false;
 
+
 	constructor
 	(
 		private _categoriaService: CategoriaService,
@@ -38,6 +39,8 @@ export class CategoriascreateComponent implements OnInit {
 	ngOnInit()
 	{
 	}
+	
+	//@ViewChild("nameField") namef: ElementRef;
 
 	register(form: NgForm)
 	{
@@ -57,6 +60,7 @@ export class CategoriascreateComponent implements OnInit {
 						this.isAlert = true;
 						this.onIsError();
 						form.reset()
+						//this.namef.nativeElement.focus();
 					}
 					else
 					{

@@ -14,11 +14,13 @@ import { Global } from '../../../services/global';
 export class RutasComponent implements OnInit {
 	
 	public rutas: any;
+	public resID: string;
 	public url: string;
 	public total:number=0;
 	public isError:boolean = false;
 	public isAlert:boolean = false;
 	public message:string;
+	public page:number=1;
 
 	constructor
 	(
@@ -30,6 +32,8 @@ export class RutasComponent implements OnInit {
 	{
 		this.url = Global.url;
 		this.getRutas();
+		this.resID = localStorage.getItem('resID');
+
 	}
 
 	getRutas()

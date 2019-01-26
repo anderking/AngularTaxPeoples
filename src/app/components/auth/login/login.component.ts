@@ -17,6 +17,8 @@ export class LoginComponent implements OnInit {
 	public user : User;
   public email:string;
   public password:string;
+  public type:string = "password";
+  public show:boolean = false;
   public resID:string;
   public url:string;
   public isError:boolean = false;
@@ -90,6 +92,17 @@ export class LoginComponent implements OnInit {
       },
       3000
     );
+  }
+
+  toggleShow()
+  {
+      this.show = !this.show;
+      if (this.show){
+          this.type = "text";
+      }
+      else {
+          this.type = "password";
+      }
   }
 
 }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
+import { Rol } from '../../../models/rol';
 import {NgForm} from '@angular/forms';
 import { UploadService } from '../../../services/upload.service';
 import { Global } from '../../../services/global';
@@ -20,7 +21,9 @@ export class UserseditComponent implements OnInit {
 
 	public user: User;
 	public update_user;
+	public tipo:string;
 	public type:string = "password";
+	public roles:Rol[];
     public show:boolean = false;
 	public message:string;
 	public isError:boolean = false;
@@ -34,7 +37,12 @@ export class UserseditComponent implements OnInit {
 		private _location: Location
 	)
 	{
-		
+		this.roles=
+		[
+			{_id:"",name:"Seleccione un Rol"},
+			{_id:"miembro",name:"Miembro"},
+			{_id:"cliente",name:"Cliente"},
+		];	
 	}
 
 	ngOnInit()
@@ -56,6 +64,7 @@ export class UserseditComponent implements OnInit {
 			response =>
 			{
 				this.user = response.user;
+				this.tipo = this.user.tipo;
 			},
 			error =>
 			{
@@ -69,6 +78,8 @@ export class UserseditComponent implements OnInit {
 	{
 		if(form.valid)
 		{
+			this.user.tipo = form.form.value.tipo;
+
 			this._userService.updateUser(this.user).subscribe
 			(
 				response =>
@@ -76,6 +87,7 @@ export class UserseditComponent implements OnInit {
 					if(response.user)
 					{
 						this.update_user = response.user;
+						this.getUser(this.update_user._id);
 						this.message  = response.message;
 						this.isAlert = true;
 						this.onIsError();

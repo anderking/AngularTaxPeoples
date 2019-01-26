@@ -49,6 +49,12 @@ export class UserService{
 		return this._http.get(this.url+'user/'+id, {headers: headers});
 	}
 
+	getUsersExcept(id): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'users/'+id, {headers: headers});
+	}
+
 	getUserImg(img): Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 

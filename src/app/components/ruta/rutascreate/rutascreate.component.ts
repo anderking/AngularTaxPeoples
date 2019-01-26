@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { Ruta } from '../../../models/ruta';
 import { RutaService } from '../../../services/ruta.service';
 import {NgForm} from '@angular/forms';
@@ -37,6 +37,8 @@ export class RutascreateComponent implements OnInit {
 	ngOnInit()
 	{
 	}
+	
+	//@ViewChild("nameField") namef: ElementRef;
 
 	register(form: NgForm)
 	{
@@ -56,6 +58,7 @@ export class RutascreateComponent implements OnInit {
 						this.isAlert = true;
 						this.onIsError();
 						form.reset()
+						//this.namef.nativeElement.focus();
 					}
 					else
 					{

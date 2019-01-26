@@ -1,25 +1,25 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { routing,appRoutingProviders } from './app.routing';//Para poder cargar las rutas
-import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';//Para las peticioens ajax
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';// para los formularios
+import { routing,appRoutingProviders } from './app.routing';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AuthService } from './services/auth.service';
-import { UserService } from './services/user.service';
-import { PersonaService } from './services/persona.service';
-import { EmpresaService } from './services/empresa.service';
-import { PublicationService } from './services/publication.service';
 import { CategoriaService } from './services/categoria.service';
-import { RutaService } from './services/ruta.service';
+import { EmpresaService } from './services/empresa.service';
 import { LikeService } from './services/like.service';
-
+import { PersonaService } from './services/persona.service';
+import { PublicationService } from './services/publication.service';
+import { RutaService } from './services/ruta.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
-
+import { UploadService } from './services/upload.service';
+import { UserService } from './services/user.service';
 
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -40,20 +40,21 @@ import { CreateComponent } from './components/publication/create/create.componen
 import { DetailComponent } from './components/publication/detail/detail.component';
 import { EditarComponent } from './components/publication/editar/editar.component';
 
+import { UserspadreComponent } from './components/usuario/userspadre/userspadre.component';
 import { UsersComponent } from './components/usuario/users/users.component';
 import { UsersshowComponent } from './components/usuario/usersshow/usersshow.component';
-import { UserspadreComponent } from './components/usuario/userspadre/userspadre.component';
+import { UserscreateComponent } from './components/usuario/userscreate/userscreate.component';
+import { UserseditComponent } from './components/usuario/usersedit/usersedit.component';
+import { UsersdeleteComponent } from './components/usuario/usersdelete/usersdelete.component';
 
-import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { PerfilpadreComponent } from './components/usuario/perfilpadre/perfilpadre.component';
+import { PerfilComponent } from './components/usuario/perfil/perfil.component';
 import { EditpersonaComponent } from './components/usuario/editpersona/editpersona.component';
 import { EditempresaComponent } from './components/usuario/editempresa/editempresa.component';
 import { EdituserComponent } from './components/usuario/edituser/edituser.component';
 
 import { TimelineComponent } from './components/timeline/timeline/timeline.component';
 import { TimelinepadreComponent } from './components/timeline/timelinepadre/timelinepadre.component';
-import { UserseditComponent } from './components/usuario/usersedit/usersedit.component';
-import { UsersdeleteComponent } from './components/usuario/usersdelete/usersdelete.component';
 
 import { CategoriaspadreComponent } from './components/categoria/categoriaspadre/categoriaspadre.component';
 import { CategoriasComponent } from './components/categoria/categorias/categorias.component';
@@ -76,7 +77,6 @@ import { PublicationsshowComponent } from './components/publication/publications
 import { PublicationseditComponent } from './components/publication/publicationsedit/publicationsedit.component';
 import { PublicationsdeleteComponent } from './components/publication/publicationsdelete/publicationsdelete.component';
 import { PublicationsComponent } from './components/publication/publications/publications.component';
-
 
 
 @NgModule({
@@ -128,6 +128,7 @@ import { PublicationsComponent } from './components/publication/publications/pub
     PublicationseditComponent,
     PublicationsdeleteComponent,
     PublicationsComponent,
+    UserscreateComponent,
   ],
   imports: [
     BrowserModule,
@@ -138,6 +139,7 @@ import { PublicationsComponent } from './components/publication/publications/pub
     ReactiveFormsModule,
     BrowserAnimationsModule,
     NgxSpinnerModule,
+    NgxPaginationModule,
     ToastrModule.forRoot({
       timeOut: 5000,
       positionClass: 'toast-top-right',
@@ -155,6 +157,7 @@ import { PublicationsComponent } from './components/publication/publications/pub
     PublicationService,
     CategoriaService,
     RutaService,
+    UploadService,
     LikeService,
     {
       provide: HTTP_INTERCEPTORS,

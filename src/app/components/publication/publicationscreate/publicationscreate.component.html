@@ -50,9 +50,9 @@
 
 						<div class="col-md-12 mb-3">
 
-							<label for="categoria">Categoría</label>
-							<select [ngClass]="{'is-invalid': validationCategoria.touched && !validationCategoria.valid, 'is-valid': validationCategoria.touched && validationCategoria.valid}" name="categoria" #validationCategoria="ngModel" [(ngModel)]="categoriaSelected" class="form-control" required>
-								<option *ngFor="let categoria of categoria" [value]="categoria.name"> {{categoria.name}}</option>
+							<label for="categoriaID">Categoría</label>
+							<select [ngClass]="{'is-invalid': validationCategoria.touched && !validationCategoria.valid, 'is-valid': validationCategoria.touched && validationCategoria.valid}" name="categoriaID" #validationCategoria="ngModel" [(ngModel)]="categoriaID" class="form-control" required>
+								<option *ngFor="let categoria of categorias" [value]="categoria._id"> {{categoria.name}}</option>
 							</select>
 
 							<div class="invalid-feedback" *ngIf="validationCategoria.touched && !validationCategoria.valid">
@@ -63,9 +63,9 @@
 
 						<div class="col-md-12 mb-3">
 
-							<label for="ruta">Ruta</label>
-							<select [ngClass]="{'is-invalid': validationRuta.touched && !validationRuta.valid, 'is-valid': validationRuta.touched && validationRuta.valid}" name="ruta" #validationRuta="ngModel" [(ngModel)]="categoriaSelected" class="form-control" required>
-								<option *ngFor="let ruta of ruta" [value]="ruta.name"> {{ruta.name}}</option>
+							<label for="rutaID">Ruta</label>
+							<select [ngClass]="{'is-invalid': validationRuta.touched && !validationRuta.valid, 'is-valid': validationRuta.touched && validationRuta.valid}" name="rutaID" #validationRuta="ngModel" [(ngModel)]="rutaID" class="form-control" required>
+								<option *ngFor="let ruta of rutas" [value]="ruta._id"> {{ruta.name}}</option>
 							</select>
 
 							<div class="invalid-feedback" *ngIf="validationRuta.touched && !validationRuta.valid">
@@ -79,11 +79,8 @@
 							<label for="ruta">Imagen destacada</label>
 							<div class="input-group">
 								<div class="custom-file">
-									<input type="file" class="custom-file-input" (change)="preUpload($event)" required >
+									<input type="file" class="custom-file-input" name="image" (change)="preUpload($event);fileChangeEvent($event)" required >
 									<label class="custom-file-label" for="inputGroupFile04">{{fileName}}</label>
-								</div>
-								<div class="input-group-append">
-									<button class="btn btn-outline-primary" type="submit"><i class="fa fa-paper-plane" aria-hidden="true"></i></button>
 								</div>
 							</div>
 

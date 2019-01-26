@@ -14,12 +14,12 @@ import { Global } from '../../../services/global';
 export class CategoriasComponent implements OnInit {
 	
 	public categorias: any;
+	public resID: string;
 	public url: string;
 	public total:number=0;
 	public isError:boolean = false;
 	public isAlert:boolean = false;
 	public message:string;
-
 	constructor
 	(
 		private _categoriaService: CategoriaService,
@@ -30,6 +30,7 @@ export class CategoriasComponent implements OnInit {
 	{
 		this.url = Global.url;
 		this.getCategorias();
+		this.resID = localStorage.getItem('resID');
 	}
 
 	getCategorias()
