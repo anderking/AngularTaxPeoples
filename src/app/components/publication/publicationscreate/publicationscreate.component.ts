@@ -37,6 +37,8 @@ export class PublicationscreateComponent implements OnInit {
 	public vista: string;
 	public create_at: any;
 	public resID:string = localStorage.getItem('resID');
+	public rolID:string=localStorage.getItem('rolID');
+	
 	public categoriaID: string;
 	public rutaID: string;
 
@@ -74,7 +76,8 @@ export class PublicationscreateComponent implements OnInit {
 				if(response.categorias)
 				{
 					this.categorias = response.categorias;
-					this.categoriaID = this.categorias[0]._id;
+					//this.categoriaID = this.categorias[0]._id;
+					this.categoriaID = "";
 				}
 			},
 			error => 
@@ -93,7 +96,8 @@ export class PublicationscreateComponent implements OnInit {
 				if(response.rutas)
 				{
 					this.rutas = response.rutas;
-					this.rutaID = this.rutas[0]._id;
+					//this.rutaID = this.rutas[0]._id;
+					this.rutaID = "";
 				}
 			},
 			error => 
@@ -128,6 +132,7 @@ export class PublicationscreateComponent implements OnInit {
 								this.save_publication = result.publication;
 								this.isAlert=true;
 								this.message = "Publicación Creada Correctamente";
+								form.reset();
 								this.onIsError();
 								
 							}
@@ -139,6 +144,7 @@ export class PublicationscreateComponent implements OnInit {
 						console.log(this.save_publication);
 						this.isAlert=true;
 						this.message = response.message;
+						form.reset();
 						this.onIsError();
 					}
 				},
@@ -168,10 +174,7 @@ export class PublicationscreateComponent implements OnInit {
 	onIsError()
 	{
 		this.isError=true;
-		this._router.navigate(['/publicaciones//create']);
-		
 		window.scrollTo(0, 0);
-
 	}
 
 	closeAlertError()

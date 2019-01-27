@@ -10,7 +10,19 @@
 					</button>
 				</div>
 
-				<h2 *ngIf="!isError" class="text-center mb-3">Crear nueva publicación</h2>
+				<div class="row justify-content-center my-3">
+					<div class="col-12">
+						<h2 class="text-center">Crear nueva publicación</h2>
+					</div>
+				</div>
+				<div class="row justify-content-center my-3">
+					<div class="col-12">
+						<!--<button *ngIf="rolID=='admin' || rolID=='cliente'" class="btn btn-dark" [routerLink]="['/publicaciones/show',publication._id]">Regresar</button>
+						<button *ngIf="rolID=='miembro'" class="btn btn-dark" [routerLink]="['/publicaciones/user',resID]">Regresar</button>-->
+						<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+					</div>
+				</div>
+				<hr>
 
 				<form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
 					<div class="form-row">
@@ -29,7 +41,8 @@
 						<div class="col-md-12 mb-3">
 
 							<label for="password">Descripción</label>
-							<input type="text" [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}" class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción" [(ngModel)]="description" required>
+							<textarea type="text" [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}" class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción" [(ngModel)]="description" required>
+							</textarea>
 
 							<div class="invalid-feedback" *ngIf="validationDescription.touched && !validationDescription.valid">
 								<div *ngIf="validationDescription.errors.required">Por favor, introduzca un Descripción completo</div>
@@ -39,12 +52,12 @@
 
 						<div class="col-md-12 mb-3">
 
-							<label for="tarifa">Tarifa</label>
-							<input type="text" [ngClass]="{'is-invalid': validationTarifa.touched && !validationTarifa.valid, 'is-valid': validationTarifa.touched && validationTarifa.valid}" class="form-control" name="tarifa" #validationTarifa="ngModel" placeholder="Nombre" [(ngModel)]="tarifa" required>
+							<input type="text" [ngClass]="{'is-invalid': validationTarifa.touched && !validationTarifa.valid, 'is-valid': validationTarifa.touched && validationTarifa.valid}" class="form-control" name="tarifa" #validationTarifa="ngModel" placeholder="Tarifa" [(ngModel)]="tarifa" required pattern="^[0-9]{0,12}([.][0-9]{1,2})?$">
 
-							<div class="invalid-feedback" *ngIf="validationTarifa.touched && !validationTarifa.valid">
-								<div *ngIf="validationTarifa.errors.required">Por favor, introduzca un Nombre</div>
-							</div>
+								<div class="invalid-feedback" *ngIf="validationTarifa.touched && !validationTarifa.valid">
+									<div *ngIf="validationTarifa.errors.required">Por favor, introduzca un Tarifa</div>
+									<div *ngIf="validationTarifa.errors.pattern">La tarifa debe ser solo numeros hasta maximo dos decimales, Ejemplo: 2050.50</div>
+								</div>
 
 						</div>
 
@@ -73,7 +86,7 @@
 							</div>
 
 						</div>
-
+						<!--
 						<div class="col-md-12 mb-3">
 							
 							<label for="ruta">Imagen destacada</label>
@@ -85,11 +98,10 @@
 							</div>
 
 						</div>
-
+						-->
 					</div>
 
 					<button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registrar</button>
-					<button type="reset" class="btn btn-secondary">Cancelar</button>
 					<button (click)="goBack()" class="btn btn-dark">Regresar</button>
 
 				</form>

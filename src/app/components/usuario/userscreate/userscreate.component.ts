@@ -39,7 +39,6 @@ export class UserscreateComponent implements OnInit {
 		this.user = new User('','','','','','','');
 		this.roles=
 		[
-			{_id:"",name:"Seleccione un Rol"},
 			{_id:"miembro",name:"Miembro"},
 			{_id:"cliente",name:"Cliente"},
 		];
@@ -61,7 +60,7 @@ export class UserscreateComponent implements OnInit {
 				response =>
 				{
 					this.save_user = response.user;
-					console.log(this.save_user);
+					form.reset();
 					this.message = response.message;
 					this.isAlert=true;
 					this.onIsError();

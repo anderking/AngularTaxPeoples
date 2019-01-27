@@ -10,7 +10,18 @@
           </button>
         </div>
 
-        <h2 *ngIf="!isError" class="text-center mb-3">Actualizar Usuario</h2>
+        <div class="row justify-content-center my-3">
+          <div class="col-12">
+            <h2 class="text-center">Actualizar Datos</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center my-3">
+          <div class="col-12">
+            <button class="btn btn-dark" (click)="goBack()">Regresar</button>
+          </div>
+        </div>
+        <hr>
+
         <div *ngIf="user">
           <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
             <div class="form-row">
@@ -75,8 +86,6 @@
             </div>
 
             <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Actualizar</button>
-            <button type="reset" class="btn btn-secondary">Reiniciar</button>
-            <button (click)="goBack()" class="btn btn-dark">Regresar</button>
 
           </form>
         </div>

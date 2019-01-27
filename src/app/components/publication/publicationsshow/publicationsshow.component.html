@@ -1,5 +1,18 @@
 <main class="main_publications_show">
 	<div class="container">
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<h2 class="text-center">Publicación</h2>
+			</div>
+		</div>
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<!--<button *ngIf="rolID=='admin' || rolID=='cliente'" class="btn btn-dark" [routerLink]="['/publicaciones/show',publication._id]">Regresar</button>
+				<button *ngIf="rolID=='miembro'" class="btn btn-dark" [routerLink]="['/publicaciones/user',resID]">Regresar</button>-->
+				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+			</div>
+		</div>
+		<hr>
 		<div *ngIf="publication">
 			<div class="row">
 				<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 mb-3">
@@ -77,8 +90,8 @@
 			</div>
 			<div class="row">
 				<div class="col-12">
-					<button class="btn btn-info" [routerLink]="['/publicaciones/edit',publication._id]" >Editar</button>
-					<a href="#delete-publication" class="btn btn-danger" data-toggle="modal">Eliminar</a>
+					<button *ngIf="ispost || rolID=='admin'" class="btn btn-info" [routerLink]="['/publicaciones/edit',publication._id]" >Editar</button>
+					<a *ngIf="ispost || rolID=='admin'" href="#delete-publication" class="btn btn-danger" data-toggle="modal">Eliminar</a>
 					<div class="modal fade" id="delete-publication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -98,7 +111,6 @@
 							</div>
 						</div>
 					</div>
-					<button class="btn btn-dark" (click)="goBack()">Regresar</button>
 				</div>
 			</div>
 		</div>

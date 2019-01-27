@@ -1,19 +1,26 @@
 <main class="main_rutas_show">
 	<div class="container">
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<h2 class="text-center">Información de la ruta</h2>
+			</div>
+		</div>
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+			</div>
+		</div>
+		
+		<hr>
+
 		<div class="row justify-content-center">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-
-				<h2 class="text-center">Datos de la ruta</h2>
-				<hr>
 
 				<ul class="list-group" *ngIf="ruta">
 				  <li class="list-group-item active text-center">Información detallada de la ruta</li>
 				  <li class="list-group-item"><b>Nombre: </b>{{ ruta.name }}</li>
 				  <li class="list-group-item"><b>Descripción: </b>{{ ruta.description }}</li>
 				</ul>
-
-				<hr>
-            	<button (click)="goBack()" class="btn btn-dark">Regresar</button>
 
 			</div>
 		</div>

@@ -9,6 +9,6 @@ export class Publication{
 		public create_at:string,
 		public categoriaID: string,
 		public rutaID: string,
-		public userID:string,
+		public userID:any,
 	){}
 }

@@ -23,9 +23,13 @@ export class UsersshowComponent implements OnInit {
 	public persona: Persona;
 	public empresa: Empresa;
 	public publicationsUser: any;
+	public publicactionUserID:string;
 	public total:number=0;
 	public resID:string;
 	public url: string;
+	public isError:boolean = false;
+	public isAlert:boolean = false;
+	public message:string;
 
 	constructor
 	(
@@ -47,6 +51,7 @@ export class UsersshowComponent implements OnInit {
 			params =>
 			{
 				let id = params.id;
+				this.publicactionUserID = id;
 				this.getUser(id);
 				this.getPublicationsUser(id);
 			}
@@ -123,6 +128,41 @@ export class UsersshowComponent implements OnInit {
 				console.log(<any>error);
 			}
 		)
+	}
+
+	delete(id)
+	{
+		this._publicationService.deletePublication(id).subscribe
+		(
+			response =>
+			{
+				this.message = response.message;
+				this.isAlert = true;
+				this.onIsError();
+				this.getPublicationsUser(this.publicactionUserID);
+				$('body').removeClass('modal-open');
+				$("body").removeAttr("style");
+				$('.modal-backdrop.fade.show').css('display','none');
+			},
+			error =>
+			{
+				this.message = error.message;
+				this.isAlert = false;
+				this.onIsError();
+			}
+		);
+	}
+
+	onIsError()
+	{
+		this.isError=true;
+		window.scrollTo(0, 0);
+
+	}
+
+	closeAlertError()
+	{
+		this.isError=false;
 	}
 
 	goBack() { 

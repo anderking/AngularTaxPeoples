@@ -69,6 +69,8 @@
             				<button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/publicaciones']" role="button">Ver Publicaciones</button>
             				<button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/categorias']" role="button">Administrar Categorías</button>
             				<button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/rutas']" role="button">Administrar Rutas</button>
+            				<button class="btn btn-dark" [routerLink]="['/publicaciones']" role="button">TimeLine</button>
+            				<button class="btn btn-primary" [routerLink]="['/logout']" role="button">Cerrar Sesión</button>
 
 						</div>
 					</div>
@@ -126,14 +128,14 @@
 									</a>
 								</li>
 							</ul>
-            				<button class="btn btn-primary" [routerLink]="['/perfil/'+resID+'/empresa/edit', resID]" role="button">Editar Información</button>
-            				<button class="btn btn-primary" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</button>
-            				<button class="btn btn-primary" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis publicaciones</button>
-
+            				<button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/empresa/edit', resID]" role="button">Editar Información</button>
+            				<button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</button>
+            				<button class="btn btn-dark" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis publicaciones</button>
+            				<button class="btn btn-dark" [routerLink]="['/publicaciones']" role="button">TimeLine</button>
+            				<button class="btn btn-primary" [routerLink]="['/logout']" role="button">Cerrar Sesión</button>
 						</div>
 					</div>
 				</div>
-
 
 			</div>
 		</div>

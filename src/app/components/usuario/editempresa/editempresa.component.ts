@@ -22,6 +22,7 @@ export class EditempresaComponent implements OnInit {
 	public user: User;
 	public empresa: Empresa;
 	public categoria : Categoria[];
+	public resID:string;
 	public update_empresa;
 	public message:string;
 	public isError:boolean = false;
@@ -69,6 +70,7 @@ export class EditempresaComponent implements OnInit {
 
 	ngOnInit()
 	{
+		this.resID = localStorage.getItem('resID');
 		this._route.params.subscribe
 		(
 			params =>

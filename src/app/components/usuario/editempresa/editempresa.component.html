@@ -10,9 +10,16 @@
 					</button>
 				</div>
 
-				<h2 *ngIf="!isError" class="text-center mb-3">Empresa</h2>
-
 				<div *ngIf="empresa">
+					<div class="col-12">
+						<h2 class="text-center">Actualice sus datos</h2>
+					</div>
+					<div class="row justify-content-center my-3">
+						<div class="col-12">
+							<button class="btn btn-dark" [routerLink]="['/perfil/',resID]">Regresar</button>
+						</div>
+					</div>
+					<hr>
 
 					<form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
 
@@ -70,12 +77,9 @@
 
 							</div>
 
-
 						</div>
 
 						<button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Actualizar</button>
-						<a class="btn btn-dark" [routerLink]="['/register']" role="button">Regresar</a>
-
 					</form>
 				</div>
 			</div>

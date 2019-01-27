@@ -60,13 +60,19 @@ export class UserService{
 
 		return this._http.get(this.url+'get-image-user/'+img, {headers: headers});
 	}
-	
+
+	deleteUsers(id): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'deleteUsers/'+id, {headers: headers});
+	}
+
 	deleteUser(id): Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
 		return this._http.delete(this.url+'user/'+id, {headers: headers});
 	}
-
+	
 	updateUser(user): Observable<any>{
 		let params = JSON.stringify(user);
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');

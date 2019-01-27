@@ -4,6 +4,7 @@ import { UserService } from '../../../services/user.service';
 import { Publication } from '../../../models/publication';
 import { PublicationService } from '../../../services/publication.service';
 import { Global } from '../../../services/global';
+import { Router, ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -27,6 +28,8 @@ export class UsersComponent implements OnInit {
 	(
 		private _userService: UserService,
 		private _publicationService: PublicationService,
+		private _router: Router,
+
 	)
 	{
 	}
@@ -88,6 +91,34 @@ export class UsersComponent implements OnInit {
 				$('body').removeClass('modal-open');
 				$("body").removeAttr("style");
 				$('.modal-backdrop.fade.show').css('display','none');
+				$('.modal.fade').css('display','none');
+				
+
+			},
+			error =>
+			{
+				this.message = error.message;
+				this.isAlert = false;
+				this.onIsError();
+			}
+		);
+	}
+
+	deleteUsers()
+	{
+		this._userService.deleteUsers(this.resID).subscribe
+		(
+			response =>
+			{
+				$('body').removeClass('modal-open');
+				$("body").removeAttr("style");
+				$('.modal-backdrop.fade.show').css('display','none');
+				$('#delete-users').css('display','none');
+				this.message = response.message;
+				this.isAlert = true;
+				this.onIsError();
+				this.getUserAll(this.resID);
+
 			},
 			error =>
 			{

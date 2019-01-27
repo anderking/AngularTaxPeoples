@@ -17,10 +17,6 @@ import { RegisterJComponent } from './components/auth/register-j/register-j.comp
 import { LoginspinnerComponent } from './components/auth/loginspinner/loginspinner.component';
 import { LogoutComponent } from './components/auth/logout/logout.component';
 
-import { CreateComponent } from './components/publication/create/create.component';
-import { DetailComponent } from './components/publication/detail/detail.component';
-import { EditarComponent } from './components/publication/editar/editar.component';
-
 import { UserspadreComponent } from './components/usuario/userspadre/userspadre.component';
 import { UsersComponent } from './components/usuario/users/users.component';
 import { UserscreateComponent } from './components/usuario/userscreate/userscreate.component';

@@ -10,8 +10,20 @@
           </button>
         </div>
 
-        <h2 *ngIf="!isError" class="text-center mb-3">Configure si desea cambiar sus datos de Acceso</h2>
         <div *ngIf="user">
+          
+          <div class="row justify-content-center my-3">
+            <div class="col-12">
+              <h2 class="text-center">Configure si desea cambiar sus datos de Acceso</h2>
+            </div>
+          </div>
+          <div class="row justify-content-center my-3">
+            <div class="col-12">
+              <button class="btn btn-dark" [routerLink]="['/perfil/',user._id]">Regresar</button>
+            </div>
+          </div>
+          <hr>
+
           <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
             <div class="form-row">
 
@@ -62,7 +74,6 @@
             </div>
 
             <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Actualizar</button>
-            <button (click)="goBack()" class="btn btn-dark">Regresar</button>
 
           </form>
         </div>

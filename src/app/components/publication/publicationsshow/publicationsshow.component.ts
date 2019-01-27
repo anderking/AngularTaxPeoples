@@ -8,6 +8,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Location} from '@angular/common';
 import { LikeService } from '../../../services/like.service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-publicationsshow',
@@ -21,9 +22,11 @@ export class PublicationsshowComponent implements OnInit {
 	public publication: Publication;
 	public url: string;
 	public confirm: boolean;
-	public resID:string;
+	public resID:string = localStorage.getItem('resID');
+	public rolID:string=localStorage.getItem('rolID');
 	public likes:number=0;
 	public likebool:boolean=false;
+	public ispost:boolean=false;
 
 	constructor
 	(
@@ -32,12 +35,13 @@ export class PublicationsshowComponent implements OnInit {
 		private _likeService: LikeService,
 		private _router: Router,
 		private _route: ActivatedRoute,
-		private _location: Location
+		private _location: Location,
+		private toastr: ToastrService
+
 	)
 	{
 		this.url = Global.url;
     	this.confirm = false;
-		this.resID = localStorage.getItem('resID');
 	}
 
 	ngOnInit()
@@ -63,7 +67,12 @@ export class PublicationsshowComponent implements OnInit {
 			response =>
 			{
 				this.publication = response.publication;
-				console.log(this.publication);
+				if(this.publication.userID._id==this.resID)					
+					this.ispost = true;
+				else
+					this.ispost =false;
+				console.log(this.ispost);
+
 				this.publication.create_at = this.publication.create_at.split("T")[0];;
 
 			},
@@ -112,12 +121,14 @@ export class PublicationsshowComponent implements OnInit {
 				{
 					if(this.user.tipo=="miembro")
 					{
-						this._router.navigate(['/publicaiones/user/'+this.user._id+'']);
+						this._router.navigate(['/publicaciones/user/'+this.user._id+'']);
+            			//this.toastr.error(response.message, 'Error!');
 					}
 
 					if(this.user.tipo=="admin")
 					{
 						this._router.navigate(['/publicaciones/']);
+						//this.toastr.error(response.message, 'Error!');
 					}
 				}
 				$('body').removeClass('modal-open');
@@ -147,9 +158,6 @@ export class PublicationsshowComponent implements OnInit {
           			this.likebool=true;
           		else
           			this.likebool=false;
-
-          		console.log(this.likebool);
-					
 			},
 			error =>
 			{

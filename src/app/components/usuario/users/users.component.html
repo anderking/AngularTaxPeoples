@@ -21,6 +21,26 @@
 						<div class="col-12">
 							<button [routerLink]="['/perfil/',resID]" class="btn btn-dark">Volver a Perfil</button>
 							<button [routerLink]="['/users/create']" class="btn btn-primary">Nuevo usuario</button>
+							<a href="#delete-users" class="btn btn-danger" data-toggle="modal">Eliminar Todos</a>
+							<div class="modal fade" id="delete-users" tabindex="-1" role="dialog" aria-labelledby="delete-users" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<div class="modal-header">
+											<h5 class="modal-title" id="delete-users">Confirmación</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											¿Estas seguro de eliminar este usuario?
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+											<button (click)="deleteUsers()" type="button" class="btn btn-primary">Si</button>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -59,8 +79,8 @@
 									<td>{{user.description}}</td>
 									<td><span class="badge" [ngClass]="{ 'badge-primary': user.tipo=='cliente', 'badge-success': user.tipo=='miembro', 'badge-dark': user.tipo=='admin' }">{{user.tipo}}</span></td>
 									<td><button [routerLink]="['/users/edit', user._id]" class="btn btn-info">Editar</button></td>
-									<td><button class="btn btn-danger" data-toggle="modal" data-target="#exampleModal">Eliminar</button></td>
-									<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+									<td><a href="#delete-user-{{user._id}}" class="btn btn-danger" data-toggle="modal">Eliminar</a></td>
+									<div class="modal fade" id="delete-user-{{user._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 										<div class="modal-dialog" role="document">
 											<div class="modal-content">
 												<div class="modal-header">
