@@ -27,6 +27,12 @@ export class CategoriaService{
 		return this._http.get(this.url+'categorias', {headers: headers});
 	}
 
+	getpublicationsCategoria(id): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'publicationsCategoria/'+id, {headers: headers});
+	}
+
 	getCategoria(id): Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -37,6 +43,12 @@ export class CategoriaService{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
 		return this._http.delete(this.url+'categoria/'+id, {headers: headers});
+	}
+
+	deleteCategorias(): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'deleteCategorias', {headers: headers});
 	}
 
 	updateCategoria(categoria): Observable<any>{

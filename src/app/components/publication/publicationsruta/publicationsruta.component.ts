@@ -10,14 +10,14 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import { LikeService } from '../../../services/like.service';
 
 @Component({
-  selector: 'app-publications',
-  templateUrl: './publications.component.html',
-  styleUrls: ['./publications.component.css'],
+  selector: 'app-publicationsruta',
+  templateUrl: './publicationsruta.component.html',
+  styleUrls: ['./publicationsruta.component.css']
 })
 
-export class PublicationsComponent implements OnInit {
+export class PublicationsrutaComponent implements OnInit {
 	
-	public publications: any;
+	public publicationsRuta: any;
 	public categorias: any;
 	public rutas: any;
 	public url:string;
@@ -45,29 +45,11 @@ export class PublicationsComponent implements OnInit {
 			params =>
 			{
 				let id = params.id;
+				this.getpublicationsRuta(id);
 			}
 		);
-		this.getPublications();
 		this.getCategorias();
 		this.getRutas();
-	}
-
-	getPublications(){
-		this._publicationService.getPublications().subscribe
-		(
-			response =>
-			{
-				if(response.publications)
-				{
-					this.publications = response.publications;
-					this.total = this.publications.length;
-				}
-			},
-			error => 
-			{
-				console.log(error);
-			}
-		);
 	}
 
 	getCategorias()
@@ -104,6 +86,23 @@ export class PublicationsComponent implements OnInit {
 				console.log(error);
 			}
 		);
+	}
+
+ 	getpublicationsRuta(id)
+	{
+		this._rutaService.getpublicationsRuta(id).subscribe
+		(
+			response =>
+			{
+				this.publicationsRuta = response.publicationsRuta;
+				this.total = this.publicationsRuta.length;
+				console.log(this.publicationsRuta);
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		)
 	}
 
 }

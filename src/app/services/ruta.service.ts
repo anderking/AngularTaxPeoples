@@ -27,6 +27,12 @@ export class RutaService{
 		return this._http.get(this.url+'rutas', {headers: headers});
 	}
 
+	getpublicationsRuta(id): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'publicationsRuta/'+id, {headers: headers});
+	}
+
 	getRuta(id): Observable<any>{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
@@ -37,6 +43,12 @@ export class RutaService{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
 		return this._http.delete(this.url+'ruta/'+id, {headers: headers});
+	}
+
+	deleteRutas(): Observable<any>{
+		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+		return this._http.get(this.url+'deleteRutas', {headers: headers});
 	}
 
 	updateRuta(ruta): Observable<any>{

@@ -4,7 +4,6 @@ import { routing,appRoutingProviders } from './app.routing';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { environment } from '../environments/environment';
-import { ToastrModule } from 'ngx-toastr';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AppRoutingModule } from './app-routing.module';
@@ -73,6 +72,8 @@ import { PublicationsshowComponent } from './components/publication/publications
 import { PublicationseditComponent } from './components/publication/publicationsedit/publicationsedit.component';
 import { PublicationsdeleteComponent } from './components/publication/publicationsdelete/publicationsdelete.component';
 import { PublicationsComponent } from './components/publication/publications/publications.component';
+import { PublicationscategoriaComponent } from './components/publication/publicationscategoria/publicationscategoria.component';
+import { PublicationsrutaComponent } from './components/publication/publicationsruta/publicationsruta.component';
 
 
 @NgModule({
@@ -122,6 +123,8 @@ import { PublicationsComponent } from './components/publication/publications/pub
     PublicationsdeleteComponent,
     PublicationsComponent,
     UserscreateComponent,
+    PublicationscategoriaComponent,
+    PublicationsrutaComponent,
   ],
   imports: [
     BrowserModule,
@@ -133,12 +136,6 @@ import { PublicationsComponent } from './components/publication/publications/pub
     BrowserAnimationsModule,
     NgxSpinnerModule,
     NgxPaginationModule,
-    ToastrModule.forRoot({
-      timeOut: 5000,
-      positionClass: 'toast-top-right',
-      preventDuplicates: true,
-      closeButton:true
-    }),
   ],
   providers:
   [

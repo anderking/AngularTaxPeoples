@@ -51,6 +51,8 @@ import { PublicationsshowComponent } from './components/publication/publications
 import { PublicationseditComponent } from './components/publication/publicationsedit/publicationsedit.component';
 import { PublicationsdeleteComponent } from './components/publication/publicationsdelete/publicationsdelete.component';
 import { PublicationsComponent } from './components/publication/publications/publications.component';
+import { PublicationscategoriaComponent } from './components/publication/publicationscategoria/publicationscategoria.component';
+import { PublicationsrutaComponent } from './components/publication/publicationsruta/publicationsruta.component';
 
 import { TimelinepadreComponent } from './components/timeline/timelinepadre/timelinepadre.component';
 import { TimelineComponent } from './components/timeline/timeline/timeline.component';
@@ -123,6 +125,8 @@ const appRoutes: Routes = [
 			{path: 'show/:id', component: PublicationsshowComponent},
 			{path: 'create', component: PublicationscreateComponent},
 			{path: 'edit/:id', component: PublicationseditComponent},
+			{path: 'categoria/:id', component: PublicationscategoriaComponent},
+			{path: 'ruta/:id', component: PublicationsrutaComponent},
 		]
 	},
 	

@@ -8,7 +8,7 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Location} from '@angular/common';
 import { LikeService } from '../../../services/like.service';
 import { HttpErrorResponse } from '@angular/common/http';
-import { ToastrService } from 'ngx-toastr';
+import { NgxSpinnerService } from 'ngx-spinner';
 
 @Component({
   selector: 'app-publicationsshow',
@@ -31,13 +31,12 @@ export class PublicationsshowComponent implements OnInit {
 	constructor
 	(
 		private _publicationService: PublicationService,
+		private spinner: NgxSpinnerService,
 		private _userService: UserService,
 		private _likeService: LikeService,
 		private _router: Router,
 		private _route: ActivatedRoute,
 		private _location: Location,
-		private toastr: ToastrService
-
 	)
 	{
 		this.url = Global.url;
