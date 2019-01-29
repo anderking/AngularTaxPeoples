@@ -3,12 +3,16 @@ import { Publication } from '../../../models/publication';
 import { PublicationService } from '../../../services/publication.service';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
+import { Coment } from '../../../models/coment';
+import { ComentService } from '../../../services/coment.service';
 import { Global } from '../../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Location} from '@angular/common';
+import { Like } from '../../../models/like';
 import { LikeService } from '../../../services/like.service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NgxSpinnerService } from 'ngx-spinner';
+import {NgForm} from '@angular/forms';
 
 @Component({
   selector: 'app-publicationsshow',
@@ -16,24 +20,37 @@ import { NgxSpinnerService } from 'ngx-spinner';
   styleUrls: ['./publicationsshow.component.css']
 })
 
-export class PublicationsshowComponent implements OnInit {
-	
+export class PublicationsshowComponent implements OnInit
+{
 	public user: User;
 	public publication: Publication;
+	public publicationID: string;
+	public coment: Coment;
+	public comentSingle: Coment;
+	public comentForUpdate: Coment;
+	public likesPublication: Like;
+	public save_coment: Coment;
+	public update_coment: Coment;
+	public comentsPublication: any;
+
+	public totalComents:number=0;
+	public totalLikes:number=0;
 	public url: string;
 	public confirm: boolean;
 	public resID:string = localStorage.getItem('resID');
 	public rolID:string=localStorage.getItem('rolID');
-	public likes:number=0;
 	public likebool:boolean=false;
 	public ispost:boolean=false;
+	public iscoment:boolean=true;
+	
 
 	constructor
 	(
 		private _publicationService: PublicationService,
-		private spinner: NgxSpinnerService,
 		private _userService: UserService,
 		private _likeService: LikeService,
+		private _comentService: ComentService,
+		private spinner: NgxSpinnerService,
 		private _router: Router,
 		private _route: ActivatedRoute,
 		private _location: Location,
@@ -50,36 +67,14 @@ export class PublicationsshowComponent implements OnInit {
 			params =>
 			{
 				let id = params.id;
+				this.publicationID = id;
 				this.getPublication(id);
 				this.getLikesPublication(id);
+				this.getcomentsPublication(id);
 				this.islike(id)
 			}
 		);
 		this.getUser(this.resID);
-
-	}
-
-	getPublication(id)
-	{
-		this._publicationService.getPublication(id).subscribe
-		(
-			response =>
-			{
-				this.publication = response.publication;
-				if(this.publication.userID._id==this.resID)					
-					this.ispost = true;
-				else
-					this.ispost =false;
-				console.log(this.ispost);
-
-				this.publication.create_at = this.publication.create_at.split("T")[0];;
-
-			},
-			error =>
-			{
-				console.log(<any>error);
-			}
-		);
 	}
 
 	getUser(id)
@@ -97,22 +92,29 @@ export class PublicationsshowComponent implements OnInit {
 		)
 	}
 
-	getLikesPublication(id)
+	getPublication(id)
 	{
-		this._likeService.getLikesPublication(id).subscribe
+		this._publicationService.getPublication(id).subscribe
 		(
 			response =>
 			{
-				this.likes = response.likesPublication.length;
+				this.publication = response.publication;
+
+				if(this.publication.userID._id==this.resID)					
+					this.ispost = true;
+				else
+					this.ispost =false;
+
 			},
 			error =>
 			{
 				console.log(<any>error);
 			}
-		)
+		);
 	}
 
-	deletePublication(id){
+	deletePublication(id)
+	{
 		this._publicationService.deletePublication(id).subscribe(
 			response =>
 			{
@@ -121,13 +123,11 @@ export class PublicationsshowComponent implements OnInit {
 					if(this.user.tipo=="miembro")
 					{
 						this._router.navigate(['/publicaciones/user/'+this.user._id+'']);
-            			//this.toastr.error(response.message, 'Error!');
 					}
 
 					if(this.user.tipo=="admin")
 					{
 						this._router.navigate(['/publicaciones/']);
-						//this.toastr.error(response.message, 'Error!');
 					}
 				}
 				$('body').removeClass('modal-open');
@@ -140,16 +140,175 @@ export class PublicationsshowComponent implements OnInit {
 		);
 	}
 
-	setConfirm(confirm)
+	getLikesPublication(id)
 	{
-		this.confirm = confirm;
+		this._likeService.getLikesPublication(id).subscribe
+		(
+			response =>
+			{
+				this.likesPublication = response.likesPublication;
+				this.totalLikes = response.likesPublication.length;
+				console.log(this.likesPublication);
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		)
 	}
-	
-	goBack() { 
-     this._location.back(); 
+
+ 	getcomentsPublication(id)
+	{
+		this._comentService.getcomentsPublication(id).subscribe
+		(
+			response =>
+			{
+				this.comentsPublication = response.comentsPublication;
+				this.totalComents = this.comentsPublication.length;
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		)
+	}
+
+	registerComent(form: NgForm)
+	{
+		if(form.valid)
+		{
+			this.coment = new Coment('','','',this.resID,this.publicationID);
+
+			this.coment.text = form.form.value.text;
+			
+			this._comentService.saveComent(this.coment).subscribe
+			(
+				response =>
+				{
+						this.save_coment = response.coment;
+						form.reset();
+						this.getcomentsPublication(this.publicationID);
+				},
+				err =>
+				{
+					console.log(err);
+				}
+			);
+		}else
+		{
+			console.log("Form no valido");
+		}
+	}
+
+	updateComent(update: NgForm)
+	{
+		if(update.valid)
+		{
+			var textEdit = update.form.value.text;
+			this.getcomentFormUpdate(update.form.value._id,textEdit);
+		}else
+		{
+			var id = update.form.value._id;
+			$('#inputComent-'+id+'').addClass('is-invalid');
+		}
+	}
+
+	getcomentFormUpdate(id,textEdit)
+	{
+		this._comentService.getComent(id).subscribe
+		(
+			response =>
+			{
+				this.comentForUpdate = response.coment;
+				this.comentForUpdate.text = textEdit;
+				this._comentService.updateComent(this.comentForUpdate).subscribe
+				(
+					res =>
+					{
+							this.update_coment = res.coment;
+							this.iscoment = true;
+							$('#inputComent-'+id+'').removeClass('is-invalid');
+							$('#mostrarUpdate-'+id+'').css('display','none');
+							$('#mostrarComent-'+id+'').css('display','block');
+							this.getcoment(this.update_coment._id);
+					},
+					err =>
+					{
+						console.log(err);
+					}
+				);
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		)
+	}
+
+	getcoment(id)
+	{
+		this._comentService.getComent(id).subscribe
+		(
+			response =>
+			{
+				this.comentSingle = response.coment;
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		)
+	}
+
+	mostrarUpdate(id)
+	{
+		$('#mostrarUpdate-'+id+'').css('display','block');
+		$('#mostrarComent-'+id+'').css('display','none');
+		$('#inputComent-'+id+'').css('heigth','auto');
+
+	}
+
+	cancelarUpdate(id)
+	{
+		console.log('#mostrarUpdate-'+id+'');
+		this.getcomentsPublication(this.publicationID);
+		setTimeout
+		(
+			() =>
+			{
+				$('#inputComent-'+id+'').removeClass('is-invalid');
+				$('#mostrarUpdate-'+id+'').css('display','none');
+				$('#mostrarComent-'+id+'').css('display','block');
+			},
+			50
+		);
+			
+	}
+
+	deleteComent(id)
+	{
+		this._comentService.deleteComent(id).subscribe
+		(
+			response =>
+			{
+				$('body').removeClass('modal-open');
+				$("body").removeAttr("style");
+				$('.modal-backdrop.fade.show').css('display','none');
+				this.getcomentsPublication(this.publicationID);
+			},
+			error =>
+			{
+			}
+		);
+	}
+
+	goBack()
+	{
+		this._location.back(); 
     }
 
-    islike(id){
+    islike(id)
+    {
     	this._likeService.isLike(this.resID,id).subscribe(
 			response =>
 			{
@@ -165,7 +324,8 @@ export class PublicationsshowComponent implements OnInit {
 		);
     }
 
-    upLike(){
+    upLike()
+    {
     	this._likeService.upLike(this.publication._id,this.resID).subscribe(
     		response =>
 			{
@@ -180,7 +340,8 @@ export class PublicationsshowComponent implements OnInit {
     	);
     }
 
-    disLike(){
+    disLike()
+    {
     	this._likeService.disLike(this.publication._id,this.resID).subscribe(
     		response =>
 			{
@@ -194,6 +355,10 @@ export class PublicationsshowComponent implements OnInit {
     	);
     }
 
-
+    comentarioFocus()
+    {
+    	$('#comentarioFocusInput').focus();
+    }
 
 }
+

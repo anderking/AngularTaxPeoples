@@ -18,8 +18,9 @@
 				</nav>
 			</div>
 		</div>
-
-		<div *ngIf="total>0">
+		
+		<div *ngIf="publications">
+			
 			<div class="row justify-content-center my-3">
 				<div class="col-12">
 					<h2 class="text-center">Time Line</h2>
@@ -27,70 +28,61 @@
 			</div>
 			<div class="row justify-content-center my-3">
 				<div class="col-12">
-					<button [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</button>
-					<button [routerLink]="['/perfil/',resID]" class="btn btn-dark">Volver a Perfil</button>
+					<div *ngIf="total>0">
+						<button *ngIf="rolID=='miembro' || rolID=='admin'" [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</button>
+						<button [routerLink]="['/perfil/',resID]" class="btn btn-dark">Volver a Perfil</button>
+					</div>
 				</div>
 			</div>
 			<hr>
+			
+			<div *ngIf="!publications">
+				<div class="text-center">
+			  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+			    		<span class="sr-only">Loading...</span>
+			  		</div>
+				</div>
+			</div>
+
+			<div *ngIf="total>0">
+				<div class="row">
+					<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 mb-3" *ngFor="let publication of publications; let i = index">
+						<div class="card booking-card">
+							<div class="view overlay">
+								<a [routerLink]="['/publicaciones/show', publication._id]">
+									<img *ngIf="publication.image" class="card-img-top img-fluid"  src="{{url+'get-image-publication/'+publication.image}}"/>
+									<img *ngIf="!publication.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="...">
+								</a>
+							</div>
+							<div class="card-body">
+								<h4 class="card-title font-weight-bold"><a [routerLink]="['/publicaciones/show', publication._id]">{{ publication.title }}</a></h4>
+								<hr>
+								<p class="mb-2">
+									<i class="fa fa-user-o" aria-hidden="true"></i><b>Post by: </b><span class="badge badge-primary">{{ publication.userID.email }}</span>
+								</p>
+								<p class="mb-2">
+									<i class="fa fa-tags" aria-hidden="true"></i><b>Categoría: </b><span class="badge badge-primary">{{ publication.categoriaID.name }}</span>
+								</p>
+								<p class="mb-2">
+									<i class="fa fa-taxi" aria-hidden="true"></i><b>Ruta: </b><span class="badge badge-primary">{{ publication.rutaID.name }}</span>
+								</p>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
 
-		<div *ngIf="total<=0">
-			<div class="row justify-content-center my-3">
-				<div class="col-12">
-					<h2 class="text-center">Time Line</h2>
-				</div>
-			</div>
-			<hr>
+		<div  *ngIf="total<=0">
 			<div class="jumbotron jumbotron-fluid">
 				<div class="container">
 					<h2 class="display-4">No hay publicaciones para mostrar</h2>
 					<button [routerLink]="['/perfil/',resID]" class="btn btn-dark">Volver a Perfil</button>
 					<button [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</button>
-            		<button *ngIf="rolID=='miembro'" class="btn btn-primary" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis publicaciones</button>
-
+					<button *ngIf="rolID=='miembro'" class="btn btn-primary" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis publicaciones</button>
 				</div>
 			</div>
-		</div>
-				
-		<div class="text-center" *ngIf="publications">
-		  <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-		    <span class="sr-only">Loading...</span>
-		  </div>
-		</div>
+		</div>	
 
-		<div class="row">
-
-			<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 mb-3" *ngFor="let publication of publications; let i = index">
-
-
-
-				<div *ngIf="total>0">
-
-					<div class="card booking-card">
-						<div class="view overlay">
-							<a [routerLink]="['/publicaciones/show', publication._id]">
-								<img *ngIf="publication.image" class="card-img-top img-fluid"  src="{{url+'get-image-publication/'+publication.image}}"/>
-								<img *ngIf="!publication.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="...">
-							</a>
-						</div>
-						<div class="card-body">
-							<h4 class="card-title font-weight-bold"><a [routerLink]="['/publicaciones/show', publication._id]">{{ publication.title }}</a></h4>
-							<hr>
-							<p class="mb-2">
-								<i class="fa fa-user-o" aria-hidden="true"></i><b>Post by: </b><span class="badge badge-primary">{{ publication.userID.email }}</span>
-							</p>
-							<p class="mb-2">
-								<i class="fa fa-tags" aria-hidden="true"></i><b>Categoría: </b><span class="badge badge-primary">{{ publication.categoriaID.name }}</span>
-							</p>
-							<p class="mb-2">
-								<i class="fa fa-taxi" aria-hidden="true"></i><b>Ruta: </b><span class="badge badge-primary">{{ publication.rutaID.name }}</span>
-							</p>
-							
-						</div>
-					</div>
-
-				</div>
-			</div>
-		</div>
 	</div>
 </main>

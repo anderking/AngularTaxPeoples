@@ -1,5 +1,7 @@
 $(document).ready(function()
 {
-	$('.selectpicker').selectpicker();
+	$(".fondoComentarios").hover(function(){
+	  $('.button-comentarios').css("display", "block");
+	});
 });
 	  

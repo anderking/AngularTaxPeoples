@@ -19,6 +19,7 @@ import { RutaService } from './services/ruta.service';
 import { TokenInterceptorService } from './services/token-interceptor.service';
 import { UploadService } from './services/upload.service';
 import { UserService } from './services/user.service';
+import { ComentService } from './services/coment.service';
 
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -149,6 +150,7 @@ import { PublicationsrutaComponent } from './components/publication/publications
     RutaService,
     UploadService,
     LikeService,
+    ComentService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass : TokenInterceptorService,

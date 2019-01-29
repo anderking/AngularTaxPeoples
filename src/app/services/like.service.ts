@@ -28,14 +28,14 @@ export class LikeService{
 	{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-		return this._http.get(this.url+'likesPublications/'+id, {headers: headers});
+		return this._http.get(this.url+'likesPublication/'+id, {headers: headers});
 	}
 
-	getLikesUsers(id): Observable<any>
+	getLikesUser(id): Observable<any>
 	{
 		let headers = new HttpHeaders().set('Content-Type', 'application/json');
 
-		return this._http.get(this.url+'likesUsers/'+id, {headers: headers});
+		return this._http.get(this.url+'likesUser/'+id, {headers: headers});
 	}
 
 	getLikes(): Observable<any>

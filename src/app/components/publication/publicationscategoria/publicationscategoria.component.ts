@@ -95,7 +95,6 @@ export class PublicationscategoriaComponent implements OnInit {
 			{
 				this.publicationsCategoria = response.publicationsCategoria;
 				this.total = this.publicationsCategoria.length;
-				console.log(this.publicationsCategoria);
 			},
 			error =>
 			{

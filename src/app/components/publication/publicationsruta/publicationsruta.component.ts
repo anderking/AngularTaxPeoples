@@ -96,7 +96,6 @@ export class PublicationsrutaComponent implements OnInit {
 			{
 				this.publicationsRuta = response.publicationsRuta;
 				this.total = this.publicationsRuta.length;
-				console.log(this.publicationsRuta);
 			},
 			error =>
 			{

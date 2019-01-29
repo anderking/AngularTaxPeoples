@@ -48,6 +48,14 @@ header .navbar{
     border: 2px solid hsla(0,0%,100%,.8) !important;
     border-radius: 50%;
 }
+
+.img_profiel_media {
+    height: 50px !important;
+    width: 50px !important;
+    border: 2px solid hsla(0,0%,100%,.8) !important;
+    border-radius: 50%;
+}
+
 .dropdown-toggle::after{
 	content: none;
 }
@@ -235,8 +243,6 @@ i{
     margin: .5rem;
 }
 
-
-
 .main_publications_show .dropdown-menu {
     /*left: 0 !important;*/
 }
@@ -246,4 +252,70 @@ i{
 
 .qa.avz .input-group-append > button{
     margin: 0;
+}
+#showPublication{
+    width: 100%;
+    height: 100%;
+}
+
+.button-comentarios .close{
+    float: none;
+}
+.button-comentarios{
+    margin-bottom: 0 !important;
+}
+.media-body-coment{
+    overflow: auto;
+}
+.ocultarUpdateFormComent{
+    display: none;
+}
+
+a.close {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.enlacePointer{
+    cursor: pointer;
+    text-decoration: none;
+    color: #007bff !important;
+}
+
+.enlacePointer:hover,.enlacePointer:focus,.enlacePointer:active{
+    color: #0056b3 !important;
+}
+.enlacePointerBadge{
+    color: #ffffff !important;
+}
+.enlacePointerBadge:hover{
+    color: #D8D8D8 !important;
+}
+.media-coments .col-2,.media-coments .col-sm-2, .media-coments .col-md-2,.media-coments .col-lg-2{
+    padding-right: 0;
+    padding-left: 0;
+}
+.fondoComentarios{
+    background: #fff;
+    border-radius: 20px;
+    padding: 1em;
+}
+.button-comentarios{
+    margin: 5px;
+}
+.button-comentarios button:focus{
+    outline: none;
+    outline-color: none;
+}
+
+.btn-coment-update{
+    margin: 5px 5px 5px 0px !important;
+}
+.button-comentarios i{
+    font-size: .8em;
+
 }
