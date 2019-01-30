@@ -103,6 +103,10 @@ export class UserseditComponent implements OnInit {
 				},
 				error =>
 				{
+					this.message = error.error.message;
+					console.log(error);
+					this.isAlert = false;
+					this.onIsError();
 					if(error instanceof HttpErrorResponse)
 					{
 						if(error.status===404)

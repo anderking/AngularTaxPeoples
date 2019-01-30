@@ -56,6 +56,7 @@ export class RegisterComponent implements OnInit {
 				err =>
 				{
 					this.isAlert=false;
+					this.message = err.error.message;
 					console.log(err);
 					this.onIsError();
 

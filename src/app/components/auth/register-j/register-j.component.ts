@@ -21,6 +21,10 @@ import { NgxSpinnerService } from 'ngx-spinner';
 export class RegisterJComponent implements OnInit {
 
   public user:User;
+  public name:string;
+  public rif:string;
+  public telefono:string;
+  public direccion:string;
   public update_user;
   public empresa:Empresa;
   public tipo:string="miembro";

@@ -23,9 +23,16 @@ export class RegisterNComponent implements OnInit {
 	public user:User;
 	public update_user;
 	public persona:Persona;
-	public email:string;
-	public password:string;
+
+	public name:string;
+	public cedula:string;
+	public fechaNacimiento:string;
+	public telefono:string;
+	public direccion:string;
+	public sexo:string;
+	public edoCivil:string;
   	public tipo:string="cliente";
+  	
   	public fechaActual:any;
   	public categoria:Categoria[];
   	public categoriaSelected:string;
@@ -142,7 +149,6 @@ export class RegisterNComponent implements OnInit {
 					{
 						console.log(err);
 						this.isAlert=false;
-
 						this.message = err.message;
 						this.onIsError();
 

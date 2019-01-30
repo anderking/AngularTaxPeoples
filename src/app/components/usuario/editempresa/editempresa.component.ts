@@ -138,8 +138,9 @@ export class EditempresaComponent implements OnInit {
 				},
 				error =>
 				{
-					this.isAlert=false;
+					this.message = error.error.message;
 					console.log(error);
+					this.isAlert = false;
 					this.onIsError();
 
 					if(error instanceof HttpErrorResponse)

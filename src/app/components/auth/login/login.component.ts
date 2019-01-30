@@ -54,6 +54,10 @@ export class LoginComponent implements OnInit {
         },
         err =>
         {
+          this.messageError = err.error.message;
+          console.log(err);
+          this.onIsError();
+          
           if(err instanceof HttpErrorResponse)
           {
             if(err.status===404)

@@ -33,6 +33,7 @@ export class PublicationscreateComponent implements OnInit {
 
 	public title: string;
 	public description: string;
+	public tarifa:string;
 	public image: string;
 	public vista: string;
 	public create_at: any;
