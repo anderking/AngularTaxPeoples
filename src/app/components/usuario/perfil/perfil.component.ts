@@ -11,6 +11,8 @@ import { UploadService } from '../../../services/upload.service';
 import { Global } from '../../../services/global';
 import { NgxSpinnerService } from 'ngx-spinner';
 import {NgForm} from '@angular/forms';
+import {Location} from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-perfil',
@@ -39,8 +41,8 @@ export class PerfilComponent implements OnInit {
 		private _router: Router,
 		private _authService: AuthService,
 		private _uploadService: UploadService,
-		private spinner: NgxSpinnerService
-
+		private spinner: NgxSpinnerService,
+		private _location: Location
 	)
 	{
 		this.url = Global.url;
@@ -57,7 +59,6 @@ export class PerfilComponent implements OnInit {
 	      		this.resID = id;
 			}
 		);
-
 	}
 
 	getUser(id)
@@ -75,8 +76,13 @@ export class PerfilComponent implements OnInit {
 					this._router.navigate(["/register/"+this.resID]);
 				}else
 				{
-					this.getPersona(id);
-					this.getEmpresa(id);
+					if(this.rolID=="cliente" || this.rolID=="admin")
+					{
+						this.getPersona(id);
+					}else if(this.rolID=="miembro")
+					{
+						this.getEmpresa(id);
+					}
 				}
 			},
 			error =>
@@ -94,15 +100,14 @@ export class PerfilComponent implements OnInit {
 			{
 				if(this.rolID=="cliente" || this.rolID=="admin")
 				{
-					if(response.persona.length==0)
+					if(!response.persona)
 					{
 						this._router.navigate(["/registerN/"+this.resID]);
 					}
 					else
 					{
-						this.persona = response.persona[0];
-						localStorage.setItem('perID', this.persona._id);
-						this.persona.fechaNacimiento = this.persona.fechaNacimiento.split("T")[0];;
+						this.persona = response.persona;
+						//localStorage.setItem('perID', this.persona._id);
 					}
 				}
 			},
@@ -121,14 +126,14 @@ export class PerfilComponent implements OnInit {
 			{
 				if(this.rolID=="miembro")
 				{
-					if(response.empresa.length==0)
+					if(!response.empresa)
 					{
 						this._router.navigate(["/registerJ/"+this.resID]);
 					}
 					else
 					{
-						this.empresa = response.empresa[0];
-						localStorage.setItem('empID', this.empresa._id);
+						this.empresa = response.empresa;
+						//localStorage.setItem('empID', this.empresa._id);
 					}
 				}
 			},
@@ -151,13 +156,14 @@ export class PerfilComponent implements OnInit {
 					{	
 						if(this.filesToUpload)
 						{
+							console.log("entro");
 							this._uploadService.makeFileRequest(Global.url+"upload-image-user/"+response.user._id, [], this.filesToUpload, 'image')
 							.then
 							(
 								(result:any) =>
 								{
-									//this.getUser(this.user._id);
-									window.location.replace('http://localhost:4200/perfil/'+localStorage.getItem('resID'));
+									var actualRoute = window.location.href;
+									window.location.replace(actualRoute);
 								}
 							);
 						}
@@ -193,4 +199,8 @@ export class PerfilComponent implements OnInit {
 	  this.filesToUpload = <Array<File>>event.target.files;
 	}
 
+	goBack()
+	{ 
+		this._location.back(); 
+    }
 }

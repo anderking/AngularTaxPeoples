@@ -10,6 +10,7 @@ import { PublicationService } from '../../../services/publication.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Global } from '../../../services/global';
 import {Location} from '@angular/common'; 
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-usersshow',
@@ -25,11 +26,13 @@ export class UsersshowComponent implements OnInit {
 	public publicationsUser: any;
 	public publicactionUserID:string;
 	public total:number=0;
+	public totalInfo:number=0;
 	public resID:string;
 	public url: string;
 	public isError:boolean = false;
 	public isAlert:boolean = false;
 	public message:string;
+	public failedConect:string;
 
 	constructor
 	(
@@ -65,13 +68,24 @@ export class UsersshowComponent implements OnInit {
 			response =>
 			{
 				this.user = response.user;
-				console.log(this.user);
-				this.getPersona(id);
-				this.getEmpresa(id);
+				if(this.user.tipo=="cliente")
+				{
+					this.getPersona(id);
+				}else if(this.user.tipo=="miembro")
+				{
+					this.getEmpresa(id);
+				}
 			},
 			error =>
 			{
 				console.log(<any>error);
+				if(error instanceof HttpErrorResponse)
+				{
+					if(error.status===0)
+					{
+						this.failedConect = Global.failed;
+					}
+				}
 			}
 		)
 	}
@@ -84,13 +98,20 @@ export class UsersshowComponent implements OnInit {
 			{
 				if(this.user.tipo=="cliente" || this.user.tipo=="admin")
 				{
-					this.persona = response.persona[0];
-					console.log(response.persona);
+					this.persona = response.persona;
+					if(this.persona) this.totalInfo = 1;
 				}
 			},
 			error =>
 			{
 				console.log(<any>error);
+				if(error instanceof HttpErrorResponse)
+				{
+					if(error.status===0)
+					{
+						this.failedConect = Global.failed;
+					}
+				}
 			}
 		)
 	}
@@ -103,13 +124,20 @@ export class UsersshowComponent implements OnInit {
 			{
 				if(this.user.tipo=="miembro")
 				{
-					this.empresa = response.empresa[0];
-					console.log(response.empresa);
+					this.empresa = response.empresa;
+					if (this.empresa) this.totalInfo = 1;
 				}
 			},
 			error =>
 			{
 				console.log(<any>error);
+				if(error instanceof HttpErrorResponse)
+				{
+					if(error.status===0)
+					{
+						this.failedConect = Global.failed;
+					}
+				}
 			}
 		)
 	}
@@ -126,6 +154,13 @@ export class UsersshowComponent implements OnInit {
 			error =>
 			{
 				console.log(<any>error);
+				if(error instanceof HttpErrorResponse)
+				{
+					if(error.status===0)
+					{
+						this.failedConect = Global.failed;
+					}
+				}
 			}
 		)
 	}
@@ -149,6 +184,7 @@ export class UsersshowComponent implements OnInit {
 				this.message = error.message;
 				this.isAlert = false;
 				this.onIsError();
+				console.log(<any>error);
 			}
 		);
 	}

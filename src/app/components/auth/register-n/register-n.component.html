@@ -38,7 +38,7 @@ type = "ball-clip-rotate"
 
               <label for="cedula">Cedula</label>
 
-              <input type="text" [ngClass]="{'is-invalid': validationCedula.touched && !validationCedula.valid, 'is-valid': validationCedula.touched && validationCedula.valid}" class="form-control" name="cedula" #validationCedula="ngModel" placeholder="Cedula" [(ngModel)]="cedula" required maxlength="9" pattern="^([VEJPG]{1})([0-9]{7,9})$">
+              <input type="text" [ngClass]="{'is-invalid': validationCedula.touched && !validationCedula.valid, 'is-valid': validationCedula.touched && validationCedula.valid}" class="form-control" name="cedula" #validationCedula="ngModel" placeholder="Cedula" [(ngModel)]="cedula" required maxlength="9" pattern="^([VEve]{1})([0-9]{7,9})$">
 
               <div class="invalid-feedback" *ngIf="validationCedula.touched && !validationCedula.valid">
                 

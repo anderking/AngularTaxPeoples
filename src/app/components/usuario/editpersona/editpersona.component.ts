@@ -93,7 +93,6 @@ export class EditpersonaComponent implements OnInit {
 			response =>
 			{
 				this.user = response.user;
-				console.log(this.user);
 			},
 			error =>
 			{
@@ -110,7 +109,6 @@ export class EditpersonaComponent implements OnInit {
 			{
 				this.persona = response.persona[0];
 				this.persona.fechaNacimiento = this.persona.fechaNacimiento.split("T")[0];
-				console.log(this.persona);
 			},
 			error =>
 			{
@@ -151,8 +149,6 @@ export class EditpersonaComponent implements OnInit {
 					},
 					error =>
 					{
-						this.message = error.error.message;
-						console.log(error);
 						this.isAlert = false;
 						this.onIsError();
 						
@@ -161,13 +157,19 @@ export class EditpersonaComponent implements OnInit {
 							if(error.status===404)
 							{
 								this.message = error.error.message;
+								console.log(error);
 							}
+						}else
+						{
+							this.message = error.message;
+							console.log(error);
 						}
 					}
 				);
 			}else{
 				window.scrollTo(0, 0);
 				this.isAlert=false;
+				this.onIsError();
 				this.message = "La fecha de nacimiento no puede ser mayor que la fecha actual";
 			}
 		}else

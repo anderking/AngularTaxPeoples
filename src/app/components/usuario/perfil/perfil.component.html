@@ -44,7 +44,7 @@
 								<span *ngIf=" persona.edoCivil=='S' ">Soltero</span>
 								<span *ngIf=" persona.edoCivil=='C' ">Casado</span>
 							</p>
-							<p class="afo"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento }}</p>
+							<p class="afo"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento |date:"longDate" }}</p>
 							<p class="afo"><b>Tipo de Usuario: </b><span class="badge" [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }" >{{ rolID }}</span></p>
 
 

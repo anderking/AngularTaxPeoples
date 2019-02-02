@@ -26,7 +26,6 @@
               "./node_modules/bootstrap/dist/css/bootstrap.css",
               "./src/assets/css/styles.css",
               "src/assets/css/bootstrap-select.css",
-              "src/assets/css/ng2-select.css",
             ],
             "scripts": [
               "./node_modules/jquery/dist/jquery.js",

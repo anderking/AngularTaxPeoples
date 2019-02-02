@@ -25,7 +25,8 @@ export class LoginspinnerComponent implements OnInit {
 			() =>
 			{
 				this.spinner.hide();
-				window.location.replace('http://localhost:4200/perfil/'+localStorage.getItem('resID'));
+				var actualRoute = window.location.origin;
+        		window.location.replace(actualRoute+'/perfil/'+localStorage.getItem('resID'));
 			},
 			3000
 		);	

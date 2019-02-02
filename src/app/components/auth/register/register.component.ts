@@ -3,6 +3,7 @@ import { AuthService } from '../../../services/auth.service';
 import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import {Location} from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import {NgForm} from '@angular/forms';
 import { SelectControlValueAccessor } from '@angular/forms';
@@ -31,6 +32,7 @@ export class RegisterComponent implements OnInit {
 		private authService: AuthService,
 		private _userService: UserService,
     	private spinner: NgxSpinnerService,
+    	private _location: Location,
 	)
 	{		
 	}
@@ -50,23 +52,25 @@ export class RegisterComponent implements OnInit {
 					this.resID = res.user._id;
 					localStorage.setItem('token',res.token);
 					localStorage.setItem('resID', this.resID);
-					console.log(this.isAlert,this.isError);
 					this.loginRedirect()
 				},
-				err =>
+				error =>
 				{
-					this.isAlert=false;
-					this.message = err.error.message;
-					console.log(err);
-					this.onIsError();
-
-					if(err instanceof HttpErrorResponse)
+					if(error instanceof HttpErrorResponse)
 					{
-						if(err.status===404)
+						if(error.status===404)
 						{
-							this.message = err.error.message;
+							this.message = error.error.message;
+							console.log(error);
 						}
+					}else
+					{
+						this.message = error.message;
+						console.log(error);
 					}
+					
+					this.isAlert=false;
+					this.onIsError();
 				}
 			);
 		}else
@@ -96,9 +100,14 @@ export class RegisterComponent implements OnInit {
 	      () =>
 	      {
 	        this.spinner.hide();
-	        window.location.replace('http://localhost:4200/register/'+this.resID);
+	        var actualRoute = window.location.origin;
+        	window.location.replace(actualRoute+'/perfil/'+this.resID);
 	      },
 	      3000
 	    );
 	}
+
+	goBack() { 
+     this._location.back(); 
+    }
 }

@@ -41,7 +41,6 @@ export class NavbarComponent implements OnInit {
 	    }
 	    else
 	    {
-	      console.log('resID dose not exists');
 	      this._authService.logoutUserToken();
 	      this._authService.logoutUserResID();
 	    }

@@ -65,18 +65,18 @@ export class UserscreateComponent implements OnInit {
 					this.isAlert=true;
 					this.onIsError();
 				},
-				err =>
+				error =>
 				{
-					this.message = error.error.message;
+					this.message = error.message;
 					console.log(error);
 					this.isAlert = false;
 					this.onIsError();
 
-					if(err instanceof HttpErrorResponse)
+					if(error instanceof HttpErrorResponse)
 					{
-						if(err.status===404)
+						if(error.status===404)
 						{
-							this.message = err.error.message;
+							this.message = error.error.message;
 						}
 					}
 				}

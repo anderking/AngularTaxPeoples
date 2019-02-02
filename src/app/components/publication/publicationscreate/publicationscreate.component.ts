@@ -142,25 +142,24 @@ export class PublicationscreateComponent implements OnInit {
 					else
 					{
 						this.save_publication = response.publication;
-						console.log(this.save_publication);
 						this.isAlert=true;
 						this.message = response.message;
 						form.reset();
 						this.onIsError();
 					}
 				},
-				err =>
+				error =>
 				{
-					console.log(err);
+					console.log(error);
 					this.isAlert=false;
-					this.message = err.message;
+					this.message = error.message;
 					this.onIsError();
 
-					if(err instanceof HttpErrorResponse)
+					if(error instanceof HttpErrorResponse)
 					{
-						if(err.status===404)
+						if(error.status===404)
 						{
-							this.message = err.error.message;
+							this.message = error.error.message;
 							this.onIsError();
 						}
 					}

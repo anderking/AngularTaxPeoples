@@ -6,6 +6,7 @@ import { Empresa } from '../../../models/empresa';
 import { EmpresaService } from '../../../services/empresa.service';
 import { Categoria } from '../../../models/categoria';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import {Location} from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import {NgForm} from '@angular/forms';
 import { SelectControlValueAccessor } from '@angular/forms';
@@ -43,6 +44,7 @@ export class RegisterJComponent implements OnInit {
     private _userService: UserService,
     private _empresaService: EmpresaService,
     private spinner: NgxSpinnerService,
+    private _location: Location,
 
   )
   {    
@@ -97,7 +99,6 @@ export class RegisterJComponent implements OnInit {
       response =>
       {
         this.user = response.user;
-        console.log(this.user);
 
       },
       error =>
@@ -124,18 +125,18 @@ export class RegisterJComponent implements OnInit {
             localStorage.setItem('empID', res.empresa._id);
             this.asigarTipo();
           },
-          err =>
+          error =>
           {
-            console.log(err);
+            console.log(error);
             this.isAlert=false;
-            this.message = err.message;
+            this.message = error.message;
             this.onIsError();
 
-            if(err instanceof HttpErrorResponse)
+            if(error instanceof HttpErrorResponse)
             {
-              if(err.status===404)
+              if(error.status===404)
               {
-                this.message = err.error.message;
+                this.message = error.error.message;
               }
             }
           }
@@ -194,9 +195,14 @@ export class RegisterJComponent implements OnInit {
         () =>
         {
           this.spinner.hide();
-          window.location.replace('http://localhost:4200/perfil/'+localStorage.getItem('resID'));
+          var actualRoute = window.location.origin;
+          window.location.replace(actualRoute+'/perfil/'+this.resID);
         },
         3000
       );
   }
+
+  goBack() { 
+     this._location.back(); 
+    }
 }

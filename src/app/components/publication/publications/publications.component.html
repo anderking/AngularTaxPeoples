@@ -18,32 +18,22 @@
 				</nav>
 			</div>
 		</div>
-		
-		<div *ngIf="publications">
-			
-			<div class="row justify-content-center my-3">
-				<div class="col-12">
-					<h2 class="text-center">Time Line</h2>
-				</div>
-			</div>
-			<div class="row justify-content-center my-3">
-				<div class="col-12">
-					<div *ngIf="total>0">
-						<button *ngIf="rolID=='miembro' || rolID=='admin'" [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</button>
-						<button [routerLink]="['/perfil/',resID]" class="btn btn-dark">Volver a Perfil</button>
-					</div>
-				</div>
-			</div>
-			<hr>
-			
-			<div *ngIf="!publications">
-				<div class="text-center">
-			  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-			    		<span class="sr-only">Loading...</span>
-			  		</div>
-				</div>
-			</div>
 
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<h2 class="text-center">Time Line</h2>
+				<h6 class="text-center">{{ total }} Publicaciones</h6>
+			</div>
+		</div>
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<button *ngIf="rolID=='miembro' || rolID=='admin'" [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</button>
+				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+			</div>
+		</div>
+		<hr>
+
+		<div *ngIf="publications">
 			<div *ngIf="total>0">
 				<div class="row">
 					<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 mb-3" *ngFor="let publication of publications; let i = index">
@@ -73,16 +63,16 @@
 			</div>
 		</div>
 
-		<div  *ngIf="total<=0">
-			<div class="jumbotron jumbotron-fluid">
-				<div class="container">
-					<h2 class="display-4">No hay publicaciones para mostrar</h2>
-					<button [routerLink]="['/perfil/',resID]" class="btn btn-dark">Volver a Perfil</button>
-					<button [routerLink]="['/publicaciones/create']" class="btn btn-primary">Nueva publicación</button>
-					<button *ngIf="rolID=='miembro'" class="btn btn-primary" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis publicaciones</button>
-				</div>
+		<div *ngIf="!publications && !failedConect">
+			<div class="text-center">
+		  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+		    		<span class="sr-only">Loading...</span>
+		  		</div>
 			</div>
-		</div>	
+		</div>
+		<div *ngIf="failedConect">
+			<h6 class="text-center">{{failedConect}}</h6>
+		</div>
 
 	</div>
 </main>

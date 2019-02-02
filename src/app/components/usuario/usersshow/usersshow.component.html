@@ -1,125 +1,142 @@
 <main class="main_users_show">
 	<div class="container">
+
 		<div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
 			{{message}}
 			<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
 				<span aria-hidden="true">&times;</span>
 			</button>
 		</div>
+
 		<div class="row justify-content-center my-3">
 			<div class="col-12">
-				<h2 class="text-center">Información del usuario</h2>
+				<h2 class="text-center">Información del Usuario</h2>
+				<h6 class="text-center">{{ totalInfo }} encontrado</h6>
 			</div>
 		</div>
+
 		<div class="row justify-content-center my-3">
 			<div class="col-12">
-				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+					<button class="btn btn-dark" (click)="goBack()">Regresar</button>
 			</div>
 		</div>
 		<hr>
-		<div class="row justify-content-center">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-				
-				<div *ngIf="user">
 
-					<div *ngIf="!persona && !empresa">
-						<div class="jumbotron jumbotron-fluid">
-						  <div class="container">
-						    <h2 class="display-4">Este usuario no tiene una persona o empresa asociada</h2>
-						  </div>
-						</div>
+		<div class="row justify-content-center my-3">
+			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+				<ul class="list-group" *ngIf="persona">
+					<li class="list-group-item active text-center">Información detallada del Usuario</li>
+					<li class="list-group-item"><b>Nombre: </b>{{ persona.name }}</li>
+					<li class="list-group-item"><b>Cédula: </b>{{ persona.cedula }}</li>
+					<li class="list-group-item"><b>Teléfono: </b>{{ persona.telefono }}</li>
+					<li class="list-group-item"><b>Dirección: </b>{{ persona.direccion }}</li>
+					<li class="list-group-item"><b>Estado: </b>{{ persona.estado }}</li>
+					<li class="list-group-item">
+						<b>Sexo: </b>
+						<span *ngIf="persona.sexo=='M'">Masculino</span>
+						<span *ngIf="persona.sexo=='F'">Femenino</span>
+					</li>
+					<li class="list-group-item">
+						<b>Estado Civil: </b>
+						<span *ngIf="persona.edoCivil=='S'">Soltero</span>
+						<span *ngIf="persona.edoCivil=='C'">Casado</span>
+					</li>
+					<li class="list-group-item"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento |date:"longDate" }}</li>
+				</ul>
+				<ul class="list-group" *ngIf="empresa">
+					<li class="list-group-item active text-center">Información detallada del Usuario</li>
+					<li class="list-group-item"><b>Nombre: </b>{{ empresa.name }}</li>
+					<li class="list-group-item"><b>RIF: </b>{{ empresa.rif }}</li>
+					<li class="list-group-item"><b>Teléfono: </b>{{ empresa.telefono }}</li>
+					<li class="list-group-item"><b>Dirección: </b>{{ empresa.direccion }}</li>
+					<li class="list-group-item"><b>Estado: </b>{{ empresa.estado }}</li>
+				</ul>
+				
+				<div *ngIf="( !user ) && !failedConect">
+					<div class="text-center">
+				  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+				    		<span class="sr-only">Loading...</span>
+				  		</div>
 					</div>
-					
-					<ul class="list-group" *ngIf="persona">
-					  <li class="list-group-item active text-center">Información detallada del Usuario</li>
-					  <li class="list-group-item"><b>Nombre: </b>{{ persona.name }}</li>
-					  <li class="list-group-item"><b>Cédula: </b>{{ persona.cedula }}</li>
-					  <li class="list-group-item"><b>Teléfono: </b>{{ persona.telefono }}</li>
-					  <li class="list-group-item"><b>Dirección: </b>{{ persona.direccion }}</li>
-					  <li class="list-group-item"><b>Estado: </b>{{ persona.estado }}</li>
-					  <li class="list-group-item">
-					  	<b>Sexo: </b>
-					  	<span *ngIf="persona.sexo=='M'">Masculino</span>
-					  	<span *ngIf="persona.sexo=='F'">Femenino</span>
-					  </li>
-					  <li class="list-group-item">
-					  	<b>Estado Civil: </b>
-					  	<span *ngIf="persona.edoCivil=='S'">Soltero</span>
-					  	<span *ngIf="persona.edoCivil=='C'">Casado</span>
-					  </li>
-					  <li class="list-group-item"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento.split("T")[0] }}</li>
-					</ul>
-					
-					<ul class="list-group" *ngIf="empresa">
-					  <li class="list-group-item active text-center">Información detallada del Usuario</li>
-					  <li class="list-group-item"><b>Nombre: </b>{{ empresa.name }}</li>
-					  <li class="list-group-item"><b>RIF: </b>{{ empresa.rif }}</li>
-					  <li class="list-group-item"><b>Teléfono: </b>{{ empresa.telefono }}</li>
-					  <li class="list-group-item"><b>Dirección: </b>{{ empresa.direccion }}</li>
-					  <li class="list-group-item"><b>Estado: </b>{{ empresa.estado }}</li>
-					</ul>
-					
-					<hr>
-					<h2 class="text-center">Publicaciones del Usuario</h2>
-					<hr>
-					<div class="table-responsive" *ngIf="total>0">
-						<table class="table">
-							<thead class="thead-dark">
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">Titulo</th>
-									<th scope="col">Descripción</th>
-									<th scope="col">Fecha</th>
-									<th scope="col">Editar</th>
-									<th scope="col">Eliminar</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let publicationUser of publicationsUser">
-									<th scope="row">
-										<button class="btn btn-dark" [routerLink]="['/publicaciones/show', publicationUser._id]">Ver</button>
-									</th>
-									<td>{{publicationUser.title}}</td>
-									<td>{{publicationUser.description}}</td>
-									<td>{{publicationUser.create_at.split("T")[0]}}</td>
-									<td><button [routerLink]="['/publicaciones/edit', publicationUser._id]" class="btn btn-info">Editar</button></td>
-									<td><a href="#delete-publicationUser-{{publicationUser._id}}" class="btn btn-danger" data-toggle="modal">Eliminar</a></td>
-									<div class="modal fade" id="delete-publicationUser-{{publicationUser._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													¿Estas seguro de eliminar esta publicación?
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-													<button (click)="delete(publicationUser._id)" type="button" class="btn btn-primary">Si</button>
+				</div>
+				<div *ngIf="failedConect">
+					<h6 class="text-center">{{failedConect}}</h6>
+				</div>
+			</div>
+		</div>
+
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<h2 class="text-center">Publicaciones del Usuario</h2>
+				<h6 class="text-center">{{total}} Publicaciones</h6>
+			</div>
+		</div>
+		<hr>
+
+		<div *ngIf="publicationsUser">
+			<div class="row justify-content-center">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+					<div *ngIf="total>0">
+						<div class="table-responsive">
+							<table class="table">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Titulo</th>
+										<th scope="col">Descripción</th>
+										<th scope="col">Fecha</th>
+										<th scope="col">Editar</th>
+										<th scope="col">Eliminar</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let publicationUser of publicationsUser">
+										<th scope="row">
+											<button class="btn btn-dark" [routerLink]="['/publicaciones/show', publicationUser._id]">Ver</button>
+										</th>
+										<td>{{publicationUser.title}}</td>
+										<td>{{publicationUser.description}}</td>
+										<td>{{publicationUser.create_at.split("T")[0]}}</td>
+										<td><button [routerLink]="['/publicaciones/edit', publicationUser._id]" class="btn btn-info">Editar</button></td>
+										<td><a href="#delete-publicationUser-{{publicationUser._id}}" class="btn btn-danger" data-toggle="modal">Eliminar</a></td>
+										<div class="modal fade" id="delete-publicationUser-{{publicationUser._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														¿Estas seguro de eliminar esta publicación?
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+														<button (click)="delete(publicationUser._id)" type="button" class="btn btn-primary">Si</button>
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-					
-					<div *ngIf="total<=0">
-						<div class="jumbotron jumbotron-fluid">
-						  <div class="container">
-						    <h2 *ngIf="user.tipo=='miembro' || user.tipo=='admin'" class="display-4">Este usuario no tiene publicaciones</h2>
-						    <h2 *ngIf="user.tipo=='cliente' || user.tipo==''" class="display-4">Este usuario no esta autorizado para tener publicaciones</h2>
-						  </div>
+									</tr>
+								</tbody>
+							</table>
 						</div>
 					</div>
-
 				</div>
-
 			</div>
 		</div>
+
+		<div *ngIf="!publicationsUser && !failedConect">
+			<div class="text-center">
+		  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+		    		<span class="sr-only">Loading...</span>
+		  		</div>
+			</div>
+		</div>
+		<div *ngIf="failedConect">
+			<h6 class="text-center">{{failedConect}}</h6>
+		</div>
+
 	</div>
 </main>

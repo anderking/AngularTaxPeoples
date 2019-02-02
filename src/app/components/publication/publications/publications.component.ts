@@ -8,6 +8,8 @@ import { RutaService } from '../../../services/ruta.service';
 import { Global } from '../../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { LikeService } from '../../../services/like.service';
+import {Location} from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-publications',
@@ -24,14 +26,17 @@ export class PublicationsComponent implements OnInit {
 	public total:number=0;
 	public resID:string;
 	public rolID:string;
+	public failedConect:string;
 
 	constructor
 	(
 		private _publicationService: PublicationService,
 		private _categoriaService: CategoriaService,
 		private _rutaService: RutaService,
+		private _location: Location,
 		private _route: ActivatedRoute,
 		private _likeService: LikeService,
+		
 	)
 	{
 		this.url = Global.url;
@@ -65,6 +70,13 @@ export class PublicationsComponent implements OnInit {
 			},
 			error => 
 			{
+				if(error instanceof HttpErrorResponse)
+				{
+					if(error.status===0)
+					{
+						this.failedConect = Global.failed;
+					}
+				}
 				console.log(error);
 			}
 		);
@@ -105,5 +117,9 @@ export class PublicationsComponent implements OnInit {
 			}
 		);
 	}
-
+	
+	goBack()
+	{ 
+     this._location.back(); 
+    }
 }

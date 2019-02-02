@@ -148,7 +148,6 @@ export class PublicationsshowComponent implements OnInit
 			{
 				this.likesPublication = response.likesPublication;
 				this.totalLikes = response.likesPublication.length;
-				console.log(this.likesPublication);
 			},
 			error =>
 			{
@@ -189,9 +188,9 @@ export class PublicationsshowComponent implements OnInit
 						form.reset();
 						this.getcomentsPublication(this.publicationID);
 				},
-				err =>
+				error =>
 				{
-					console.log(err);
+					console.log(error);
 				}
 			);
 		}else
@@ -232,9 +231,9 @@ export class PublicationsshowComponent implements OnInit
 							$('#mostrarComent-'+id+'').css('display','block');
 							this.getcoment(this.update_coment._id);
 					},
-					err =>
+					error =>
 					{
-						console.log(err);
+						console.log(error);
 					}
 				);
 			},
@@ -270,7 +269,6 @@ export class PublicationsshowComponent implements OnInit
 
 	cancelarUpdate(id)
 	{
-		console.log('#mostrarUpdate-'+id+'');
 		this.getcomentsPublication(this.publicationID);
 		setTimeout
 		(
@@ -298,14 +296,10 @@ export class PublicationsshowComponent implements OnInit
 			},
 			error =>
 			{
+				console.log(<any>error);
 			}
 		);
 	}
-
-	goBack()
-	{
-		this._location.back(); 
-    }
 
     islike(id)
     {
@@ -358,6 +352,11 @@ export class PublicationsshowComponent implements OnInit
     comentarioFocus()
     {
     	$('#comentarioFocusInput').focus();
+    }
+
+ 	goBack()
+	{ 
+		this._location.back(); 
     }
 
 }

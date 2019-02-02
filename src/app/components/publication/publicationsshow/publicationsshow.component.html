@@ -6,43 +6,35 @@
 				<h2 class="text-center">Publicación</h2>
 			</div>
 		</div>
-
-		<div class="text-center" *ngIf="!publication">
-			<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-				<span class="sr-only">Loading...</span>
-			</div>
-		</div>
-
-		
-		<div *ngIf="publication">
-			<div class="row justify-content-center my-3">
-				<div class="col-12">
-					<button class="btn btn-dark" (click)="goBack()">Regresar</button>
-					<button *ngIf="ispost || rolID=='admin'" class="btn btn-info" [routerLink]="['/publicaciones/edit',publication._id]" >Editar</button>
-					<a *ngIf="ispost || rolID=='admin'" href="#delete-publication" class="btn btn-danger" data-toggle="modal">Eliminar</a>
-					<div class="modal fade" id="delete-publication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									¿Estas seguro de eliminar esta publicación?
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-									<button (click)="deletePublication(publication._id)" type="button" class="btn btn-primary">Si</button>
-								</div>
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+				<button *ngIf="(ispost || rolID=='admin') && publication" class="btn btn-info" [routerLink]="['/publicaciones/edit',publication._id]" >Editar</button>
+				<a *ngIf="(ispost || rolID=='admin') && publication" href="#delete-publication" class="btn btn-danger" data-toggle="modal">Eliminar</a>
+				<div class="modal fade" id="delete-publication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					<div class="modal-dialog" role="document">
+						<div class="modal-content">
+							<div class="modal-header">
+								<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+									<span aria-hidden="true">&times;</span>
+								</button>
+							</div>
+							<div class="modal-body">
+								¿Estas seguro de eliminar esta publicación?
+							</div>
+							<div class="modal-footer">
+								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+								<button (click)="deletePublication(publication._id)" type="button" class="btn btn-primary">Si</button>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<hr>
+		</div>
+		<hr>
 
+		<div *ngIf="publication">
 			<div class="row">
 				<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 mb-3">
 					<div id="showPublication">
@@ -52,29 +44,53 @@
 								<img *ngIf="!publication.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="...">
 							</div>
 							<div class="card-body">
-								<!--<div class="row justify-content-between">
-								    <div class="col-8">
-								      <h4 class="card-title font-weight-bold"><a>La Sirena restaurant</a></h4>
+								<div class="row justify-content-between">
+								    <div class="col-8 col-lg-9">
+								      <h4 class="card-title font-weight-bold">{{ publication.title }}</h4>
 								    </div>
-								    <div class="col-4">
-								      <button class="btn btn-primary">Contratar</button>
+								    <div class="col-4 col-lg-3">
+								      <a href="#mostrarContratar" data-toggle="modal" class="btn btn-primary">Contratar</a>
+								      <div class="modal fade" id="mostrarContratar" tabindex="-1" role="dialog" aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="mostrarLikesUsers2">Contratar Servicio</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														<p>Se enviara una notificación al usuario y él te contactará ¿esta de acuerdo?</p>
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-dark" data-dismiss="modal">Si</button>
+													</div>
+												</div>
+											</div>
+										</div>
 								    </div>
-								</div>-->
-								<h4 class="card-title font-weight-bold">{{ publication.title }}</h4>
+								</div>
+								
 								<hr>
 								<p class="mb-2">{{ publication.description }}</p>
 								<hr>
 								<p class="mb-2">
-									<i class="fa fa-folder-open-o" aria-hidden="true"></i><b>Tarífa: </b> <span class="badge badge-primary">{{ publication.tarifa }} Bs.S</span>
+									<i class="fa fa-usd" aria-hidden="true"></i><b>Tarífa: </b> <span class="badge badge-primary">{{ publication.tarifa }} Bs.S</span>
 								</p>
 								<p class="mb-2">
-									<i class="fa fa-folder-open-o" aria-hidden="true"></i><b>Categoría: </b> <span class="badge badge-primary">{{ publication.categoriaID.name }}</span>
+									<i class="fa fa-tags" aria-hidden="true"></i><b>Categoría: </b> <span class="badge badge-primary">{{ publication.categoriaID.name }}</span>
 								</p>
 								<p class="mb-2">
-									<i class="fa fa-tags" aria-hidden="true"></i><b>Ruta: </b><span class="badge badge-primary">{{ publication.rutaID.name }}</span>
+									<i class="fa fa-car" aria-hidden="true"></i><b>Ruta: </b><span class="badge badge-primary">{{ publication.rutaID.name }}</span>
 								</p>
 								<p class="mb-2">
 									<i class="fa fa-user-o" aria-hidden="true"></i><b>Post by: </b><span class="badge badge-primary">{{ publication.userID.email }}</span>
+								</p>
+								<p class="mb-2">
+									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
 								</p>
 								<p class="mb-2">
 									<i class="fa fa-clock-o" aria-hidden="true"></i><b>Publicado el: </b><span class="badge badge-primary">{{ publication.create_at |date:"medium" }}</span>
@@ -104,7 +120,7 @@
 														</div>
 													</div>
 													<div class="modal-footer">
-														<button type="button" class="btn btn-secondary" data-dismiss="modal">Salir</button>
+														<button type="button" class="btn btn-dark" data-dismiss="modal">Salir</button>
 													</div>
 												</div>
 											</div>
@@ -114,7 +130,7 @@
 										<small class="badge badge-dark">{{totalComents}} comentarios</small>
 									</div>
 									<div class="col-4">
-										<small class="badge badge-dark">4 compartidos</small>
+										<!--<small class="badge badge-dark">{{totalComents}} comentarios</small>-->
 									</div>
 								</div>
 								<hr>
@@ -130,13 +146,39 @@
 										</div>
 										<div class="col-4">
 											<div class="dropdown">
-												<a href="#compartir" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
-													<small><i class="fa fa-share" aria-hidden="true"></i>Compartir</small>
+												<a  href="#mostrarRecomendar" data-toggle="modal">
+													<small><i class="fa fa-share" aria-hidden="true"></i>Recomendar</small>
 												</a>
-												<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-													<a class="dropdown-item">Compartir</a>
-													<a class="dropdown-item" data-toggle="modal" data-target="#modalRecomendar">Recomendar</a>
-												</ul>
+												<div class="modal fade" id="mostrarRecomendar" tabindex="-1" role="dialog" aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
+													<div class="modal-dialog" role="document">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="mostrarLikesUsers2">Enviar recomendación a tus seguidores</h5>
+																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																	<span aria-hidden="true">&times;</span>
+																</button>
+															</div>
+															<div class="modal-body">
+																<div class="media" *ngFor="let likePublication of likesPublication; let i = index">
+																	<img *ngIf="likePublication.userID.image" class="img_profiel" src="{{url+'get-image-user/'+likePublication.userID.image}}" alt="..."/>
+																	<img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="..."/>
+																	<div class="media-body d-flex align-items-center">
+																		<h5 class="mt-0">{{ likePublication.userID.email }}</h5>
+																	</div>
+																	<form>
+																		<input type="submit" class="btn btn-success" value="Enviar">
+																		<input type="hidden" name="userEmisorID" value="{{resID}}">
+																		<input type="hidden" name="userReceptorID" value="{{likePublication.userID._id}}">
+																		<input type="hidden" name="interaction" value="recomendacion">
+																	</form>
+																</div>
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-dark" data-dismiss="modal">Salir</button>
+															</div>
+														</div>
+													</div>
+												</div>
 											</div>
 										</div>
 									</div>
@@ -213,6 +255,15 @@
 				</div>
 			</div>
 		</div>
+
+		<div *ngIf="!publication">
+			<div class="text-center">
+		  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+		    		<span class="sr-only">Loading...</span>
+		  		</div>
+			</div>
+		</div>
+
 	</div>
 </main>
 

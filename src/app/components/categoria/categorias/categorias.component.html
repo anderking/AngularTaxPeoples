@@ -1,89 +1,125 @@
 <main class="main_categorias">
 	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-				
-				<div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
-					{{message}}
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				
-				<div class="row justify-content-center my-3">
-					<div class="col-12">
-						<h2 class="text-center">Categorías</h2>
-					</div>
-				</div>
 
-				<div *ngIf="total>0">
-					<div class="row justify-content-center my-3">
-						<div class="col-12">
-							<button [routerLink]="['/perfil/',resID]" class="btn btn-dark">Volver a Perfil</button>
-							<button [routerLink]="['/categorias/create']" class="btn btn-primary">Nueva categoría</button>
+		<div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
+			{{message}}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<h2 class="text-center">Categorías</h2>
+				<h6 class="text-center">{{ total }} Categorías</h6>
+			</div>
+		</div>
+
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+				<button [routerLink]="['/categorias/create']" class="btn btn-primary">Nuevo</button>
+				<span *ngIf="total>0">
+					<!--<a href="#delete-categorias" class="btn btn-danger" data-toggle="modal">Eliminar Todos</a>-->
+					<div class="modal fade" id="delete-categorias" tabindex="-1" role="dialog" aria-labelledby="deletecategorias" aria-hidden="true">
+						<div class="modal-dialog" role="document">
+							<div class="modal-content">
+								<div class="modal-header">
+									<h5 class="modal-title" id="deletecategorias">Confirmación</h5>
+									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+										<span aria-hidden="true">&times;</span>
+									</button>
+								</div>
+								<div class="modal-body">
+									¿Estas seguro de eliminar este usuario?
+								</div>
+								<div class="modal-footer">
+									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+									<button (click)="deletecategorias()" type="button" class="btn btn-primary">Si</button>
+								</div>
+							</div>
 						</div>
 					</div>
-				</div>
-				
-				<hr>
+				</span>
+			</div>
+		</div>
 
-				<div *ngIf="total<=0">
-					<div class="jumbotron jumbotron-fluid">
-						<div class="container">
-							<h2 class="display-4">No hay categorias registradas</h2>
-							<button [routerLink]="['/perfil/',resID]" class="btn btn-dark">Volver a Perfil</button>
-							<button [routerLink]="['/categorias/create']" class="btn btn-primary">Nueva categoría</button>
-						</div>
-					</div>
-				</div>
-
-				<div *ngIf="total>0">
-					<div class="table-responsive">
-						<table class="table">
-							<thead class="thead-dark">
-								<tr>
-									<th scope="col">#</th>
-									<th scope="col">Nombre</th>
-									<th scope="col">Descripción</th>
-									<th scope="col">Editar</th>
-									<th scope="col">Eliminar</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr *ngFor="let categoria of categorias | paginate: { itemsPerPage: 5, currentPage: page }">
-									<td scope="row">
-										<button class="btn btn-dark" [routerLink]="['/categorias/show', categoria._id]">Ver</button>
-									</td>
-									<td>{{categoria.name}}</td>
-									<td>{{categoria.description}}</td>
-									<td><button [routerLink]="['/categorias/edit', categoria._id]" class="btn btn-info">Editar</button></td>
-									<td><a href="#delete-categoria-{{categoria._id}}" class="btn btn-danger" data-toggle="modal">Eliminar</a></td>
-									<div class="modal fade" id="delete-categoria-{{categoria._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-										<div class="modal-dialog" role="document">
-											<div class="modal-content">
-												<div class="modal-header">
-													<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-													<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-														<span aria-hidden="true">&times;</span>
-													</button>
-												</div>
-												<div class="modal-body">
-													¿Estas seguro de eliminar esta categoría?
-												</div>
-												<div class="modal-footer">
-													<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-													<button (click)="delete(categoria._id)" type="button" class="btn btn-primary">Si</button>
+		<hr>
+		
+		<div *ngIf="categorias">
+			<div class="row justify-content-center">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+					<div *ngIf="categorias">
+						<div *ngIf="total>0">
+							<div class="table-responsive">
+								<table class="table">
+									<thead class="thead-dark">
+										<tr>
+											<th scope="col">#</th>
+											<th scope="col">Name</th>
+											<th scope="col">Descripción</th>
+											<th scope="col">Editar</th>
+											<th scope="col">Eliminar</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr *ngFor="let categoria of categorias | paginate: { itemsPerPage: 5, currentPage: page }">
+											<th scope="row">
+												<button class="btn btn-dark" [routerLink]="['/categorias/show', categoria._id]">Ver</button>
+											</th>
+											<td>{{categoria.name}}</td>
+											<td>{{categoria.description}}</td>
+											<td><button [routerLink]="['/categorias/edit', categoria._id]" class="btn btn-info">Editar</button></td>
+											<td><a href="#delete-categoria-{{categoria._id}}" class="btn btn-danger" data-toggle="modal">Eliminar</a></td>
+											<div class="modal fade" id="delete-categoria-{{categoria._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+												<div class="modal-dialog" role="document">
+													<div class="modal-content">
+														<div class="modal-header">
+															<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+																<span aria-hidden="true">&times;</span>
+															</button>
+														</div>
+														<div class="modal-body">
+															¿Estas seguro de eliminar esta categoría?
+														</div>
+														<div class="modal-footer">
+															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+															<button (click)="delete(categoria._id)" type="button" class="btn btn-primary">Si</button>
+														</div>
+													</div>
 												</div>
 											</div>
-										</div>
-									</div>
-								</tr>
-							</tbody>
-						</table>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<pagination-controls (pageChange)="page = $event"></pagination-controls>
+						</div>
 					</div>
-					<pagination-controls (pageChange)="page = $event"></pagination-controls>
+
+					<div *ngIf="!categorias">
+						<div class="text-center">
+							<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+								<span class="sr-only">Loading...</span>
+							</div>
+						</div>
+					</div>
+
 				</div>
 			</div>
 		</div>
+
+		<div *ngIf="!categorias && !failedConect">
+			<div class="text-center">
+		  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+		    		<span class="sr-only">Loading...</span>
+		  		</div>
+			</div>
+		</div>
+		<div *ngIf="failedConect">
+			<h6 class="text-center">{{failedConect}}</h6>
+		</div>
+
 	</div>
 </main>

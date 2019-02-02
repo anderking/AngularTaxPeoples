@@ -1,16 +1,26 @@
 <main class="main_categorias_show">
 	<div class="container">
+
+		<div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
+			{{message}}
+			<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
+				<span aria-hidden="true">&times;</span>
+			</button>
+		</div>
+
 		<div class="row justify-content-center my-3">
 			<div class="col-12">
 				<h2 class="text-center">Información de la categoría</h2>
 			</div>
 		</div>
+
 		<div class="row justify-content-center my-3">
 			<div class="col-12">
-				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+					<button class="btn btn-dark" (click)="goBack()">Regresar</button>
 			</div>
 		</div>
 		<hr>
+
 		<div class="row justify-content-center">
 			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
 
@@ -20,67 +30,92 @@
 					<li class="list-group-item"><b>Descripción: </b>{{ categoria.description }}</li>
 				</ul>
 
+				<div *ngIf="!categoria && !failedConect">
+					<div class="text-center">
+				  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+				    		<span class="sr-only">Loading...</span>
+				  		</div>
+					</div>
+				</div>
+				<div *ngIf="failedConect">
+					<h6 class="text-center">{{failedConect}}</h6>
+				</div>
+
 			</div>
 		</div>
 
+		<div class="row justify-content-center my-3">
+			<div class="col-12">
+				<h2 class="text-center">Publicaciones de la Categoría</h2>
+				<h6 class="text-center">{{total}} Publicaciones</h6>
+			</div>
+		</div>
 		<hr>
-		<div class="row justify-content-center">
-			<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-				<h2 class="text-center">Publicaciones que tienen esta categoría</h2>
-				<hr>
-				<div class="table-responsive" *ngIf="total>0">
-					<table class="table">
-						<thead class="thead-dark">
-							<tr>
-								<th scope="col">#</th>
-								<th scope="col">Titulo</th>
-								<th scope="col">Descripción</th>
-								<th scope="col">Fecha</th>
-								<th scope="col">Editar</th>
-								<th scope="col">Eliminar</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr *ngFor="let publicationCategoria of publicationsCategoria">
-								<th scope="row">
-									<button class="btn btn-dark" [routerLink]="['/publicaciones/show', publicationCategoria._id]">Ver</button>
-								</th>
-								<td>{{publicationCategoria.title}}</td>
-								<td>{{publicationCategoria.description}}</td>
-								<td>{{publicationCategoria.create_at.split("T")[0]}}</td>
-								<td><button [routerLink]="['/publicaciones/edit', publicationCategoria._id]" class="btn btn-info">Editar</button></td>
-								<td><a href="#delete-publicationCategoria-{{publicationCategoria._id}}" class="btn btn-danger" data-toggle="modal">Eliminar</a></td>
-								<div class="modal fade" id="delete-publicationCategoria-{{publicationCategoria._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												¿Estas seguro de eliminar esta publicación?
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-												<button (click)="delete(publicationCategoria._id)" type="button" class="btn btn-primary">Si</button>
+
+		<div *ngIf="publicationsCategoria">
+			<div class="row justify-content-center">
+				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
+					<div *ngIf="total>0">
+						<div class="table-responsive">
+							<table class="table">
+								<thead class="thead-dark">
+									<tr>
+										<th scope="col">#</th>
+										<th scope="col">Titulo</th>
+										<th scope="col">Descripción</th>
+										<th scope="col">Fecha</th>
+										<th scope="col">Editar</th>
+										<th scope="col">Eliminar</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr *ngFor="let publicationCategoria of publicationsCategoria">
+										<th scope="row">
+											<button class="btn btn-dark" [routerLink]="['/publicaciones/show', publicationCategoria._id]">Ver</button>
+										</th>
+										<td>{{publicationCategoria.title}}</td>
+										<td>{{publicationCategoria.description}}</td>
+										<td>{{publicationCategoria.create_at |date:"longDate" }}</td>
+										<td><button [routerLink]="['/publicaciones/edit', publicationCategoria._id]" class="btn btn-info">Editar</button></td>
+										<td><a href="#delete-publicationCategoria-{{publicationCategoria._id}}" class="btn btn-danger" data-toggle="modal">Eliminar</a></td>
+										<div class="modal fade" id="delete-publicationCategoria-{{publicationCategoria._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+											<div class="modal-dialog" role="document">
+												<div class="modal-content">
+													<div class="modal-header">
+														<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+															<span aria-hidden="true">&times;</span>
+														</button>
+													</div>
+													<div class="modal-body">
+														¿Estas seguro de eliminar esta publicación?
+													</div>
+													<div class="modal-footer">
+														<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+														<button (click)="delete(publicationCategoria._id)" type="button" class="btn btn-primary">Si</button>
+													</div>
+												</div>
 											</div>
 										</div>
-									</div>
-								</div>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<div *ngIf="total<=0">
-					<div class="jumbotron jumbotron-fluid">
-					  <div class="container">
-					    <h2 class="display-4">Esta categoria no tiene publicaciones asociadas</h2>
-					  </div>
+									</tr>
+								</tbody>
+							</table>
+						</div>
 					</div>
 				</div>
 			</div>
 		</div>
+
+		<div *ngIf="!publicationsCategoria && !failedConect">
+			<div class="text-center">
+		  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+		    		<span class="sr-only">Loading...</span>
+		  		</div>
+			</div>
+		</div>
+		<div *ngIf="failedConect">
+			<h6 class="text-center">{{failedConect}}</h6>
+		</div>
+
 	</div>
 </main>

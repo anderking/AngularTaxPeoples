@@ -55,7 +55,6 @@ export class EdituserComponent implements OnInit {
 			response =>
 			{
 				this.user = response.user;
-				console.log(this.user);
 			},
 			error =>
 			{
@@ -91,7 +90,7 @@ export class EdituserComponent implements OnInit {
 				},
 				error =>
 				{
-					this.message = error.error.message;
+					this.message = error.message;
 					console.log(error);
 					this.isAlert = false;
 					this.onIsError();

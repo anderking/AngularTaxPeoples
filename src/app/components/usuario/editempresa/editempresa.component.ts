@@ -89,7 +89,6 @@ export class EditempresaComponent implements OnInit {
 			response =>
 			{
 				this.user = response.user;
-				console.log(this.user);
 			},
 			error =>
 			{
@@ -105,7 +104,6 @@ export class EditempresaComponent implements OnInit {
 			response =>
 			{
 				this.empresa = response.empresa[0];
-				console.log(this.empresa);
 			},
 			error =>
 			{
@@ -138,7 +136,7 @@ export class EditempresaComponent implements OnInit {
 				},
 				error =>
 				{
-					this.message = error.error.message;
+					this.message = error.message;
 					console.log(error);
 					this.isAlert = false;
 					this.onIsError();

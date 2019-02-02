@@ -6,6 +6,7 @@ import { Persona } from '../../../models/persona';
 import { PersonaService } from '../../../services/persona.service';
 import { Categoria } from '../../../models/categoria';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import {Location} from '@angular/common';
 import { HttpErrorResponse } from '@angular/common/http';
 import {NgForm} from '@angular/forms';
 import { SelectControlValueAccessor } from '@angular/forms';
@@ -49,6 +50,7 @@ export class RegisterNComponent implements OnInit {
 		private _userService: UserService,
 		private _personaService: PersonaService,
     	private spinner: NgxSpinnerService,
+    	private _location: Location,
 
 	)
 	{		
@@ -89,7 +91,6 @@ export class RegisterNComponent implements OnInit {
 	ngOnInit()
 	{
 		this.categoriaSelected="";
-		this.resID = localStorage.getItem('resID');
 		this.persona = new Persona('','','','','','','','','',this.resID);
 		this._route.params.subscribe
 		(
@@ -109,7 +110,6 @@ export class RegisterNComponent implements OnInit {
 			response =>
 			{
 				this.user = response.user;
-				console.log(this.user);
 
 			},
 			error =>
@@ -145,18 +145,18 @@ export class RegisterNComponent implements OnInit {
 						localStorage.setItem('perID', res.persona._id);
 						this.asigarTipo();
 					},
-					err =>
+					error =>
 					{
-						console.log(err);
+						console.log(error);
 						this.isAlert=false;
-						this.message = err.message;
+						this.message = error.message;
 						this.onIsError();
 
-						if(err instanceof HttpErrorResponse)
+						if(error instanceof HttpErrorResponse)
 						{
-							if(err.status===404)
+							if(error.status===404)
 							{
-								this.message = err.error.message;
+								this.message = error.error.message;
 								this.onIsError();
 							}
 						}
@@ -221,9 +221,21 @@ export class RegisterNComponent implements OnInit {
 	      () =>
 	      {
 	        this.spinner.hide();
-	        window.location.replace('http://localhost:4200/perfil/'+localStorage.getItem('resID'));
+	        var actualRoute = window.location.origin;
+	        if(localStorage.getItem('rolID')=='admin')
+	        {
+	        	window.location.replace(actualRoute+'/perfil/'+this.resID);
+	        }else{
+	        	window.location.replace(actualRoute+'/users/show/'+this.resID);
+	        }
 	      },
 	      3000
 	    );
 	}
+
+	goBack()
+	{ 
+		this._location.back(); 
+    }
+    
 }

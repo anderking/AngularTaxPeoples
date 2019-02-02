@@ -51,13 +51,18 @@
 						</div>
 
 						<div class="col-md-12 mb-3">
-
-							<input type="text" [ngClass]="{'is-invalid': validationTarifa.touched && !validationTarifa.valid, 'is-valid': validationTarifa.touched && validationTarifa.valid}" class="form-control" name="tarifa" #validationTarifa="ngModel" placeholder="Tarifa" [(ngModel)]="tarifa" required pattern="^[0-9]{0,12}([.][0-9]{1,2})?$">
+							<label for="tarifa">Tarifa</label>
+							<div class="input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text" id="basic-addon1">Bs.S</span>
+								</div>
+								<input type="text" [ngClass]="{'is-invalid': validationTarifa.touched && !validationTarifa.valid, 'is-valid': validationTarifa.touched && validationTarifa.valid}" class="form-control" name="tarifa" #validationTarifa="ngModel" placeholder="Tarifa" [(ngModel)]="tarifa" required pattern="^[0-9]{0,12}([.][0-9]{1,2})?$">
 
 								<div class="invalid-feedback" *ngIf="validationTarifa.touched && !validationTarifa.valid">
 									<div *ngIf="validationTarifa.errors.required">Por favor, introduzca un Tarifa</div>
 									<div *ngIf="validationTarifa.errors.pattern">La tarifa debe ser solo numeros hasta maximo dos decimales, Ejemplo: 2050.50</div>
 								</div>
+							</div>
 
 						</div>
 

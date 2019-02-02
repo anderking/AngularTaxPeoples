@@ -5,6 +5,8 @@ import { Publication } from '../../../models/publication';
 import { PublicationService } from '../../../services/publication.service';
 import { Global } from '../../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
+import {Location} from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-users',
@@ -16,46 +18,33 @@ import { Router, ActivatedRoute, Params } from '@angular/router';
 export class UsersComponent implements OnInit {
 	
 	public users: any;
-	public publicationsUser: any;
 	public total:number=0;
 	public resID:string;
 	public url: string;
 	public isError:boolean = false;
 	public isAlert:boolean = false;
 	public message:string;
+	public failedConect:string;
 
 	constructor
 	(
 		private _userService: UserService,
 		private _publicationService: PublicationService,
 		private _router: Router,
+		private _location: Location,
 
 	)
 	{
 	}
+
 	ngOnInit()
 	{
 		this.resID = localStorage.getItem('resID');
 		this.url = Global.url;
-		this.getUserAll(this.resID);
+		this.getUsers(this.resID);
 	}
 
-	getPublicationsUser(id)
-	{
-		this._publicationService.getPublicationsUser(id).subscribe
-		(
-			response =>
-			{
-				this.publicationsUser = response.publicationsUser;
-			},
-			error =>
-			{
-				console.log(<any>error);
-			}
-		)
-	}
-
-	getUserAll(id)
+	getUsers(id)
 	{
 		this._userService.getUsersExcept(id).subscribe
 		(
@@ -64,15 +53,18 @@ export class UsersComponent implements OnInit {
 				if(response.users)
 				{
 					this.users = response.users;
-					for (var i = 0; i < this.users.length; i++)
-					{
-						this.getPublicationsUser(this.users[i]._id);
-					}
 					this.total = this.users.length;
 				}
 			},
 			error => 
 			{
+				if(error instanceof HttpErrorResponse)
+				{
+					if(error.status===0)
+					{
+						this.failedConect = "Ups!!! hay problemas para conectar con la API, probablemente no haya internet";
+					}
+				}
 				console.log(error);
 			}
 		);
@@ -87,7 +79,7 @@ export class UsersComponent implements OnInit {
 				this.message = response.message;
 				this.isAlert = true;
 				this.onIsError();
-				this.getUserAll(this.resID);
+				this.getUsers(this.resID);
 				$('body').removeClass('modal-open');
 				$("body").removeAttr("style");
 				$('.modal-backdrop.fade.show').css('display','none');
@@ -117,7 +109,7 @@ export class UsersComponent implements OnInit {
 				this.message = response.message;
 				this.isAlert = true;
 				this.onIsError();
-				this.getUserAll(this.resID);
+				this.getUsers(this.resID);
 
 			},
 			error =>
@@ -140,5 +132,9 @@ export class UsersComponent implements OnInit {
 	{
 		this.isError=false;
 	}
-
+	
+	goBack()
+	{ 
+     this._location.back(); 
+    }
 }
