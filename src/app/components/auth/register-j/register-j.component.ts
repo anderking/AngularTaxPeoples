@@ -79,8 +79,6 @@ export class RegisterJComponent implements OnInit {
 
   ngOnInit()
   {
-    this.resID = localStorage.getItem('resID');
-    this.empresa = new Empresa('','','','','','',this.resID);
     this._route.params.subscribe
     (
       params =>
@@ -90,6 +88,7 @@ export class RegisterJComponent implements OnInit {
             this.resID = id;
       }
     );
+    this.empresa = new Empresa('','','','','','',this.resID);
   }
 
   getUser(id)

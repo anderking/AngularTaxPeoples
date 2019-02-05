@@ -98,6 +98,7 @@ export class PerfilComponent implements OnInit {
 		(
 			response =>
 			{
+					console.log(response);
 				if(this.rolID=="cliente" || this.rolID=="admin")
 				{
 					if(!response.persona)

@@ -24,6 +24,8 @@ export class RutasshowComponent implements OnInit {
 	public isError:boolean = false;
 	public isAlert:boolean = false;
 	public message:string;
+	public failedConect:string;
+
 
 	constructor
 	(
@@ -61,6 +63,13 @@ export class RutasshowComponent implements OnInit {
 			error =>
 			{
 				console.log(<any>error);
+				if(error instanceof HttpErrorResponse)
+				{
+					if(error.status===0)
+					{
+						this.failedConect = Global.failed;
+					}
+				}
 			}
 		)
 	}
@@ -77,6 +86,13 @@ export class RutasshowComponent implements OnInit {
 			error =>
 			{
 				console.log(<any>error);
+				if(error instanceof HttpErrorResponse)
+				{
+					if(error.status===0)
+					{
+						this.failedConect = Global.failed;
+					}
+				}
 			}
 		)
 	}

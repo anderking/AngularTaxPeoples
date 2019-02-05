@@ -27,7 +27,8 @@ export class LogoutComponent implements OnInit {
 	      {
 	        this.spinner.hide();
 	        this._authService.logoutClear();
-        	window.location.replace('http://localhost:4200/login/');
+          var actualRoute = window.location.origin;
+          window.location.replace(actualRoute+'/login/');
 	      },
 	      3000
 	    );

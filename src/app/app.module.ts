@@ -20,6 +20,7 @@ import { TokenInterceptorService } from './services/token-interceptor.service';
 import { UploadService } from './services/upload.service';
 import { UserService } from './services/user.service';
 import { ComentService } from './services/coment.service';
+import { CalificacionService } from './services/calificacion.service';
 
 import { AppComponent } from './app.component';
 import { ErrorComponent } from './components/error/error.component';
@@ -75,6 +76,8 @@ import { PublicationsdeleteComponent } from './components/publication/publicatio
 import { PublicationsComponent } from './components/publication/publications/publications.component';
 import { PublicationscategoriaComponent } from './components/publication/publicationscategoria/publicationscategoria.component';
 import { PublicationsrutaComponent } from './components/publication/publicationsruta/publicationsruta.component';
+import { PerfilfollowComponent } from './components/follow/perfilfollow/perfilfollow.component';
+import { FollowpadreComponent } from './components/follow/followpadre/followpadre.component';
 
 
 @NgModule({
@@ -126,6 +129,8 @@ import { PublicationsrutaComponent } from './components/publication/publications
     UserscreateComponent,
     PublicationscategoriaComponent,
     PublicationsrutaComponent,
+    PerfilfollowComponent,
+    FollowpadreComponent,
   ],
   imports: [
     BrowserModule,
@@ -151,6 +156,7 @@ import { PublicationsrutaComponent } from './components/publication/publications
     UploadService,
     LikeService,
     ComentService,
+    CalificacionService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass : TokenInterceptorService,

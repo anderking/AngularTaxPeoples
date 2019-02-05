@@ -1,0 +1,276 @@
+<main class="main_perfil_follow">
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-12">
+				<div *ngIf="user && persona">
+					<div class="pz bpi afo">
+						<div class="qf" style="background-image: url(assets/img/biografia.jpg);"></div>
+						<div class="qa avz">
+							<img *ngIf="user.image" class="bpj" src="{{url+'get-image-user/'+user.image}}" alt="...">
+							<img *ngIf="!user.image" class="bpj" src="../../../../assets/img/user.png" alt="...">
+
+							<h2 class="qb">
+								<div class="boa" href="profile/index.html">{{ persona.name }}</div>
+							</h2>
+							<p class="afo">{{ user.description }}</p>
+							<hr>
+							<p class="afo"><b>Cedula: </b>{{ persona.cedula }}</p>
+							<p class="afo"><b>Telefono: </b>{{ persona.telefono }}</p>
+							<p class="afo"><b>Direccion: </b>{{ persona.direccion }}</p>
+							<p class="afo"><b>Estado: </b>{{ persona.estado }}</p>
+							<p class="afo"><b>Sexo: </b>
+								<span *ngIf=" persona.sexo=='M' ">Masculino</span>
+								<span *ngIf=" persona.sexo=='F' ">Femenino</span>
+							</p>
+							<p class="afo"><b>Estado Civil: </b>
+								<span *ngIf=" persona.edoCivil=='S' ">Soltero</span>
+								<span *ngIf=" persona.edoCivil=='C' ">Casado</span>
+							</p>
+							<p class="afo"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento |date:"longDate" }}</p>
+							<p class="afo" *ngIf="!calificacionesR">
+								<b>Calificación: </b>
+								Nadie ha calificado a este Usuario
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=1 && promedioCalificaciones<=1.44">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=1.45 && promedioCalificaciones<=2.44">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=2.45 && promedioCalificaciones<=3.44">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=3.45 && promedioCalificaciones<4.44">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=4.45 && promedioCalificaciones<=5.45">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+
+							<button class="btn btn-success">Seguir</button>
+
+							<a href="#calificar" *ngIf="!calificacionBool" class="btn btn-primary" data-toggle="modal">Calificar</a>
+
+							<div class="modal fade" id="calificar" *ngIf="!calificacionBool" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<form #calificarForm="ngForm" (ngSubmit)="calificar(calificarForm)">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Calificar</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="form-group">
+												<label for="value">Calificación</label>
+												<select [ngClass]="{'is-invalid': validationValue.touched && !validationValue.valid, 'is-valid': validationValue.touched && validationValue.valid}" name="value" #validationValue="ngModel" [(ngModel)]="calificationSelected" class="form-control" required>
+													<option *ngFor="let calification of califications" [value]="calification._id"> {{calification.name}}</option>
+												</select>
+
+												<div class="invalid-feedback" *ngIf="validationValue.touched && !validationValue.valid">
+													<div *ngIf="validationValue.errors.required">Por favor, introduzca una Calificación</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary" [disabled]="!calificarForm.form.valid">Enviar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+							</div>
+
+							<a href="#desCalificar" *ngIf="calificacionBool" class="btn btn-primary" data-toggle="modal">Editar Calificacion</a>
+
+							<div class="modal fade" id="desCalificar" *ngIf="calificacionBool && calificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<form #updateCalificarForm="ngForm" (ngSubmit)="updateCalificar(updateCalificarForm)">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Calificar</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<label for="value">Calificación</label>
+													<select [ngClass]="{'is-invalid': validationValue.touched && !validationValue.valid, 'is-valid': validationValue.touched && validationValue.valid}" name="value" #validationValue="ngModel" [(ngModel)]="calificacionSelected" class="form-control" required>
+														<option *ngFor="let calification of califications" [value]="calification._id"> {{calification.name}}</option>
+													</select>
+
+													<div class="invalid-feedback" *ngIf="validationValue.touched && !validationValue.valid">
+														<div *ngIf="validationValue.errors.required">Por favor, introduzca una Calificación</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary" [disabled]="!updateCalificarForm.form.valid">Enviar</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+						</div>
+					</div>
+				</div>
+
+				<div *ngIf="user && empresa">
+					<div class="pz bpi afo">
+						<div class="qf" style="background-image: url(assets/img/biografia.jpg);"></div>
+						<div class="qa avz">
+							<img *ngIf="user.image" class="bpj" src="{{url+'get-image-user/'+user.image}}" alt="...">
+							<img *ngIf="!user.image" class="bpj" src="../../../../assets/img/user.png" alt="...">
+
+							<h2 class="qb">
+								<div class="boa" href="profile/index.html">{{ empresa.name }}</div>
+							</h2>
+							<p class="afo">{{ user.description }}</p>
+							<hr>
+							<p class="afo"><b>RIF: </b>{{ empresa.rif }}</p>
+							<p class="afo"><b>Telefono: </b>{{ empresa.telefono }}</p>
+							<p class="afo"><b>Direccion: </b>{{ empresa.direccion }}</p>
+							<p class="afo"><b>Estado: </b>{{ empresa.estado }}</p>
+
+							<p class="afo" *ngIf="promedioCalificaciones>=0 && promedioCalificaciones<1">
+								<b>Calificación: </b>
+								Nadie ha calificado a este miembro
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=1 && promedioCalificaciones<=1.44">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=1.45 && promedioCalificaciones<=2.44">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=2.45 && promedioCalificaciones<=3.44">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=3.45 && promedioCalificaciones<4.44">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+							<p class="afo" *ngIf="promedioCalificaciones>=4.45 && promedioCalificaciones<=5.45">
+								<b>Calificación: </b>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								<i class="fa fa-star" aria-hidden="true"></i>
+								{{ promedioCalificaciones }}
+							</p>
+
+							<button class="btn btn-success">Seguir</button>
+
+							<a href="#calificar" *ngIf="!calificacionBool" class="btn btn-primary" data-toggle="modal">Calificar</a>
+
+							<div class="modal fade" id="calificar" *ngIf="!calificacionBool" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal-dialog" role="document">
+								<div class="modal-content">
+									<form #calificarForm="ngForm" (ngSubmit)="calificar(calificarForm)">
+										<div class="modal-header">
+											<h5 class="modal-title" id="exampleModalLabel">Calificar</h5>
+											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+												<span aria-hidden="true">&times;</span>
+											</button>
+										</div>
+										<div class="modal-body">
+											<div class="form-group">
+												<label for="value">Calificación</label>
+												<select [ngClass]="{'is-invalid': validationValue.touched && !validationValue.valid, 'is-valid': validationValue.touched && validationValue.valid}" name="value" #validationValue="ngModel" [(ngModel)]="calificationSelected" class="form-control" required>
+													<option *ngFor="let calification of califications" [value]="calification._id"> {{calification.name}}</option>
+												</select>
+
+												<div class="invalid-feedback" *ngIf="validationValue.touched && !validationValue.valid">
+													<div *ngIf="validationValue.errors.required">Por favor, introduzca una Calificación</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+											<button type="submit" class="btn btn-primary" [disabled]="!calificarForm.form.valid">Enviar</button>
+										</div>
+									</form>
+								</div>
+							</div>
+							</div>
+
+							<a href="#desCalificar" *ngIf="calificacionBool" class="btn btn-primary" data-toggle="modal">Editar Calificacion</a>
+
+							<div class="modal fade" id="desCalificar" *ngIf="calificacionBool && calificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<form #updateCalificarForm="ngForm" (ngSubmit)="updateCalificar(updateCalificarForm)">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Calificar</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<label for="value">Calificación</label>
+													<select [ngClass]="{'is-invalid': validationValue.touched && !validationValue.valid, 'is-valid': validationValue.touched && validationValue.valid}" name="value" #validationValue="ngModel" [(ngModel)]="calificacionSelected" class="form-control" required>
+														<option *ngFor="let calification of califications" [value]="calification._id"> {{calification.name}}</option>
+													</select>
+
+													<div class="invalid-feedback" *ngIf="validationValue.touched && !validationValue.valid">
+														<div *ngIf="validationValue.errors.required">Por favor, introduzca una Calificación</div>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary" [disabled]="!updateCalificarForm.form.valid">Enviar</button>
+											</div>
+										</form>
+									</div>
+								</div>
+							</div>
+
+							<button class="btn btn-dark" (click)="goBack()">Regresar</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</main>
+

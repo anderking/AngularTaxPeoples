@@ -56,6 +56,8 @@ import { PublicationsrutaComponent } from './components/publication/publications
 
 import { TimelinepadreComponent } from './components/timeline/timelinepadre/timelinepadre.component';
 import { TimelineComponent } from './components/timeline/timeline/timeline.component';
+import { PerfilfollowComponent } from './components/follow/perfilfollow/perfilfollow.component';
+import { FollowpadreComponent } from './components/follow/followpadre/followpadre.component';
 
 
 
@@ -130,11 +132,11 @@ const appRoutes: Routes = [
 		]
 	},
 	
-	{path: 'timeline', component: TimelinepadreComponent, canActivate: [AuthGuard] ,
+	{path: 'follow', component: FollowpadreComponent, canActivate: [AuthGuard] ,
 		children:
 		[
-			{path: '', component: TimelineComponent},
-			{path: 'categoria/:id', component: EditpersonaComponent},
+			//{path: '', component: TimelineComponent},
+			{path: 'perfil/:id', component: PerfilfollowComponent},
 		]
 	},
 	

@@ -84,14 +84,78 @@
 									<i class="fa fa-car" aria-hidden="true"></i><b>Ruta: </b><span class="badge badge-primary">{{ publication.rutaID.name }}</span>
 								</p>
 								<p class="mb-2">
-									<i class="fa fa-user-o" aria-hidden="true"></i><b>Post by: </b><span class="badge badge-primary">{{ publication.userID.email }}</span>
+									<i class="fa fa-user-o" aria-hidden="true"></i><b>Post by: </b><a [routerLink]="['/follow/perfil', publication.userID._id]"><span class="badge badge-primary">{{ publication.userID.email }}</span></a>
 								</p>
-								<p class="mb-2">
+
+								<p class="mb-2" *ngIf="!calificacionesR">
+									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
+									Nadie ha calificado a este miembro
+								</p>
+								<p class="mb-2" *ngIf="promedioCalificaciones>=1 && promedioCalificaciones<=1.44">
+									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									{{ promedioCalificaciones }}
+								</p>
+								<p class="mb-2" *ngIf="promedioCalificaciones>=1.45 && promedioCalificaciones<=2.44">
+									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									{{ promedioCalificaciones }}
+								</p>
+								<p class="mb-2" *ngIf="promedioCalificaciones>=2.45 && promedioCalificaciones<=3.44">
 									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
 									<i class="fa fa-star" aria-hidden="true"></i>
 									<i class="fa fa-star" aria-hidden="true"></i>
 									<i class="fa fa-star" aria-hidden="true"></i>
+									{{ promedioCalificaciones }}
 								</p>
+								<p class="mb-2" *ngIf="promedioCalificaciones>=3.45 && promedioCalificaciones<4.44">
+									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									{{ promedioCalificaciones }}
+								</p>
+								<p class="mb-2" *ngIf="promedioCalificaciones>=4.45 && promedioCalificaciones<=5.45">
+									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									<i class="fa fa-star" aria-hidden="true"></i>
+									{{ promedioCalificaciones }}
+								</p>
+
+								<p class="mb-2">
+									<a [routerLink]="['/follow/perfil', publication.userID._id]" class="btn btn-info btn-sm">Calificar</a>
+									<a href="#listaCalificaciones" data-toggle="modal" class="btn btn-info btn-sm">Usuarios que calificaron</a>
+								</p>
+								<div class="modal fade" id="listaCalificaciones" tabindex="-1" role="dialog" aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
+									<div class="modal-dialog" role="document">
+										<div class="modal-content">
+											<div class="modal-header">
+												<h5 class="modal-title" id="mostrarLikesUsers2">Lista de usuarios</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="media" *ngFor="let calificacionR of calificacionesR; let i = index">
+													<img *ngIf="calificacionR.userEmisorID.image" class="img_profiel" src="{{url+'get-image-user/'+calificacionR.userEmisorID.image}}" alt="...">
+													<img *ngIf="!calificacionR.userEmisorID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="...">
+													<div class="media-body d-flex align-items-center">
+														<h5 class="mt-0">{{ calificacionR.userEmisorID.email }}</h5>
+													</div>
+												</div>
+											</div>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-dark" data-dismiss="modal">Salir</button>
+											</div>
+										</div>
+									</div>
+								</div>
+
 								<p class="mb-2">
 									<i class="fa fa-clock-o" aria-hidden="true"></i><b>Publicado el: </b><span class="badge badge-primary">{{ publication.create_at |date:"medium" }}</span>
 								</p>

@@ -91,7 +91,6 @@ export class RegisterNComponent implements OnInit {
 	ngOnInit()
 	{
 		this.categoriaSelected="";
-		this.persona = new Persona('','','','','','','','','',this.resID);
 		this._route.params.subscribe
 		(
 			params =>
@@ -101,6 +100,7 @@ export class RegisterNComponent implements OnInit {
 	      		this.resID = id;
 			}
 		);
+		this.persona = new Persona('','','','','','','','','',this.resID);
 	}
 
 	getUser(id)
@@ -142,7 +142,6 @@ export class RegisterNComponent implements OnInit {
 				(
 					res =>
 					{
-						localStorage.setItem('perID', res.persona._id);
 						this.asigarTipo();
 					},
 					error =>
@@ -222,12 +221,7 @@ export class RegisterNComponent implements OnInit {
 	      {
 	        this.spinner.hide();
 	        var actualRoute = window.location.origin;
-	        if(localStorage.getItem('rolID')=='admin')
-	        {
-	        	window.location.replace(actualRoute+'/perfil/'+this.resID);
-	        }else{
-	        	window.location.replace(actualRoute+'/users/show/'+this.resID);
-	        }
+	        window.location.replace(actualRoute+'/perfil/'+this.resID);
 	      },
 	      3000
 	    );

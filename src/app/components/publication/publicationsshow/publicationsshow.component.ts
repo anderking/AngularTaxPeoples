@@ -5,6 +5,8 @@ import { User } from '../../../models/user';
 import { UserService } from '../../../services/user.service';
 import { Coment } from '../../../models/coment';
 import { ComentService } from '../../../services/coment.service';
+import { Calificacion } from '../../../models/calificacion';
+import { CalificacionService } from '../../../services/calificacion.service';
 import { Global } from '../../../services/global';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import {Location} from '@angular/common';
@@ -33,6 +35,11 @@ export class PublicationsshowComponent implements OnInit
 	public update_coment: Coment;
 	public comentsPublication: any;
 
+	public calificacionesR: any;
+	public totalCalificacionesR:number=0;
+	public countCalificacionesR:number=0;
+	public promedioCalificaciones;
+
 	public totalComents:number=0;
 	public totalLikes:number=0;
 	public url: string;
@@ -50,6 +57,8 @@ export class PublicationsshowComponent implements OnInit
 		private _userService: UserService,
 		private _likeService: LikeService,
 		private _comentService: ComentService,
+		private _calificacionService: CalificacionService,
+
 		private spinner: NgxSpinnerService,
 		private _router: Router,
 		private _route: ActivatedRoute,
@@ -99,9 +108,12 @@ export class PublicationsshowComponent implements OnInit
 			response =>
 			{
 				this.publication = response.publication;
+				this.getCalificacionesR(this.publication.userID._id);
 
-				if(this.publication.userID._id==this.resID)					
+				if(this.publication.userID._id==this.resID)
+				{
 					this.ispost = true;
+				}				
 				else
 					this.ispost =false;
 
@@ -352,6 +364,36 @@ export class PublicationsshowComponent implements OnInit
     comentarioFocus()
     {
     	$('#comentarioFocusInput').focus();
+    }
+
+    getCalificacionesR(idR)
+    {
+    	this._calificacionService.getCalificacionesR(idR).subscribe(
+			response =>
+			{
+				if(response)
+				{
+					this.calificacionesR = response.calificacionesR;
+					this.totalCalificacionesR = 0;
+					this.countCalificacionesR = 0;
+					this.promedioCalificaciones = 0;
+					for(var i=0; i<this.calificacionesR.length;i++)
+					{
+						this.totalCalificacionesR = this.totalCalificacionesR + this.calificacionesR[i].value;
+						this.countCalificacionesR = this.countCalificacionesR +1;
+						if(this.countCalificacionesR>0)
+						{
+							this.promedioCalificaciones =  parseFloat( (this.totalCalificacionesR/this.countCalificacionesR).toFixed(2) );
+						}
+					}
+				}
+
+			},
+			error =>
+			{
+				console.log(<any>error);
+			}
+		);
     }
 
  	goBack()

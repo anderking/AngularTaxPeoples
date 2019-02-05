@@ -107,7 +107,7 @@ export class EditpersonaComponent implements OnInit {
 		(
 			response =>
 			{
-				this.persona = response.persona[0];
+				this.persona = response.persona;
 				this.persona.fechaNacimiento = this.persona.fechaNacimiento.split("T")[0];
 			},
 			error =>
@@ -150,6 +150,7 @@ export class EditpersonaComponent implements OnInit {
 					error =>
 					{
 						this.isAlert = false;
+						this.message = error.message;
 						this.onIsError();
 						
 						if(error instanceof HttpErrorResponse)
