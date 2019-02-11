@@ -98,7 +98,6 @@ export class PerfilComponent implements OnInit {
 		(
 			response =>
 			{
-					console.log(response);
 				if(this.rolID=="cliente" || this.rolID=="admin")
 				{
 					if(!response.persona)
@@ -108,7 +107,6 @@ export class PerfilComponent implements OnInit {
 					else
 					{
 						this.persona = response.persona;
-						//localStorage.setItem('perID', this.persona._id);
 					}
 				}
 			},
@@ -134,7 +132,6 @@ export class PerfilComponent implements OnInit {
 					else
 					{
 						this.empresa = response.empresa;
-						//localStorage.setItem('empID', this.empresa._id);
 					}
 				}
 			},

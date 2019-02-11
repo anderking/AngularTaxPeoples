@@ -28,7 +28,7 @@
 						<div class="col-md-12 mb-3">
 
 							<label for="name">Nombre</label>
-							<input type="text" [ngClass]="{'is-invalid': validationName.touched && !validationName.valid, 'is-valid': validationName.touched && validationName.valid}" class="form-control" #nameField name="name" #validationName="ngModel" placeholder="Nombre" [(ngModel)]="name" required>
+							<input type="text" [ngClass]="{'is-invalid': validationName.touched && !validationName.valid, 'is-valid': validationName.touched && validationName.valid}" id="inputName" class="form-control" #nameField name="name" #validationName="ngModel" placeholder="Nombre" [(ngModel)]="name" required>
 
 							<div class="invalid-feedback" *ngIf="validationName.touched && !validationName.valid">
 								<div *ngIf="validationName.errors.required">Por favor, introduzca un Nombre</div>

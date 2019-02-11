@@ -38,7 +38,7 @@ type = "ball-clip-rotate"
 
               <label for="rif">RIF</label>
 
-              <input type="text" [ngClass]="{'is-invalid': validationRIF.touched && !validationRIF.valid, 'is-valid': validationRIF.touched && validationRIF.valid}" class="form-control" name="rif" #validationRIF="ngModel" placeholder="RIF" [(ngModel)]="rif" required maxlength="11" pattern="^([JPG]{1})([0-9]{7,10})$">
+              <input type="text" [ngClass]="{'is-invalid': validationRIF.touched && !validationRIF.valid, 'is-valid': validationRIF.touched && validationRIF.valid}" class="form-control" name="rif" #validationRIF="ngModel" placeholder="RIF" [(ngModel)]="rif" required maxlength="11" pattern="^([JPGjpg]{1})([0-9]{7,10})$">
 
               <div class="invalid-feedback" *ngIf="validationRIF.touched && !validationRIF.valid">
                 

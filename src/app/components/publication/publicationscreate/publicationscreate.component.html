@@ -30,7 +30,7 @@
 						<div class="col-md-12 mb-3">
 
 							<label for="title">Titulo</label>
-							<input type="text" [ngClass]="{'is-invalid': validationTitle.touched && !validationTitle.valid, 'is-valid': validationTitle.touched && validationTitle.valid}" class="form-control" name="title" #validationTitle="ngModel" placeholder="Nombre" [(ngModel)]="title" required>
+							<input type="text" [ngClass]="{'is-invalid': validationTitle.touched && !validationTitle.valid, 'is-valid': validationTitle.touched && validationTitle.valid}" id="inputTitle" class="form-control" name="title" #validationTitle="ngModel" placeholder="Nombre" [(ngModel)]="title" required>
 
 							<div class="invalid-feedback" *ngIf="validationTitle.touched && !validationTitle.valid">
 								<div *ngIf="validationTitle.errors.required">Por favor, introduzca un Nombre</div>

@@ -401,5 +401,11 @@ export class PublicationsshowComponent implements OnInit
 		this._location.back(); 
     }
 
+    removerModal(){
+    	$('body').removeClass('modal-open');
+		$("body").removeAttr("style");
+		$('.modal-backdrop.fade.show').css('display','none');
+		$('#listaCalificaciones').css('display','none');
+    }
 }
 

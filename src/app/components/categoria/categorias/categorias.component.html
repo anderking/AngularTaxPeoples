@@ -20,7 +20,7 @@
 				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
 				<button [routerLink]="['/categorias/create']" class="btn btn-primary">Nuevo</button>
 				<span *ngIf="total>0">
-					<!--<a href="#delete-categorias" class="btn btn-danger" data-toggle="modal">Eliminar Todos</a>-->
+					<a href="#delete-categorias" class="btn btn-danger" data-toggle="modal">Eliminar Todos</a>
 					<div class="modal fade" id="delete-categorias" tabindex="-1" role="dialog" aria-labelledby="deletecategorias" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">
@@ -31,7 +31,7 @@
 									</button>
 								</div>
 								<div class="modal-body">
-									¿Estas seguro de eliminar este usuario?
+									¿Estas seguro de eliminar todas las categorias? esto borrará todas las publicaciones relacionadas con estas categorías, junto con sus likes y comentarios.
 								</div>
 								<div class="modal-footer">
 									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>

@@ -84,7 +84,15 @@
 									<i class="fa fa-car" aria-hidden="true"></i><b>Ruta: </b><span class="badge badge-primary">{{ publication.rutaID.name }}</span>
 								</p>
 								<p class="mb-2">
-									<i class="fa fa-user-o" aria-hidden="true"></i><b>Post by: </b><a [routerLink]="['/follow/perfil', publication.userID._id]"><span class="badge badge-primary">{{ publication.userID.email }}</span></a>
+									<i class="fa fa-user-o" aria-hidden="true"></i>
+									<b>Publicado por: </b>
+									<a *ngIf="publication.userID._id!=resID" [routerLink]="['/follow/perfil', publication.userID._id]">
+										<span class="badge badge-primary">{{ publication.userID.email }}</span>
+									</a>
+
+									<a *ngIf="publication.userID._id==resID" [routerLink]="['/perfil', publication.userID._id]">
+										<span class="badge badge-primary">Tú</span>
+									</a>
 								</p>
 
 								<p class="mb-2" *ngIf="!calificacionesR">
@@ -128,8 +136,8 @@
 								</p>
 
 								<p class="mb-2">
-									<a [routerLink]="['/follow/perfil', publication.userID._id]" class="btn btn-info btn-sm">Calificar</a>
-									<a href="#listaCalificaciones" data-toggle="modal" class="btn btn-info btn-sm">Usuarios que calificaron</a>
+									<a [routerLink]="['/follow/perfil', publication.userID._id]" class="btn btn-info btn-sm" *ngIf="resID!=publication.userID._id">Calificar</a>
+									<a href="#listaCalificaciones" data-toggle="modal" class="btn btn-secondary btn-sm">Usuarios que calificaron</a>
 								</p>
 								<div class="modal fade" id="listaCalificaciones" tabindex="-1" role="dialog" aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
 									<div class="modal-dialog" role="document">
@@ -145,7 +153,9 @@
 													<img *ngIf="calificacionR.userEmisorID.image" class="img_profiel" src="{{url+'get-image-user/'+calificacionR.userEmisorID.image}}" alt="...">
 													<img *ngIf="!calificacionR.userEmisorID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="...">
 													<div class="media-body d-flex align-items-center">
-														<h5 class="mt-0">{{ calificacionR.userEmisorID.email }}</h5>
+														<h5 *ngIf="calificacionR.userEmisorID._id!=resID" class="mt-0"><a [routerLink]="['/follow/perfil', calificacionR.userEmisorID._id]" (click)="removerModal()">{{ calificacionR.userEmisorID.email }}</a></h5>
+
+														<h5 *ngIf="calificacionR.userEmisorID._id==resID" class="mt-0"><a [routerLink]="['/perfil', calificacionR.userEmisorID._id]" (click)="removerModal()">Tú</a></h5>
 													</div>
 												</div>
 											</div>
@@ -179,7 +189,11 @@
 															<img *ngIf="likePublication.userID.image" class="img_profiel" src="{{url+'get-image-user/'+likePublication.userID.image}}" alt="...">
 															<img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="...">
 															<div class="media-body d-flex align-items-center">
-																<h5 class="mt-0">{{ likePublication.userID.email }}</h5>
+
+																<h5 *ngIf="likePublication.userID._id!=resID" class="mt-0"><a [routerLink]="['/follow/perfil', likePublication.userID._id]" (click)="removerModal()">{{ likePublication.userID.email }}</a></h5>
+
+																<h5 *ngIf="likePublication.userID._id==resID" class="mt-0"><a [routerLink]="['/perfil', likePublication.userID._id]" (click)="removerModal()">Tú</a></h5>
+
 															</div>
 														</div>
 													</div>
@@ -278,7 +292,9 @@
 														<input type="hidden" name="_id" [(ngModel)]="comentPublication._id">
 													</form>
 													<p id="mostrarComent-{{comentPublication._id}}" class="fondoComentarios">
-														<b>{{ comentPublication.userID.email }}</b> {{comentPublication.text}}
+														<b *ngIf=" comentPublication.userID._id!=resID "><a [routerLink]="['/follow/perfil', comentPublication.userID._id]" >{{ comentPublication.userID.email }} </a></b>
+														<b *ngIf=" comentPublication.userID._id==resID "><a [routerLink]="['/perfil', comentPublication.userID._id]" >Tú </a></b>
+														{{comentPublication.text}}
 													</p>
 													<h6 class="mt-0">{{ comentPublication.create_at |date:"medium" }}</h6>
 												</div>

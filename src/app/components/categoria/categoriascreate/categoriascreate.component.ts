@@ -39,8 +39,6 @@ export class CategoriascreateComponent implements OnInit {
 	ngOnInit()
 	{
 	}
-	
-	//@ViewChild("nameField") namef: ElementRef;
 
 	register(form: NgForm)
 	{
@@ -60,7 +58,7 @@ export class CategoriascreateComponent implements OnInit {
 						this.isAlert = true;
 						this.onIsError();
 						form.reset()
-						//this.namef.nativeElement.focus();
+						$('#inputName').focus();
 					}
 					else
 					{

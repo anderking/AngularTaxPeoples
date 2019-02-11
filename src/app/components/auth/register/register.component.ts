@@ -56,21 +56,18 @@ export class RegisterComponent implements OnInit {
 				},
 				error =>
 				{
-					if(error instanceof HttpErrorResponse)
-					{
-						if(error.status===404)
-						{
-							this.message = error.error.message;
-							console.log(error);
-						}
-					}else
-					{
-						this.message = error.message;
-						console.log(error);
-					}
-					
-					this.isAlert=false;
-					this.onIsError();
+		            console.log(error);
+		            this.isAlert=false;
+		            this.message = error.message;
+		            this.onIsError();
+
+		            if(error instanceof HttpErrorResponse)
+		            {
+		              if(error.status===404)
+		              {
+		                this.message = error.error.message;
+		              }
+		            }
 				}
 			);
 		}else

@@ -103,7 +103,7 @@ export class EditempresaComponent implements OnInit {
 		(
 			response =>
 			{
-				this.empresa = response.empresa[0];
+				this.empresa = response.empresa;
 			},
 			error =>
 			{

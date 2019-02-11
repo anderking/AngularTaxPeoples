@@ -121,7 +121,6 @@ export class RegisterJComponent implements OnInit {
         (
           res =>
           {
-            localStorage.setItem('empID', res.empresa._id);
             this.asigarTipo();
           },
           error =>

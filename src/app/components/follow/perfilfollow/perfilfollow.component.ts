@@ -47,6 +47,7 @@ export class PerfilfollowComponent implements OnInit {
 
 	public url: string;
 	public calificacionBool:boolean;
+	public resID:string = localStorage.getItem('resID');
 
 	constructor
 	(
@@ -255,6 +256,9 @@ export class PerfilfollowComponent implements OnInit {
 						$("body").removeAttr("style");
 						$('.modal-backdrop.fade.show').css('display','none');
 						$('#desCalificar').css('display','none');
+						//$('#desCalificar').removeClass('show');
+						//$("#desCalificar").removeAttr("aria-modal");
+						//$("#desCalificar").attr("aria-hidden","true");
 						this.getUser(this.userReceptorID);
 						this.isCalificacion(this.userEmisorID,this.userReceptorID)
 				},

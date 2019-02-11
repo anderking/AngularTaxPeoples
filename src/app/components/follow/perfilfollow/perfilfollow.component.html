@@ -69,40 +69,40 @@
 
 							<button class="btn btn-success">Seguir</button>
 
-							<a href="#calificar" *ngIf="!calificacionBool" class="btn btn-primary" data-toggle="modal">Calificar</a>
+							<a href="#calificar" *ngIf="!calificacionBool && user.tipo=='miembro' && resID!=user._id " class="btn btn-primary" data-toggle="modal">Calificar</a>
 
 							<div class="modal fade" id="calificar" *ngIf="!calificacionBool" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<form #calificarForm="ngForm" (ngSubmit)="calificar(calificarForm)">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Calificar</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<div class="form-group">
-												<label for="value">Calificación</label>
-												<select [ngClass]="{'is-invalid': validationValue.touched && !validationValue.valid, 'is-valid': validationValue.touched && validationValue.valid}" name="value" #validationValue="ngModel" [(ngModel)]="calificationSelected" class="form-control" required>
-													<option *ngFor="let calification of califications" [value]="calification._id"> {{calification.name}}</option>
-												</select>
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<form #calificarForm="ngForm" (ngSubmit)="calificar(calificarForm)">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Calificar</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<label for="value">Calificación</label>
+													<select [ngClass]="{'is-invalid': validationValue.touched && !validationValue.valid, 'is-valid': validationValue.touched && validationValue.valid}" name="value" #validationValue="ngModel" [(ngModel)]="calificationSelected" class="form-control" required>
+														<option *ngFor="let calification of califications" [value]="calification._id"> {{calification.name}}</option>
+													</select>
 
-												<div class="invalid-feedback" *ngIf="validationValue.touched && !validationValue.valid">
-													<div *ngIf="validationValue.errors.required">Por favor, introduzca una Calificación</div>
+													<div class="invalid-feedback" *ngIf="validationValue.touched && !validationValue.valid">
+														<div *ngIf="validationValue.errors.required">Por favor, introduzca una Calificación</div>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button type="submit" class="btn btn-primary" [disabled]="!calificarForm.form.valid">Enviar</button>
-										</div>
-									</form>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary" [disabled]="!calificarForm.form.valid">Enviar</button>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
-							</div>
 
-							<a href="#desCalificar" *ngIf="calificacionBool" class="btn btn-primary" data-toggle="modal">Editar Calificacion</a>
+							<a href="#desCalificar" *ngIf="calificacionBool && user.tipo=='miembro' && resID!=user._id" class="btn btn-primary" data-toggle="modal">Editar Calificacion</a>
 
 							<div class="modal fade" id="desCalificar" *ngIf="calificacionBool && calificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
@@ -196,45 +196,44 @@
 								<i class="fa fa-star" aria-hidden="true"></i>
 								{{ promedioCalificaciones }}
 							</p>
-
 							<button class="btn btn-success">Seguir</button>
 
-							<a href="#calificar" *ngIf="!calificacionBool" class="btn btn-primary" data-toggle="modal">Calificar</a>
+							<a href="#calificar" *ngIf="!calificacionBool && user.tipo=='miembro' && resID!=user._id" class="btn btn-primary" data-toggle="modal">Calificar</a>
 
 							<div class="modal fade" id="calificar" *ngIf="!calificacionBool" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-							<div class="modal-dialog" role="document">
-								<div class="modal-content">
-									<form #calificarForm="ngForm" (ngSubmit)="calificar(calificarForm)">
-										<div class="modal-header">
-											<h5 class="modal-title" id="exampleModalLabel">Calificar</h5>
-											<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-												<span aria-hidden="true">&times;</span>
-											</button>
-										</div>
-										<div class="modal-body">
-											<div class="form-group">
-												<label for="value">Calificación</label>
-												<select [ngClass]="{'is-invalid': validationValue.touched && !validationValue.valid, 'is-valid': validationValue.touched && validationValue.valid}" name="value" #validationValue="ngModel" [(ngModel)]="calificationSelected" class="form-control" required>
-													<option *ngFor="let calification of califications" [value]="calification._id"> {{calification.name}}</option>
-												</select>
+								<div class="modal-dialog" role="document">
+									<div class="modal-content">
+										<form #calificarForm="ngForm" (ngSubmit)="calificar(calificarForm)">
+											<div class="modal-header">
+												<h5 class="modal-title" id="exampleModalLabel">Calificar</h5>
+												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+													<span aria-hidden="true">&times;</span>
+												</button>
+											</div>
+											<div class="modal-body">
+												<div class="form-group">
+													<label for="value">Calificación</label>
+													<select [ngClass]="{'is-invalid': validationValue.touched && !validationValue.valid, 'is-valid': validationValue.touched && validationValue.valid}" name="value" #validationValue="ngModel" [(ngModel)]="calificationSelected" class="form-control" required>
+														<option *ngFor="let calification of califications" [value]="calification._id"> {{calification.name}}</option>
+													</select>
 
-												<div class="invalid-feedback" *ngIf="validationValue.touched && !validationValue.valid">
-													<div *ngIf="validationValue.errors.required">Por favor, introduzca una Calificación</div>
+													<div class="invalid-feedback" *ngIf="validationValue.touched && !validationValue.valid">
+														<div *ngIf="validationValue.errors.required">Por favor, introduzca una Calificación</div>
+													</div>
 												</div>
 											</div>
-										</div>
-										<div class="modal-footer">
-											<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-											<button type="submit" class="btn btn-primary" [disabled]="!calificarForm.form.valid">Enviar</button>
-										</div>
-									</form>
+											<div class="modal-footer">
+												<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+												<button type="submit" class="btn btn-primary" [disabled]="!calificarForm.form.valid">Enviar</button>
+											</div>
+										</form>
+									</div>
 								</div>
 							</div>
-							</div>
 
-							<a href="#desCalificar" *ngIf="calificacionBool" class="btn btn-primary" data-toggle="modal">Editar Calificacion</a>
+							<a href="#desCalificar" *ngIf="calificacionBool && user.tipo=='miembro' && resID!=user._id" class="btn btn-primary" data-toggle="modal">Editar Calificacion</a>
 
-							<div class="modal fade" id="desCalificar" *ngIf="calificacionBool && calificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+							<div class="modal fade" id="desCalificar" *ngIf="calificacion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 								<div class="modal-dialog" role="document">
 									<div class="modal-content">
 										<form #updateCalificarForm="ngForm" (ngSubmit)="updateCalificar(updateCalificarForm)">
