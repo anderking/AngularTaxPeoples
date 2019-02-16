@@ -63,7 +63,7 @@
 
                 <label for="description">Descripción</label>
 
-                <input type="text" [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}" class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción" [(ngModel)]="user.description" required>
+                <input type="text" [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}" class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción" [(ngModel)]="user.description">
 
                 <div class="invalid-feedback" *ngIf="validationDescription.touched && !validationDescription.valid">
                   <div *ngIf="validationDescription.errors.required">Por favor, introduzca un Descripción completo</div>

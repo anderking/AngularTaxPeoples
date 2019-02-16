@@ -68,7 +68,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr *ngFor="let ruta of rutas | paginate: { itemsPerPage: 5, currentPage: page} | buscarRutas:filterRutas">
+										<tr *ngFor="let ruta of rutas | paginate: { itemsPerPage: 10, currentPage: page} | buscarRutas:filterRutas">
 											<th scope="row">
 												<button class="btn btn-dark" [routerLink]="['/rutas/show', ruta._id]">Ver</button>
 											</th>

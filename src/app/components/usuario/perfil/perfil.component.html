@@ -47,22 +47,6 @@
 							<p class="afo"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento |date:"longDate" }}</p>
 							<p class="afo"><b>Tipo de Usuario: </b><span class="badge" [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }" >{{ rolID }}</span></p>
 
-
-							<ul class="bpk">
-								<li class="bpl">
-									<a href="#userModal" class="boa" data-toggle="modal">
-										Seguidores
-										<h6 class="aej">12M</h6>
-									</a>
-								</li>
-
-								<li class="bpl">
-									<a href="#userModal" class="boa" data-toggle="modal">
-										Seguidos
-										<h6 class="aej">1</h6>
-									</a>
-								</li>
-							</ul>
             				<button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/persona/edit', resID]" role="button">Editar Información</button>
             				<button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</button>
             				<button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/users']" role="button">Administrar Usuarios</button>
@@ -112,22 +96,6 @@
 							<p class="afo"><b>Estado: </b>{{ empresa.estado }}</p>
 							<p class="afo"><b>Tipo de Usuario: </b><span class="badge" [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }" >{{ rolID }}</span></p>
 
-
-							<ul class="bpk">
-								<li class="bpl">
-									<a href="#userModal" class="boa" data-toggle="modal">
-										Seguidores
-										<h6 class="aej">12M</h6>
-									</a>
-								</li>
-
-								<li class="bpl">
-									<a href="#userModal" class="boa" data-toggle="modal">
-										Seguidos
-										<h6 class="aej">1</h6>
-									</a>
-								</li>
-							</ul>
             				<button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/empresa/edit', resID]" role="button">Editar Información</button>
             				<button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/user/configure', resID]" role="button">Configuración</button>
             				<button class="btn btn-dark" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis publicaciones</button>
