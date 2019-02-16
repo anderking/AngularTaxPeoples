@@ -22,6 +22,7 @@ export class CategoriasComponent implements OnInit {
 	public isAlert:boolean = false;
 	public message:string;
 	public failedConect:string;
+	public filterCategorias:any = "";
 
 	constructor
 	(

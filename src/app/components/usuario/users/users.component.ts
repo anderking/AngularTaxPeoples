@@ -25,6 +25,7 @@ export class UsersComponent implements OnInit {
 	public isAlert:boolean = false;
 	public message:string;
 	public failedConect:string;
+	public filterUsers:any="";
 
 	constructor
 	(

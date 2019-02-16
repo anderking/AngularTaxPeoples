@@ -28,9 +28,9 @@ export class PerfilComponent implements OnInit {
 	public resID:string;
 	public rolID:string;
 	public filesToUpload: Array<File>;
+	public fileName: string = '';
 	public url: string;
 	public isFileChosen:boolean = false;
-	public fileName: string = '';
 
 	constructor
 	(
@@ -154,7 +154,6 @@ export class PerfilComponent implements OnInit {
 					{	
 						if(this.filesToUpload)
 						{
-							console.log("entro");
 							this._uploadService.makeFileRequest(Global.url+"upload-image-user/"+response.user._id, [], this.filesToUpload, 'image')
 							.then
 							(

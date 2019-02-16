@@ -78,6 +78,10 @@ import { PublicationscategoriaComponent } from './components/publication/publica
 import { PublicationsrutaComponent } from './components/publication/publicationsruta/publicationsruta.component';
 import { PerfilfollowComponent } from './components/follow/perfilfollow/perfilfollow.component';
 import { FollowpadreComponent } from './components/follow/followpadre/followpadre.component';
+import { BuscarUsersPipe } from './pipes/buscar-users.pipe';
+import { BuscarCategoriasPipe } from './pipes/buscar-categorias.pipe';
+import { BuscarRutasPipe } from './pipes/buscar-rutas.pipe';
+import { BuscarPublicacionesPipe } from './pipes/buscar-publicaciones.pipe';
 
 
 @NgModule({
@@ -131,6 +135,10 @@ import { FollowpadreComponent } from './components/follow/followpadre/followpadr
     PublicationsrutaComponent,
     PerfilfollowComponent,
     FollowpadreComponent,
+    BuscarUsersPipe,
+    BuscarCategoriasPipe,
+    BuscarRutasPipe,
+    BuscarPublicacionesPipe,
   ],
   imports: [
     BrowserModule,

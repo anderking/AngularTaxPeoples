@@ -24,6 +24,7 @@ export class RutasComponent implements OnInit {
 	public message:string;
 	public page:number=1;
 	public failedConect:string;
+	public filterRutas:any = "";
 
 
 	constructor

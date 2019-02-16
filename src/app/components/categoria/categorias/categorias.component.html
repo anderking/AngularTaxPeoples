@@ -45,12 +45,17 @@
 		</div>
 
 		<hr>
-		
+
 		<div *ngIf="categorias">
 			<div class="row justify-content-center">
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
 					<div *ngIf="categorias">
 						<div *ngIf="total>0">
+				
+							<div class="form-group">
+								<input type="text" class="form-control" id="filterCategorias" name="filterCategorias" [(ngModel)]="filterCategorias" placeholder="Buscar...">
+							</div>
+							
 							<div class="table-responsive">
 								<table class="table">
 									<thead class="thead-dark">
@@ -63,7 +68,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr *ngFor="let categoria of categorias | paginate: { itemsPerPage: 5, currentPage: page }">
+										<tr *ngFor="let categoria of categorias | paginate: { itemsPerPage: 5, currentPage: page } | buscarCategorias:filterCategorias">
 											<th scope="row">
 												<button class="btn btn-dark" [routerLink]="['/categorias/show', categoria._id]">Ver</button>
 											</th>

@@ -51,6 +51,11 @@
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
 					<div *ngIf="rutas">
 						<div *ngIf="total>0">
+							
+							<div class="form-group">
+								<input type="text" class="form-control" id="filterRutas" name="filterRutas" [(ngModel)]="filterRutas" placeholder="Buscar...">
+							</div>
+
 							<div class="table-responsive">
 								<table class="table">
 									<thead class="thead-dark">
@@ -63,7 +68,7 @@
 										</tr>
 									</thead>
 									<tbody>
-										<tr *ngFor="let ruta of rutas | paginate: { itemsPerPage: 5, currentPage: page }">
+										<tr *ngFor="let ruta of rutas | paginate: { itemsPerPage: 5, currentPage: page} | buscarRutas:filterRutas">
 											<th scope="row">
 												<button class="btn btn-dark" [routerLink]="['/rutas/show', ruta._id]">Ver</button>
 											</th>
