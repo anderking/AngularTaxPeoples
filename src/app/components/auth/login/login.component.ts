@@ -16,8 +16,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class LoginComponent implements OnInit {
   public user : User;
-  public email:string;
-  public password:string;
+  public email:string = "admin@admin.com";
+  public password:string = "admin*2021";
   public type:string = "password";
   public show:boolean = false;
   public resID:string=localStorage.getItem('resID');
