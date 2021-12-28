@@ -1,5 +1,6 @@
 export var Global = {
-	//url: 'https://api-prueba-19.herokuapp.com/api/',
-	url: 'http://localhost:80/api/',
+	//url: 'https://taxpeoples.herokuapp.com/api/',
+	url: 'https://taxpeoples.azurewebsites.net/api/',
+	//url: 'http://localhost:80/api/',
 	failed: '"Ups!!! hay problemas para conectar con la API, revise su conexion a internet"',
 };
