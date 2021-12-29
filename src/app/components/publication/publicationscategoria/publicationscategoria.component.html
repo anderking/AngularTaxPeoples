@@ -42,7 +42,7 @@
 						<div class="card booking-card">
 							<div class="view overlay">
 								<a [routerLink]="['/publicaciones/show', publicationCategoria._id]">
-									<img *ngIf="publicationCategoria.image" class="card-img-top img-fluid"  src="{{url+'get-image-publication/'+publicationCategoria.image}}"/>
+									<img *ngIf="publicationCategoria.image" class="card-img-top img-fluid"  src="{{publicationCategoria.image}}"/>
 									<img *ngIf="!publicationCategoria.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="...">
 								</a>
 							</div>
