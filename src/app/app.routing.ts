@@ -1,5 +1,5 @@
 import { ModuleWithProviders } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Route } from '@angular/router';
 
 import { AuthGuard } from './auth.guard';
 import { RoleGuard } from './role.guard';
@@ -148,4 +148,4 @@ const appRoutes: Routes = [
 
 // Exportar el modulo del router
 export const appRoutingProviders: any[] = [];
-export const routing: ModuleWithProviders = RouterModule.forRoot(appRoutes, {scrollPositionRestoration: 'enabled' });
+export const routing: ModuleWithProviders<Route> = RouterModule.forRoot(appRoutes, {scrollPositionRestoration: 'enabled' });
