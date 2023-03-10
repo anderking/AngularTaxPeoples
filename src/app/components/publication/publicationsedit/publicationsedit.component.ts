@@ -133,10 +133,16 @@ export class PublicationseditComponent implements OnInit {
 						(
 							(result:any) =>
 							{
-								this.update_publication = result.publication;
-								this.isAlert=true;
-								this.message = "Publicación Actualizada Correctamente";
-								this.getPublication(this.update_publication._id)
+								console.log(result)
+								if(result.publication){
+									this.update_publication = result.publication;
+									this.isAlert=true;
+									this.message = "Publicación Actualizada Correctamente";
+									this.getPublication(this.update_publication._id)
+								}else{
+									this.isAlert=false;
+									this.message = result.message;
+								}
 								this.onIsError();
 								
 							}

@@ -20,7 +20,7 @@
 				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
 				<button [routerLink]="['/rutas/create']" class="btn btn-primary">Nuevo</button>
 				<span *ngIf="total>0">
-					<!--<a href="#delete-rutas" class="btn btn-danger" data-toggle="modal">Eliminar Todos</a>-->
+					<a href="#delete-rutas" class="btn btn-danger" data-toggle="modal">Eliminar Todos</a>
 					<div class="modal fade" id="delete-rutas" tabindex="-1" role="dialog" aria-labelledby="deleterutas" aria-hidden="true">
 						<div class="modal-dialog" role="document">
 							<div class="modal-content">

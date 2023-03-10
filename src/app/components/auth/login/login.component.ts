@@ -1,8 +1,7 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { AuthService } from "../../../services/auth.service";
 import { UserService } from "../../../services/user.service";
 import { User } from "../../../models/user";
-import { Router, ActivatedRoute, Params } from "@angular/router";
 import { NgForm } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
 import { Location } from "@angular/common";
@@ -15,6 +14,7 @@ import { HttpErrorResponse } from "@angular/common/http";
   providers: [AuthService, UserService],
 })
 export class LoginComponent implements OnInit {
+  @ViewChild("loginForm", { read: NgForm }) loginForm: NgForm;
   public user: User;
   public email: string = "admin@admin.com";
   public password: string = "admin*2021";
@@ -25,9 +25,7 @@ export class LoginComponent implements OnInit {
   public isError: boolean = false;
   public messageError: string;
   constructor(
-    private _router: Router,
     private authService: AuthService,
-    private userService: UserService,
     private spinner: NgxSpinnerService,
     private _location: Location
   ) {}
@@ -35,6 +33,7 @@ export class LoginComponent implements OnInit {
   ngOnInit() {}
 
   login(form: NgForm) {
+    console.log(form.valid)
     if (form.valid) {
       this.spinner.show();
       this.authService.login(this.email, this.password).subscribe(
