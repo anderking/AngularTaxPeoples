@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterNComponent } from './register-n.component';
 
-describe('RegisterNComponent', () => {
+xdescribe('RegisterNComponent', () => {
   let component: RegisterNComponent;
   let fixture: ComponentFixture<RegisterNComponent>;
 

@@ -60,7 +60,7 @@ import { PerfilfollowComponent } from "./components/follow/perfilfollow/perfilfo
 import { FollowpadreComponent } from "./components/follow/followpadre/followpadre.component";
 
 // Array de rutas
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
   {
     path: "",
     redirectTo: "login",
