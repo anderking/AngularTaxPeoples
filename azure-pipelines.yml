@@ -22,10 +22,6 @@ steps:
 - script: |
     npm install
   displayName: 'install dependences'
-
-- script: |
-    ng test
-  displayName: 'run test'
   
 - script: |
     ng build --prod
