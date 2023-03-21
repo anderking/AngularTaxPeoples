@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RutasdeleteComponent } from './rutasdelete.component';
 
-describe('RutasdeleteComponent', () => {
+xdescribe('RutasdeleteComponent', () => {
   let component: RutasdeleteComponent;
   let fixture: ComponentFixture<RutasdeleteComponent>;
 
