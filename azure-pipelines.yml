@@ -22,7 +22,11 @@ steps:
 - script: |
     npm install
   displayName: 'install dependences'
-  
+
+- script: |
+    ng test --browsers=Chrome --watch=false
+  displayName: 'run test'
+
 - script: |
     ng build --prod
   displayName: 'build prod'
