@@ -24,9 +24,9 @@ steps:
   displayName: 'install dependences'
 
 - script: |
-    ng test
+    ng test --browsers=Chrome --watch=false
   displayName: 'run test'
-  
+
 - script: |
     ng build --prod
   displayName: 'build prod'
