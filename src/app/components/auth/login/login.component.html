@@ -9,7 +9,7 @@ type = "ball-clip-rotate"
   <div class="container">
     <div class="row justify-content-center">
       <div class="col-10 col-sm-8 col-md-6">
-        
+
         <div *ngIf="isError" id="alertError" class="alert alert-danger alert-dismissible fade show" role="alert">
           {{messageError}}
           <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
@@ -26,9 +26,9 @@ type = "ball-clip-rotate"
             <div class="col-md-12 mb-3">
 
               <label for="email">Email</label>
-              
+
               <input type="email" [ngClass]="{'is-invalid': validationEmail.touched && !validationEmail.valid, 'is-valid': validationEmail.touched && validationEmail.valid}" class="form-control" name="email" #validationEmail="ngModel" placeholder="Email" [(ngModel)]="email" required pattern="[a-zA-Z0-9.-_]{1,}@[a-zA-Z.-]{2,}[.]{1}[a-zA-Z]{2,}" >
-              
+
 
               <div class="invalid-feedback" *ngIf="validationEmail.touched && !validationEmail.valid">
                 <div *ngIf="validationEmail.errors.required">Por favor, introduzca un Email</div>
@@ -43,7 +43,7 @@ type = "ball-clip-rotate"
               <div class="input-group">
                 <input type="{{type}}" [ngClass]="{'is-invalid': validationPassword.touched && !validationPassword.valid, 'is-valid': validationPassword.touched && validationPassword.valid}" class="form-control" name="password" #validationPassword="ngModel" placeholder="Password" [(ngModel)]="password" required minlength="4" maxlength="25">
                 <div class="input-group-append">
-                  <button class="btn btn-outline-primary show-password" type="button" (click)="toggleShow()"><i class="fa fa-eye-slash" aria-hidden="true"></i></button>
+                  <button class="btn btn-outline-primary show-password" type="button" (click)="toggleShow()"><fa-icon [icon]="['fas', 'eye-slash']"></fa-icon></button>
                 </div>
 
                 <div class="invalid-feedback" *ngIf="validationPassword.touched && !validationPassword.valid">
@@ -63,7 +63,7 @@ type = "ball-clip-rotate"
         </form>
         <hr>
         <a [routerLink]="['/register']">¿No tienes una cuenta?</a>
-        
+
       </div>
     </div>
   </div>

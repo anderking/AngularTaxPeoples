@@ -78,6 +78,34 @@ import { BuscarCategoriasPipe } from "./pipes/buscar-categorias.pipe";
 import { BuscarRutasPipe } from "./pipes/buscar-rutas.pipe";
 import { BuscarPublicacionesPipe } from "./pipes/buscar-publicaciones.pipe";
 
+import {
+  FontAwesomeModule,
+  FaIconLibrary,
+} from "@fortawesome/angular-fontawesome";
+import {
+  faAddressCard,
+  faCar,
+  faCertificate,
+  faClock,
+  faComments,
+  faDollarSign,
+  faEyeSlash,
+  faMoneyBill,
+  faPaperPlane,
+  faPencilAlt,
+  faShare,
+  faSignInAlt,
+  faSignOutAlt,
+  faStar,
+  faTags,
+  faTaxi,
+  faThumbsUp,
+  faTrash,
+  faTrashAlt,
+  faUser,
+  faUserPlus,
+} from "@fortawesome/free-solid-svg-icons";
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -140,6 +168,7 @@ import { BuscarPublicacionesPipe } from "./pipes/buscar-publicaciones.pipe";
     BrowserAnimationsModule,
     NgxSpinnerModule,
     NgxPaginationModule,
+    FontAwesomeModule,
   ],
   providers: [
     appRoutingProviders,
@@ -162,4 +191,30 @@ import { BuscarPublicacionesPipe } from "./pipes/buscar-publicaciones.pipe";
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule {
+  constructor(library: FaIconLibrary) {
+    library.addIcons(
+      faEyeSlash,
+      faSignInAlt,
+      faSignOutAlt,
+      faAddressCard,
+      faCar,
+      faTags,
+      faUser,
+      faUserPlus,
+      faStar,
+      faTaxi,
+      faMoneyBill,
+      faCertificate,
+      faClock,
+      faDollarSign,
+      faThumbsUp,
+      faPaperPlane,
+      faPencilAlt,
+      faShare,
+      faTrash,
+      faTrashAlt,
+      faComments,
+    );
+  }
+}

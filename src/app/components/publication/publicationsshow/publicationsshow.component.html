@@ -1,348 +1,409 @@
 <main class="main_publications_show">
-	<div class="container">
+  <div class="container">
 
-		<div class="row justify-content-center my-3">
-			<div class="col-12">
-				<h2 class="text-center">Publicación</h2>
-			</div>
-		</div>
-		<div class="row justify-content-center my-3">
-			<div class="col-12">
-				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
-				<button *ngIf="(ispost || rolID=='admin') && publication" class="btn btn-info" [routerLink]="['/publicaciones/edit',publication._id]" >Editar</button>
-				<a *ngIf="(ispost || rolID=='admin') && publication" href="#delete-publication" class="btn btn-danger" data-toggle="modal">Eliminar</a>
-				<div class="modal fade" id="delete-publication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-					<div class="modal-dialog" role="document">
-						<div class="modal-content">
-							<div class="modal-header">
-								<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-								<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-									<span aria-hidden="true">&times;</span>
-								</button>
-							</div>
-							<div class="modal-body">
-								¿Estas seguro de eliminar esta publicación?
-							</div>
-							<div class="modal-footer">
-								<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-								<button (click)="deletePublication(publication._id)" type="button" class="btn btn-primary">Si</button>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr>
+    <div class="row justify-content-center my-3">
+      <div class="col-12">
+        <h2 class="text-center">Publicación</h2>
+      </div>
+    </div>
+    <div class="row justify-content-center my-3">
+      <div class="col-12">
+        <button class="btn btn-dark" (click)="goBack()">Regresar</button>
+        <button *ngIf="(ispost || rolID=='admin') && publication" class="btn btn-info"
+          [routerLink]="['/publicaciones/edit',publication._id]">Editar</button>
+        <a *ngIf="(ispost || rolID=='admin') && publication" href="#delete-publication" class="btn btn-danger"
+          data-toggle="modal">Eliminar</a>
+        <div class="modal fade" id="delete-publication" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+          aria-hidden="true">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                ¿Estas seguro de eliminar esta publicación?
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                <button (click)="deletePublication(publication._id)" type="button" class="btn btn-primary">Si</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <hr>
 
-		<div *ngIf="publication">
-			<div class="row">
-				<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 mb-3">
-					<div id="showPublication">
-						<div class="card booking-card">
-							<div class="view overlay">
-								<img *ngIf="publication.image" class="card-img-top img-fluid"  src="{{publication.image}}" alt="Imagen de la publicación"/>
-								<img *ngIf="!publication.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="Imagen de la publicación">
-							</div>
-							<div class="card-body">
-								<div class="row justify-content-between">
-								    <div class="col-8 col-lg-9">
-								      <h4 class="card-title font-weight-bold">{{ publication.title }}</h4>
-								    </div>
-								    <div class="col-4 col-lg-3">
-								      <a href="#mostrarContratar" data-toggle="modal" class="btn btn-primary">Contratar</a>
-								      <div class="modal fade" id="mostrarContratar" tabindex="-1" role="dialog" aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="mostrarLikesUsers2">Contratar Servicio</h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														<p>Se enviara una notificación al usuario y él te contactará ¿esta de acuerdo?</p>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-dark" data-dismiss="modal">Si</button>
-													</div>
-												</div>
-											</div>
-										</div>
-								    </div>
-								</div>
+    <div *ngIf="publication">
+      <div class="row">
+        <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 mb-3">
+          <div id="showPublication">
+            <div class="card booking-card">
+              <div class="view overlay">
+                <img *ngIf="publication.image" class="card-img-top img-fluid" src="{{publication.image}}"
+                  alt="Imagen de la publicación" />
+                <img *ngIf="!publication.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg"
+                  alt="Imagen de la publicación">
+              </div>
+              <div class="card-body">
+                <div class="row justify-content-between">
+                  <div class="col-8 col-lg-9">
+                    <h4 class="card-title font-weight-bold">{{ publication.title }}</h4>
+                  </div>
+                  <div class="col-4 col-lg-3">
+                    <a href="#mostrarContratar" data-toggle="modal" class="btn btn-primary">Contratar</a>
+                    <div class="modal fade" id="mostrarContratar" tabindex="-1" role="dialog"
+                      aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="mostrarLikesUsers2">Contratar Servicio</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <p>Se enviara una notificación al usuario y él te contactará ¿esta de acuerdo?</p>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Si</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-								<hr>
-								<p class="mb-2">{{ publication.description }}</p>
-								<hr>
-								<p class="mb-2">
-									<i class="fa fa-usd" aria-hidden="true"></i><b>Tarífa: </b> <span class="badge badge-primary">{{ publication.tarifa }} Bs.S</span>
-								</p>
-								<p class="mb-2">
-									<i class="fa fa-tags" aria-hidden="true"></i><b>Categoría: </b> <span class="badge badge-primary">{{ publication.categoriaID.name }}</span>
-								</p>
-								<p class="mb-2">
-									<i class="fa fa-car" aria-hidden="true"></i><b>Ruta: </b><span class="badge badge-primary">{{ publication.rutaID.name }}</span>
-								</p>
-								<p class="mb-2">
-									<i class="fa fa-user-o" aria-hidden="true"></i>
-									<b>Publicado por: </b>
-									<a *ngIf="publication.userID._id!=resID" [routerLink]="['/follow/perfil', publication.userID._id]">
-										<span class="badge badge-primary">{{ publication.userID.email }}</span>
-									</a>
+                <hr>
+                <p class="mb-2">{{ publication.description }}</p>
+                <hr>
+                <p class="mb-2">
+                  <fa-icon [icon]="['fas', 'dollar-sign']"></fa-icon>
+                  <b>Tarífa: </b> <span class="badge badge-primary">{{
+                    publication.tarifa }} Bs.S</span>
+                </p>
+                <p class="mb-2">
+                  <fa-icon [icon]="['fas', 'tags']"></fa-icon>
+                  <b>Categoría: </b> <span class="badge badge-primary">{{
+                    publication.categoriaID.name }}</span>
+                </p>
+                <p class="mb-2">
+                  <fa-icon [icon]="['fas', 'car']"></fa-icon><b>Ruta: </b><span class="badge badge-primary">{{
+                    publication.rutaID.name }}</span>
+                </p>
+                <p class="mb-2">
+                  <fa-icon [icon]="['fas', 'user']"></fa-icon>
+                  <b>Publicado por: </b>
+                  <a *ngIf="publication.userID._id!=resID" [routerLink]="['/follow/perfil', publication.userID._id]">
+                    <span class="badge badge-primary">{{ publication.userID.email }}</span>
+                  </a>
 
-									<a *ngIf="publication.userID._id==resID" [routerLink]="['/perfil', publication.userID._id]">
-										<span class="badge badge-primary">Tú</span>
-									</a>
-								</p>
+                  <a *ngIf="publication.userID._id==resID" [routerLink]="['/perfil', publication.userID._id]">
+                    <span class="badge badge-primary">Tú</span>
+                  </a>
+                </p>
 
-								<p class="mb-2" *ngIf="!calificacionesR">
-									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
-									Nadie ha calificado a este miembro
-								</p>
-								<p class="mb-2" *ngIf="promedioCalificaciones>=1 && promedioCalificaciones<=1.44">
-									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									{{ promedioCalificaciones }}
-								</p>
-								<p class="mb-2" *ngIf="promedioCalificaciones>=1.45 && promedioCalificaciones<=2.44">
-									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									{{ promedioCalificaciones }}
-								</p>
-								<p class="mb-2" *ngIf="promedioCalificaciones>=2.45 && promedioCalificaciones<=3.44">
-									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									{{ promedioCalificaciones }}
-								</p>
-								<p class="mb-2" *ngIf="promedioCalificaciones>=3.45 && promedioCalificaciones<4.44">
-									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									{{ promedioCalificaciones }}
-								</p>
-								<p class="mb-2" *ngIf="promedioCalificaciones>=4.45 && promedioCalificaciones<=5.45">
-									<i class="fa fa-certificate" aria-hidden="true"></i><b>Calificación: </b>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									<i class="fa fa-star" aria-hidden="true"></i>
-									{{ promedioCalificaciones }}
-								</p>
+                <p class="mb-2" *ngIf="!calificacionesR">
+                  <fa-icon [icon]="['fas', 'certificate']"></fa-icon>
+                  <b>Calificación: </b>
+                  Nadie ha calificado a este miembro
+                </p>
+                <p class="mb-2" *ngIf="promedioCalificaciones>=1 && promedioCalificaciones<=1.44">
+                  <fa-icon [icon]="['fas', 'certificate']"></fa-icon>
+                  <b>Calificación: </b>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  {{ promedioCalificaciones }}
+                </p>
+                <p class="mb-2" *ngIf="promedioCalificaciones>=1.45 && promedioCalificaciones<=2.44">
+                  <fa-icon [icon]="['fas', 'certificate']"></fa-icon>
+                  <b>Calificación: </b>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  {{ promedioCalificaciones }}
+                </p>
+                <p class="mb-2" *ngIf="promedioCalificaciones>=2.45 && promedioCalificaciones<=3.44">
+                  <fa-icon [icon]="['fas', 'certificate']"></fa-icon>
+                  <b>Calificación: </b>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  {{ promedioCalificaciones }}
+                </p>
+                <p class="mb-2" *ngIf="promedioCalificaciones>=3.45 && promedioCalificaciones<4.44">
+                  <fa-icon [icon]="['fas', 'certificate']"></fa-icon>
+                  <b>Calificación: </b>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  {{ promedioCalificaciones }}
+                </p>
+                <p class="mb-2" *ngIf="promedioCalificaciones>=4.45 && promedioCalificaciones<=5.45">
+                  <fa-icon [icon]="['fas', 'certificate']"></fa-icon>
+                  <b>Calificación: </b>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  <fa-icon [icon]="['fas', 'star']"></fa-icon>
+                  {{ promedioCalificaciones }}
+                </p>
 
-								<p class="mb-2">
-									<a [routerLink]="['/follow/perfil', publication.userID._id]" class="btn btn-info btn-sm" *ngIf="resID!=publication.userID._id">Calificar</a>
-									<a href="#listaCalificaciones" data-toggle="modal" class="btn btn-secondary btn-sm">Usuarios que calificaron</a>
-								</p>
-								<div class="modal fade" id="listaCalificaciones" tabindex="-1" role="dialog" aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
-									<div class="modal-dialog" role="document">
-										<div class="modal-content">
-											<div class="modal-header">
-												<h5 class="modal-title" id="mostrarLikesUsers2">Lista de usuarios</h5>
-												<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-													<span aria-hidden="true">&times;</span>
-												</button>
-											</div>
-											<div class="modal-body">
-												<div class="media" *ngFor="let calificacionR of calificacionesR; let i = index">
-													<img *ngIf="calificacionR.userEmisorID.image" class="img_profiel" src="{{calificacionR.userEmisorID.image}}" alt="Imagen del usuario">
-													<img *ngIf="!calificacionR.userEmisorID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="Imagen del usuario">
-													<div class="media-body d-flex align-items-center">
-														<h5 *ngIf="calificacionR.userEmisorID._id!=resID" class="mt-0"><a [routerLink]="['/follow/perfil', calificacionR.userEmisorID._id]" (click)="removerModal()">{{ calificacionR.userEmisorID.email }}</a></h5>
+                <p class="mb-2">
+                  <a [routerLink]="['/follow/perfil', publication.userID._id]" class="btn btn-info btn-sm"
+                    *ngIf="resID!=publication.userID._id">Calificar</a>
+                  <a href="#listaCalificaciones" data-toggle="modal" class="btn btn-secondary btn-sm">Usuarios que
+                    calificaron</a>
+                </p>
+                <div class="modal fade" id="listaCalificaciones" tabindex="-1" role="dialog"
+                  aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title" id="mostrarLikesUsers2">Lista de usuarios</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="media" *ngFor="let calificacionR of calificacionesR; let i = index">
+                          <img *ngIf="calificacionR.userEmisorID.image" class="img_profiel"
+                            src="{{calificacionR.userEmisorID.image}}" alt="Imagen del usuario">
+                          <img *ngIf="!calificacionR.userEmisorID.image" class="img_profiel align-self-center mr-3"
+                            src="../../../../assets/img/user.png" alt="Imagen del usuario">
+                          <div class="media-body d-flex align-items-center">
+                            <h5 *ngIf="calificacionR.userEmisorID._id!=resID" class="mt-0"><a
+                                [routerLink]="['/follow/perfil', calificacionR.userEmisorID._id]"
+                                (click)="removerModal()">{{ calificacionR.userEmisorID.email }}</a></h5>
 
-														<h5 *ngIf="calificacionR.userEmisorID._id==resID" class="mt-0"><a [routerLink]="['/perfil', calificacionR.userEmisorID._id]" (click)="removerModal()">Tú</a></h5>
-													</div>
-												</div>
-											</div>
-											<div class="modal-footer">
-												<button type="button" class="btn btn-dark" data-dismiss="modal">Salir</button>
-											</div>
-										</div>
-									</div>
-								</div>
+                            <h5 *ngIf="calificacionR.userEmisorID._id==resID" class="mt-0"><a
+                                [routerLink]="['/perfil', calificacionR.userEmisorID._id]"
+                                (click)="removerModal()">Tú</a></h5>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-dark" data-dismiss="modal">Salir</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
 
-								<p class="mb-2">
-									<i class="fa fa-clock-o" aria-hidden="true"></i><b>Publicado el: </b><span class="badge badge-primary">{{ publication.create_at |date:"medium" }}</span>
-								</p>
-								<hr>
-								<div class="row justify-content-end">
-									<div class="col-4">
-										<a href="#mostrarLikesUsers" data-toggle="modal">
-											<small class="badge badge-dark enlacePointerBadge">{{totalLikes}} likes</small>
-										</a>
-										<div class="modal fade" id="mostrarLikesUsers" tabindex="-1" role="dialog" aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
-											<div class="modal-dialog" role="document">
-												<div class="modal-content">
-													<div class="modal-header">
-														<h5 class="modal-title" id="mostrarLikesUsers2">Lista de usuarios</h5>
-														<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-															<span aria-hidden="true">&times;</span>
-														</button>
-													</div>
-													<div class="modal-body">
-														<div class="media" *ngFor="let likePublication of likesPublication; let i = index">
-															<img *ngIf="likePublication.userID.image" class="img_profiel" src="{{likePublication.userID.image}}" alt="Imagen del usuario">
-															<img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="Imagen del usuario">
-															<div class="media-body d-flex align-items-center">
+                <p class="mb-2">
+                  <fa-icon [icon]="['fas', 'clock']"></fa-icon>
+                  <b>Publicado el: </b><span class="badge badge-primary">{{ publication.create_at |date:"medium"
+                    }}</span>
+                </p>
+                <hr>
+                <div class="row justify-content-end">
+                  <div class="col-4">
+                    <a href="#mostrarLikesUsers" data-toggle="modal">
+                      <small class="badge badge-dark enlacePointerBadge">{{totalLikes}} likes</small>
+                    </a>
+                    <div class="modal fade" id="mostrarLikesUsers" tabindex="-1" role="dialog"
+                      aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
+                      <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h5 class="modal-title" id="mostrarLikesUsers2">Lista de usuarios</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                              <span aria-hidden="true">&times;</span>
+                            </button>
+                          </div>
+                          <div class="modal-body">
+                            <div class="media" *ngFor="let likePublication of likesPublication; let i = index">
+                              <img *ngIf="likePublication.userID.image" class="img_profiel"
+                                src="{{likePublication.userID.image}}" alt="Imagen del usuario">
+                              <img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3"
+                                src="../../../../assets/img/user.png" alt="Imagen del usuario">
+                              <div class="media-body d-flex align-items-center">
 
-																<h5 *ngIf="likePublication.userID._id!=resID" class="mt-0"><a [routerLink]="['/follow/perfil', likePublication.userID._id]" (click)="removerModal()">{{ likePublication.userID.email }}</a></h5>
+                                <h5 *ngIf="likePublication.userID._id!=resID" class="mt-0"><a
+                                    [routerLink]="['/follow/perfil', likePublication.userID._id]"
+                                    (click)="removerModal()">{{ likePublication.userID.email }}</a></h5>
 
-																<h5 *ngIf="likePublication.userID._id==resID" class="mt-0"><a [routerLink]="['/perfil', likePublication.userID._id]" (click)="removerModal()">Tú</a></h5>
+                                <h5 *ngIf="likePublication.userID._id==resID" class="mt-0"><a
+                                    [routerLink]="['/perfil', likePublication.userID._id]"
+                                    (click)="removerModal()">Tú</a></h5>
 
-															</div>
-														</div>
-													</div>
-													<div class="modal-footer">
-														<button type="button" class="btn btn-dark" data-dismiss="modal">Salir</button>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="col-4">
-										<small class="badge badge-dark">{{totalComents}} comentarios</small>
-									</div>
-									<div class="col-4">
-									</div>
-								</div>
-								<hr>
-								<div class="interaction">
-									<div class="row">
-										<div class="col-4">
-											<a href="#likes" data-toggle="modal" *ngIf="!likebool" (click)="upLike(publication._id)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><small>Me gusta</small></a>
-											<a href="#likes" data-toggle="modal" *ngIf="likebool" (click)="disLike(publication._id)"><i class="fa fa-thumbs-o-up" aria-hidden="true"></i><small>No me gusta</small></a>
-										</div>
-										<div class="col-4">
-											<a class="enlacePointer" (click)="comentarioFocus()"><i class="fa fa-comments" aria-hidden="true"></i><small>Comentar</small></a>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="modal-footer">
+                            <button type="button" class="btn btn-dark" data-dismiss="modal">Salir</button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <small class="badge badge-dark">{{totalComents}} comentarios</small>
+                  </div>
+                  <div class="col-4">
+                  </div>
+                </div>
+                <hr>
+                <div class="interaction">
+                  <div class="row">
+                    <div class="col-4">
+                      <a href="#likes" data-toggle="modal" *ngIf="!likebool" (click)="upLike(publication._id)">
+                        <fa-icon [icon]="['fas', 'thumbs-up']"></fa-icon>
+                        <small>Me gusta</small></a>
+                      <a href="#likes" data-toggle="modal" *ngIf="likebool" (click)="disLike(publication._id)">
+                        <fa-icon [icon]="['fas', 'thumbs-up']"></fa-icon>
+                        <small>No me gusta</small></a>
+                    </div>
+                    <div class="col-4">
+                      <a class="enlacePointer" (click)="comentarioFocus()">
+                        <fa-icon [icon]="['fas', 'comments']"></fa-icon><small>Comentar</small></a>
 
-										</div>
-										<div class="col-4">
-											<div class="dropdown">
-												<a  href="#mostrarRecomendar" data-toggle="modal">
-													<small><i class="fa fa-share" aria-hidden="true"></i>Recomendar</small>
-												</a>
-												<div class="modal fade" id="mostrarRecomendar" tabindex="-1" role="dialog" aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
-													<div class="modal-dialog" role="document">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="mostrarLikesUsers2">Enviar recomendación a tus seguidores</h5>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<div class="modal-body">
-																<div class="media" *ngFor="let likePublication of likesPublication; let i = index">
-																	<img *ngIf="likePublication.userID.image" class="img_profiel" src="{{likePublication.userID.image}}" alt="Imagen del usuario"/>
-																	<img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="Imagen del usuario"/>
-																	<div class="media-body d-flex align-items-center">
-																		<h5 class="mt-0">{{ likePublication.userID.email }}</h5>
-																	</div>
-																	<form>
-																		<input type="submit" class="btn btn-success" value="Enviar">
-																		<input type="hidden" name="userEmisorID" value="{{resID}}">
-																		<input type="hidden" name="userReceptorID" value="{{likePublication.userID._id}}">
-																		<input type="hidden" name="interaction" value="recomendacion">
-																	</form>
-																</div>
-															</div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-dark" data-dismiss="modal">Salir</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 mb-3">
-					<div class="card bg-light">
-						<div  id="collapseExample">
-							<div class="card-body">
-								<div class="row mb-3">
-									<div class="col-12">
-										<form #registerForm="ngForm" (ngSubmit)="registerComent(registerForm)">
-											<input id="comentarioFocusInput" type="text" class="form-control" name="text" #validationComent="ngModel" placeholder="Escribe tu comentario" [(ngModel)]="text" required>
-										</form>
-									</div>
-								</div>
-								<div class="row">
-									<div class="col-12">
-										<div class="media media-coments mb-3" *ngFor="let comentPublication of comentsPublication; let i = index">
-											<div class="row">
-												<img *ngIf="comentPublication.userID.image" class="img_profiel_media" src="{{comentPublication.userID.image}}" alt="Imagen del usuario">
-												<img *ngIf="!comentPublication.userID.image" class="img_profiel_media" src="../../../../assets/img/user.png" alt="Imagen del usuario">
-												<div class="media-body media-body-coment">
-													<form id="mostrarUpdate-{{comentPublication._id}}" class="ocultarUpdateFormComent" #updateForm="ngForm" (ngSubmit)="updateComent(updateForm)">
-														<textarea rows="5" cols="100" id="inputComent-{{comentPublication._id}}" type="text" class="form-control" name="text" #validationComent="ngModel" placeholder="Escribe tu comentario" [(ngModel)]="comentPublication.text" required></textarea>
-														<button class="btn btn-dark btn-sm btn-coment-update" (click)="cancelarUpdate(comentPublication._id)">Cancelar</button>
-														<button type="submit" class="btn btn-primary btn-sm btn-coment-update">Enviar</button>
-														<input type="hidden" name="_id" [(ngModel)]="comentPublication._id">
-													</form>
-													<p id="mostrarComent-{{comentPublication._id}}" class="fondoComentarios">
-														<b *ngIf=" comentPublication.userID._id!=resID "><a [routerLink]="['/follow/perfil', comentPublication.userID._id]" >{{ comentPublication.userID.email }} </a></b>
-														<b *ngIf=" comentPublication.userID._id==resID "><a [routerLink]="['/perfil', comentPublication.userID._id]" >Tú </a></b>
-														{{comentPublication.text}}
-													</p>
-													<h6 class="mt-0">{{ comentPublication.create_at |date:"medium" }}</h6>
-												</div>
-												<div class="button-comentarios" *ngIf="resID===comentPublication.userID._id || rolID==='admin'">
-													<button id="button-{{comentPublication._id}}" type="button" class="close close-button-coment" (click)="mostrarUpdate(comentPublication._id)">
-														<i class="fa fa-pencil-square-o" aria-hidden="true"></i>
-													</button>
+                    </div>
+                    <div class="col-4">
+                      <div class="dropdown">
+                        <a href="#mostrarRecomendar" data-toggle="modal">
+                          <small>
+                            <fa-icon [icon]="['fas', 'share']"></fa-icon>Recomendar</small>
+                        </a>
+                        <div class="modal fade" id="mostrarRecomendar" tabindex="-1" role="dialog"
+                          aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="mostrarLikesUsers2">Enviar recomendación a tus seguidores
+                                </h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                <div class="media" *ngFor="let likePublication of likesPublication; let i = index">
+                                  <img *ngIf="likePublication.userID.image" class="img_profiel"
+                                    src="{{likePublication.userID.image}}" alt="Imagen del usuario" />
+                                  <img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3"
+                                    src="../../../../assets/img/user.png" alt="Imagen del usuario" />
+                                  <div class="media-body d-flex align-items-center">
+                                    <h5 class="mt-0">{{ likePublication.userID.email }}</h5>
+                                  </div>
+                                  <form>
+                                    <input type="submit" class="btn btn-success" value="Enviar">
+                                    <input type="hidden" name="userEmisorID" value="{{resID}}">
+                                    <input type="hidden" name="userReceptorID" value="{{likePublication.userID._id}}">
+                                    <input type="hidden" name="interaction" value="recomendacion">
+                                  </form>
+                                </div>
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-dark" data-dismiss="modal">Salir</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-8 offset-lg-2 mb-3">
+          <div class="card bg-light">
+            <div id="collapseExample">
+              <div class="card-body">
+                <div class="row mb-3">
+                  <div class="col-12">
+                    <form #registerForm="ngForm" (ngSubmit)="registerComent(registerForm)">
+                      <input id="comentarioFocusInput" type="text" class="form-control" name="text"
+                        #validationComent="ngModel" placeholder="Escribe tu comentario" [(ngModel)]="text" required>
+                    </form>
+                  </div>
+                </div>
+                <div class="row">
+                  <div class="col-12">
+                    <div class="media media-coments mb-3"
+                      *ngFor="let comentPublication of comentsPublication; let i = index">
+                      <div class="row">
+                        <img *ngIf="comentPublication.userID.image" class="img_profiel_media"
+                          src="{{comentPublication.userID.image}}" alt="Imagen del usuario">
+                        <img *ngIf="!comentPublication.userID.image" class="img_profiel_media"
+                          src="../../../../assets/img/user.png" alt="Imagen del usuario">
+                        <div class="media-body media-body-coment">
+                          <form id="mostrarUpdate-{{comentPublication._id}}" class="ocultarUpdateFormComent"
+                            #updateForm="ngForm" (ngSubmit)="updateComent(updateForm)">
+                            <textarea rows="5" cols="100" id="inputComent-{{comentPublication._id}}" type="text"
+                              class="form-control" name="text" #validationComent="ngModel"
+                              placeholder="Escribe tu comentario" [(ngModel)]="comentPublication.text"
+                              required></textarea>
+                            <button class="btn btn-dark btn-sm btn-coment-update"
+                              (click)="cancelarUpdate(comentPublication._id)">Cancelar</button>
+                            <button type="submit" class="btn btn-primary btn-sm btn-coment-update">Enviar</button>
+                            <input type="hidden" name="_id" [(ngModel)]="comentPublication._id">
+                          </form>
+                          <p id="mostrarComent-{{comentPublication._id}}" class="fondoComentarios">
+                            <b *ngIf=" comentPublication.userID._id!=resID "><a
+                                [routerLink]="['/follow/perfil', comentPublication.userID._id]">{{
+                                comentPublication.userID.email }} </a></b>
+                            <b *ngIf=" comentPublication.userID._id==resID "><a
+                                [routerLink]="['/perfil', comentPublication.userID._id]">Tú </a></b>
+                            {{comentPublication.text}}
+                          </p>
+                          <h6 class="mt-0">{{ comentPublication.create_at |date:"medium" }}</h6>
+                        </div>
+                        <div class="button-comentarios" *ngIf="resID===comentPublication.userID._id || rolID==='admin'">
+                          <button id="button-{{comentPublication._id}}" type="button" class="close close-button-coment"
+                            (click)="mostrarUpdate(comentPublication._id)">
+                            <fa-icon [icon]="['fas', 'pencil-alt']"></fa-icon>
+                          </button>
 
-													<a href="#delete-coment-{{comentPublication._id}}" data-toggle="modal" type="button" class="close close-button-coment"><i class="fa fa-trash-o" aria-hidden="true"></i></a>
-												</div>
+                          <a href="#delete-coment-{{comentPublication._id}}" data-toggle="modal" type="button"
+                            class="close close-button-coment">
+                            <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon></a>
+                        </div>
 
-												<div class="modal fade" id="delete-coment-{{comentPublication._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-													<div class="modal-dialog" role="document">
-														<div class="modal-content">
-															<div class="modal-header">
-																<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-																<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																	<span aria-hidden="true">&times;</span>
-																</button>
-															</div>
-															<div class="modal-body">
-																¿Estas seguro de eliminar este comentario?
-															</div>
-															<div class="modal-footer">
-																<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-																<button (click)="deleteComent(comentPublication._id)" type="button" class="btn btn-primary">Si</button>
-															</div>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+                        <div class="modal fade" id="delete-coment-{{comentPublication._id}}" tabindex="-1" role="dialog"
+                          aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                  <span aria-hidden="true">&times;</span>
+                                </button>
+                              </div>
+                              <div class="modal-body">
+                                ¿Estas seguro de eliminar este comentario?
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                                <button (click)="deleteComent(comentPublication._id)" type="button"
+                                  class="btn btn-primary">Si</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
-		<div *ngIf="!publication">
-			<div class="text-center">
-		  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-		    		<span class="sr-only">Loading...</span>
-		  		</div>
-			</div>
-		</div>
+    <div *ngIf="!publication">
+      <div class="text-center">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
 
-	</div>
+  </div>
 </main>
-

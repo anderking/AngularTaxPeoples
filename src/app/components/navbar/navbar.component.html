@@ -1,106 +1,132 @@
 <header>
 
-	<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
 
-		<a class="navbar-brand" [routerLink]="['/publicaciones']"><img src="../../../assets/img/logo.png" width="50" height="50" alt="Imagen del perfil"></a>
+    <a class="navbar-brand" [routerLink]="['/publicaciones']"><img src="../../../assets/img/logo.png" width="50"
+        height="50" alt="Imagen del perfil"></a>
 
-		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-			<span class="navbar-toggler-icon"></span>
-		</button>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-		<div class="collapse navbar-collapse" id="navbarNav">
+    <div class="collapse navbar-collapse" id="navbarNav">
 
-			<ul class="navbar-nav ml-auto" *ngIf="!_authService.loggedIn()">
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="['active']"><i class="fa fa-sign-in" aria-hidden="true"></i>Login</a></li>
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/register']" [routerLinkActive]="['active']"><i class="fa fa-user-plus" aria-hidden="true"></i>Register</a></li>
-			</ul>
+      <ul class="navbar-nav ml-auto" *ngIf="!_authService.loggedIn()">
 
-			<ul class="navbar-nav mr-auto" *ngIf="_authService.loggedIn() && tipo==='null'">
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/login']" [routerLinkActive]="['active']"><fa-icon
+              [icon]="['fas', 'sign-in-alt']"></fa-icon>Login</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/register']" [routerLinkActive]="['active']"><fa-icon
+              [icon]="['fas', 'user-plus']"></fa-icon>Register</a></li>
+      </ul>
 
-			</ul>
+      <ul class="navbar-nav mr-auto" *ngIf="_authService.loggedIn() && tipo==='null'">
 
-			<ul class="navbar-nav" *ngIf="_authService.loggedIn() && tipo==='null'">
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/logout']" [routerLinkActive]="['active']"><i class="fa fa-sign-out" aria-hidden="true"></i>Cerrar Sesión</a></li>
-			</ul>
+      </ul>
+
+      <ul class="navbar-nav" *ngIf="_authService.loggedIn() && tipo==='null'">
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/logout']" [routerLinkActive]="['active']"><fa-icon
+              [icon]="['fas', 'sign-out-alt']"></fa-icon>Cerrar Sesión</a></li>
+      </ul>
 
 
-			<ul class="navbar-nav mr-auto" *ngIf="_authService.loggedIn() && tipo==='admin'">
+      <ul class="navbar-nav mr-auto" *ngIf="_authService.loggedIn() && tipo==='admin'">
 
-			</ul>
+      </ul>
 
-			<ul class="navbar-nav" *ngIf="_authService.loggedIn() && tipo==='admin'">
-				<li class="nav-item"><a [routerLink]="['/publicaciones/']" [routerLinkActive]="['active']" class="nav-link"><i class="fa fa-address-card" aria-hidden="true"></i>Publicaciones</a></li>
-				<li class="nav-item"><a [routerLink]="['/categorias']" [routerLinkActive]="['active']" class="nav-link"><i class="fa fa-tags" aria-hidden="true"></i>Categorías</a></li>
-				<li class="nav-item"><a [routerLink]="['/rutas']" [routerLinkActive]="['active']" class="nav-link"><i class="fa fa-car" aria-hidden="true"></i>Rutas</a></li>
-				<li class="nav-item"><a [routerLink]="['/users']" [routerLinkActive]="['active']" class="nav-link"><i class="fa fa-user" aria-hidden="true"></i>Usuarios</a></li>
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/perfil/', resID]" [routerLinkActive]="['active']"><i class="fa fa-user" aria-hidden="true"></i>Perfil</a></li>
-				<li class="nav-item d-block d-lg-none"><a class="nav-link" [routerLink]="['/logout']" [routerLinkActive]="['active']"><i class="fa fa-sign-out" aria-hidden="true"></i>Cerrar Sesión</a></li>
-			</ul>
+      <ul class="navbar-nav" *ngIf="_authService.loggedIn() && tipo==='admin'">
 
-			<ul class="navbar-nav d-none d-lg-block" *ngIf="_authService.loggedIn() && tipo==='admin'">
-				<li class="nav-item">
-					<div class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu" >
-							<img *ngIf="user.image" src="{{user.image}}" alt="Imagen del perfil" class="img-circle img_profiel">
-							<img *ngIf="!user.image" src="../../../../assets/img/user.png" alt="Imagen del perfil" class="img-circle img_profiel">
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-							<a class="dropdown-item" [routerLink]="['/logout']" [routerLinkActive]="['active']">Cerrar Sesión</a>
-						</ul>
-					</div>
-				</li>
-			</ul>
 
-			<ul class="navbar-nav mr-auto" *ngIf="_authService.loggedIn() && tipo==='cliente'">
 
-			</ul>
 
-			<ul class="navbar-nav" *ngIf="_authService.loggedIn() && tipo==='cliente'">
-				<li class="nav-item"><a [routerLink]="['/publicaciones/']" [routerLinkActive]="['active']" class="nav-link"><i class="fa fa-address-card" aria-hidden="true"></i>Publicaciones</a></li>
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/perfil/', resID]" [routerLinkActive]="['active']"><i class="fa fa-user" aria-hidden="true"></i>Perfil</a></li>
-				<li class="nav-item d-block d-lg-none"><a class="nav-link" [routerLink]="['/logout']" [routerLinkActive]="['active']"><i class="fa fa-sign-out" aria-hidden="true"></i>Cerrar Sesión</a></li>
-			</ul>
 
-			<ul class="navbar-nav d-none d-lg-block" *ngIf="_authService.loggedIn() && tipo==='cliente'">
-				<li class="nav-item">
-					<div class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu" >
-							<img *ngIf="user.image" src="{{user.image}}" alt="Imagen del perfil" class="img-circle img_profiel">
-							<img *ngIf="!user.image" src="../../../../assets/img/user.png" alt="Imagen del perfil" class="img-circle img_profiel">
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-							<a class="dropdown-item" [routerLink]="['/logout']" [routerLinkActive]="['active']">Cerrar Sesión</a>
-						</ul>
-					</div>
-				</li>
-			</ul>
+        <li class="nav-item"><a [routerLink]="['/publicaciones/']" [routerLinkActive]="['active']"
+            class="nav-link"><fa-icon [icon]="['fas', 'address-card']"></fa-icon>Publicaciones</a></li>
+        <li class="nav-item"><a [routerLink]="['/categorias']" [routerLinkActive]="['active']" class="nav-link"><fa-icon
+              [icon]="['fas', 'tags']"></fa-icon>Categorías</a></li>
+        <li class="nav-item"><a [routerLink]="['/rutas']" [routerLinkActive]="['active']" class="nav-link"><fa-icon
+              [icon]="['fas', 'car']"></fa-icon>Rutas</a></li>
+        <li class="nav-item"><a [routerLink]="['/users']" [routerLinkActive]="['active']" class="nav-link"><fa-icon
+              [icon]="['fas', 'user']"></fa-icon>Usuarios</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/perfil/', resID]"
+            [routerLinkActive]="['active']"><fa-icon [icon]="['fas', 'user']"></fa-icon>Perfil</a></li>
+        <li class="nav-item d-block d-lg-none"><a class="nav-link" [routerLink]="['/logout']"
+            [routerLinkActive]="['active']"><fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>Cerrar Sesión</a></li>
+      </ul>
 
-			<ul class="navbar-nav mr-auto" *ngIf="_authService.loggedIn() && tipo==='miembro'">
+      <ul class="navbar-nav d-none d-lg-block" *ngIf="_authService.loggedIn() && tipo==='admin'">
+        <li class="nav-item">
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
+              <img *ngIf="user.image" src="{{user.image}}" alt="Imagen del perfil" class="img-circle img_profiel">
+              <img *ngIf="!user.image" src="../../../../assets/img/user.png" alt="Imagen del perfil"
+                class="img-circle img_profiel">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+              <a class="dropdown-item" [routerLink]="['/logout']" [routerLinkActive]="['active']">Cerrar Sesión</a>
+            </ul>
+          </div>
+        </li>
+      </ul>
 
-			</ul>
+      <ul class="navbar-nav mr-auto" *ngIf="_authService.loggedIn() && tipo==='cliente'">
 
-			<ul class="navbar-nav" *ngIf="_authService.loggedIn() && tipo==='miembro'">
-				<li class="nav-item"><a [routerLink]="['/publicaciones/']" [routerLinkActive]="['active']" class="nav-link"><i class="fa fa-address-card" aria-hidden="true"></i>Publicaciones</a></li>
-				<li class="nav-item"><a class="nav-link" [routerLink]="['/perfil/', resID]" [routerLinkActive]="['active']"><i class="fa fa-user" aria-hidden="true"></i>Perfil</a></li>
-				<li class="nav-item d-block d-lg-none"><a class="nav-link" [routerLink]="['/logout']" [routerLinkActive]="['active']"><i class="fa fa-sign-out" aria-hidden="true"></i>Cerrar Sesión</a></li>
-			</ul>
+      </ul>
 
-			<ul class="navbar-nav d-none d-lg-block" *ngIf="_authService.loggedIn() && tipo==='miembro'">
-				<li class="nav-item">
-					<div class="dropdown">
-						<a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu" >
-							<img *ngIf="user.image" src="{{user.image}}" alt="Imagen del perfil" class="img-circle img_profiel">
-							<img *ngIf="!user.image" src="../../../../assets/img/user.png" alt="Imagen del perfil" class="img-circle img_profiel">
-						</a>
-						<ul class="dropdown-menu" aria-labelledby="dropdownMenu">
-							<a class="dropdown-item" [routerLink]="['/logout']" [routerLinkActive]="['active']">Cerrar Sesión</a>
-						</ul>
-					</div>
-				</li>
-			</ul>
+      <ul class="navbar-nav" *ngIf="_authService.loggedIn() && tipo==='cliente'">
+        <li class="nav-item"><a [routerLink]="['/publicaciones/']" [routerLinkActive]="['active']"
+            class="nav-link"><fa-icon [icon]="['fas', 'address-card']"></fa-icon>Publicaciones</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/perfil/', resID]"
+            [routerLinkActive]="['active']"><fa-icon [icon]="['fas', 'user']"></fa-icon>Perfil</a></li>
+        <li class="nav-item d-block d-lg-none"><a class="nav-link" [routerLink]="['/logout']"
+            [routerLinkActive]="['active']"><fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>Cerrar Sesión</a></li>
+      </ul>
 
-		</div>
+      <ul class="navbar-nav d-none d-lg-block" *ngIf="_authService.loggedIn() && tipo==='cliente'">
+        <li class="nav-item">
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
+              <img *ngIf="user.image" src="{{user.image}}" alt="Imagen del perfil" class="img-circle img_profiel">
+              <img *ngIf="!user.image" src="../../../../assets/img/user.png" alt="Imagen del perfil"
+                class="img-circle img_profiel">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+              <a class="dropdown-item" [routerLink]="['/logout']" [routerLinkActive]="['active']">Cerrar Sesión</a>
+            </ul>
+          </div>
+        </li>
+      </ul>
 
-	</nav>
+      <ul class="navbar-nav mr-auto" *ngIf="_authService.loggedIn() && tipo==='miembro'">
+
+      </ul>
+
+      <ul class="navbar-nav" *ngIf="_authService.loggedIn() && tipo==='miembro'">
+        <li class="nav-item"><a [routerLink]="['/publicaciones/']" [routerLinkActive]="['active']"
+            class="nav-link"><fa-icon [icon]="['fas', 'address-card']"></fa-icon>Publicaciones</a></li>
+        <li class="nav-item"><a class="nav-link" [routerLink]="['/perfil/', resID]"
+            [routerLinkActive]="['active']"><fa-icon [icon]="['fas', 'user']"></fa-icon>Perfil</a></li>
+        <li class="nav-item d-block d-lg-none"><a class="nav-link" [routerLink]="['/logout']"
+            [routerLinkActive]="['active']"><fa-icon [icon]="['fas', 'sign-out-alt']"></fa-icon>Cerrar Sesión</a></li>
+      </ul>
+
+      <ul class="navbar-nav d-none d-lg-block" *ngIf="_authService.loggedIn() && tipo==='miembro'">
+        <li class="nav-item">
+          <div class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="dropdownMenu">
+              <img *ngIf="user.image" src="{{user.image}}" alt="Imagen del perfil" class="img-circle img_profiel">
+              <img *ngIf="!user.image" src="../../../../assets/img/user.png" alt="Imagen del perfil"
+                class="img-circle img_profiel">
+            </a>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenu">
+              <a class="dropdown-item" [routerLink]="['/logout']" [routerLinkActive]="['active']">Cerrar Sesión</a>
+            </ul>
+          </div>
+        </li>
+      </ul>
+
+    </div>
+
+  </nav>
 
 </header>

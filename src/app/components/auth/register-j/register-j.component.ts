@@ -1,11 +1,10 @@
 import { Component, OnInit } from "@angular/core";
-import { AuthService } from "../../../services/auth.service";
 import { User } from "../../../models/user";
 import { UserService } from "../../../services/user.service";
 import { Empresa } from "../../../models/empresa";
 import { EmpresaService } from "../../../services/empresa.service";
 import { Categoria } from "../../../models/categoria";
-import { Router, ActivatedRoute, Params } from "@angular/router";
+import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { NgForm } from "@angular/forms";
@@ -33,9 +32,7 @@ export class RegisterJComponent implements OnInit {
   public message: string;
 
   constructor(
-    private _router: Router,
     private _route: ActivatedRoute,
-    private authService: AuthService,
     private _userService: UserService,
     private _empresaService: EmpresaService,
     private spinner: NgxSpinnerService,

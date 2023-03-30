@@ -23,7 +23,7 @@ export class AuthService {
       })
       .pipe(
         map((data) => {
-          return data as LoginResponse;
+          return data;
         })
       );
   }

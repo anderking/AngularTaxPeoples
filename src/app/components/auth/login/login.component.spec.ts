@@ -12,7 +12,6 @@ describe("LoginComponent", () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
   let authService: AuthService;
-  let ngxSpinnerService: NgxSpinnerService;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -30,7 +29,7 @@ describe("LoginComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
     authService = TestBed.inject(AuthService);
-    ngxSpinnerService = TestBed.inject(NgxSpinnerService);
+    TestBed.inject(NgxSpinnerService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

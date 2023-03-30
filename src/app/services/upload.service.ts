@@ -18,9 +18,8 @@ export class UploadService {
     return new Promise(function (resolve, reject) {
       const formData: any = new FormData();
       const xhr = new XMLHttpRequest();
-
-      for (let i = 0; i < files.length; i++) {
-        formData.append(name, files[i], files[i].name);
+      for (let file of files) {
+        formData.append(name, file, file.name);
       }
 
       xhr.onreadystatechange = function () {

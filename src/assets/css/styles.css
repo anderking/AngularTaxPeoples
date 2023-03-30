@@ -1,4 +1,4 @@
-@import url("../font-awesome/css/font-awesome.css");
+
 
 body,
 html {
@@ -26,7 +26,6 @@ html {
 .main_categorias_create,
 .main_categorias_show,
 .main_categorias_edit,
-.main_rutas,
 .main_rutas_create,
 .main_rutas_show,
 .main_rutas_edit,
@@ -111,8 +110,8 @@ button.btn {
   color: #212529;
 }
 
-i {
-  margin-right: 5px;
+i, .ng-fa-icon {
+  margin-right: 5px !important;
 }
 
 .box_flot {
@@ -314,12 +313,22 @@ i {
   height: 100%;
 }
 
-.button-comentarios .close {
-  float: none;
+.button-comentarios{
+  margin-bottom: 0 !important;
+  margin: 5px;
 }
 
-.button-comentarios {
-  margin-bottom: 0 !important;
+.button-comentarios button:focus {
+  outline: none;
+  outline-color: none;
+}
+
+.button-comentarios i {
+  font-size: .8em;
+}
+
+.button-comentarios .close {
+  float: none;
 }
 
 .media-body-coment {
@@ -373,20 +382,6 @@ a.close {
   padding: 1em;
 }
 
-.button-comentarios {
-  margin: 5px;
-}
-
-.button-comentarios button:focus {
-  outline: none;
-  outline-color: none;
-}
-
 .btn-coment-update {
   margin: 5px 5px 5px 0px !important;
-}
-
-.button-comentarios i {
-  font-size: .8em;
-
 }

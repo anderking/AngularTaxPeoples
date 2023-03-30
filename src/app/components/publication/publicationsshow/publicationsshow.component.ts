@@ -289,9 +289,9 @@ export class PublicationsshowComponent implements OnInit {
           this.totalCalificacionesR = 0;
           this.countCalificacionesR = 0;
           this.promedioCalificaciones = 0;
-          for (let i = 0; i < this.calificacionesR.length; i++) {
+          for (let element of this.calificacionesR) {
             this.totalCalificacionesR =
-              this.totalCalificacionesR + this.calificacionesR[i].value;
+              this.totalCalificacionesR + element.value;
             this.countCalificacionesR = this.countCalificacionesR + 1;
             if (this.countCalificacionesR > 0) {
               this.promedioCalificaciones = parseFloat(
