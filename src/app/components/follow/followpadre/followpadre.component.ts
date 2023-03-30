@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-followpadre',
-  templateUrl: './followpadre.component.html',
-  styleUrls: ['./followpadre.component.css']
+  selector: "app-followpadre",
+  templateUrl: "./followpadre.component.html",
 })
-export class FollowpadreComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class FollowpadreComponent {}

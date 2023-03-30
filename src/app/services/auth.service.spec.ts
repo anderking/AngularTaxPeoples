@@ -3,7 +3,6 @@ import {
   HttpTestingController,
 } from "@angular/common/http/testing";
 import { TestBed, waitForAsync } from "@angular/core/testing";
-import { of } from "rxjs";
 import {
   mockTestLoginResponse,
   mockTestRegisterResponse,

@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { PerfilfollowComponent } from './perfilfollow.component';
 
@@ -6,7 +6,7 @@ xdescribe('PerfilfollowComponent', () => {
   let component: PerfilfollowComponent;
   let fixture: ComponentFixture<PerfilfollowComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ PerfilfollowComponent ]
     })
