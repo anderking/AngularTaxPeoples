@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-timelinepadre',
-  templateUrl: './timelinepadre.component.html',
-  styleUrls: ['./timelinepadre.component.css']
+  selector: "app-timelinepadre",
+  templateUrl: "./timelinepadre.component.html",
 })
-export class TimelinepadreComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class TimelinepadreComponent {}

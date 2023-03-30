@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RegisterJComponent } from './register-j.component';
 
@@ -6,7 +6,7 @@ xdescribe('RegisterJComponent', () => {
   let component: RegisterJComponent;
   let fixture: ComponentFixture<RegisterJComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RegisterJComponent ]
     })

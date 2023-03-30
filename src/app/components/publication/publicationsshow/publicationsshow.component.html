@@ -40,8 +40,8 @@
 					<div id="showPublication">
 						<div class="card booking-card">
 							<div class="view overlay">
-								<img *ngIf="publication.image" class="card-img-top img-fluid"  src="{{publication.image}}"/>
-								<img *ngIf="!publication.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="...">
+								<img *ngIf="publication.image" class="card-img-top img-fluid"  src="{{publication.image}}" alt="Imagen de la publicación"/>
+								<img *ngIf="!publication.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="Imagen de la publicación">
 							</div>
 							<div class="card-body">
 								<div class="row justify-content-between">
@@ -70,7 +70,7 @@
 										</div>
 								    </div>
 								</div>
-								
+
 								<hr>
 								<p class="mb-2">{{ publication.description }}</p>
 								<hr>
@@ -150,8 +150,8 @@
 											</div>
 											<div class="modal-body">
 												<div class="media" *ngFor="let calificacionR of calificacionesR; let i = index">
-													<img *ngIf="calificacionR.userEmisorID.image" class="img_profiel" src="{{calificacionR.userEmisorID.image}}" alt="...">
-													<img *ngIf="!calificacionR.userEmisorID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="...">
+													<img *ngIf="calificacionR.userEmisorID.image" class="img_profiel" src="{{calificacionR.userEmisorID.image}}" alt="Imagen del usuario">
+													<img *ngIf="!calificacionR.userEmisorID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="Imagen del usuario">
 													<div class="media-body d-flex align-items-center">
 														<h5 *ngIf="calificacionR.userEmisorID._id!=resID" class="mt-0"><a [routerLink]="['/follow/perfil', calificacionR.userEmisorID._id]" (click)="removerModal()">{{ calificacionR.userEmisorID.email }}</a></h5>
 
@@ -186,8 +186,8 @@
 													</div>
 													<div class="modal-body">
 														<div class="media" *ngFor="let likePublication of likesPublication; let i = index">
-															<img *ngIf="likePublication.userID.image" class="img_profiel" src="{{likePublication.userID.image}}" alt="...">
-															<img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="...">
+															<img *ngIf="likePublication.userID.image" class="img_profiel" src="{{likePublication.userID.image}}" alt="Imagen del usuario">
+															<img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="Imagen del usuario">
 															<div class="media-body d-flex align-items-center">
 
 																<h5 *ngIf="likePublication.userID._id!=resID" class="mt-0"><a [routerLink]="['/follow/perfil', likePublication.userID._id]" (click)="removerModal()">{{ likePublication.userID.email }}</a></h5>
@@ -238,8 +238,8 @@
 															</div>
 															<div class="modal-body">
 																<div class="media" *ngFor="let likePublication of likesPublication; let i = index">
-																	<img *ngIf="likePublication.userID.image" class="img_profiel" src="{{likePublication.userID.image}}" alt="..."/>
-																	<img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="..."/>
+																	<img *ngIf="likePublication.userID.image" class="img_profiel" src="{{likePublication.userID.image}}" alt="Imagen del usuario"/>
+																	<img *ngIf="!likePublication.userID.image" class="img_profiel align-self-center mr-3" src="../../../../assets/img/user.png" alt="Imagen del usuario"/>
 																	<div class="media-body d-flex align-items-center">
 																		<h5 class="mt-0">{{ likePublication.userID.email }}</h5>
 																	</div>
@@ -282,8 +282,8 @@
 									<div class="col-12">
 										<div class="media media-coments mb-3" *ngFor="let comentPublication of comentsPublication; let i = index">
 											<div class="row">
-												<img *ngIf="comentPublication.userID.image" class="img_profiel_media" src="{{comentPublication.userID.image}}" alt="...">
-												<img *ngIf="!comentPublication.userID.image" class="img_profiel_media" src="../../../../assets/img/user.png" alt="...">
+												<img *ngIf="comentPublication.userID.image" class="img_profiel_media" src="{{comentPublication.userID.image}}" alt="Imagen del usuario">
+												<img *ngIf="!comentPublication.userID.image" class="img_profiel_media" src="../../../../assets/img/user.png" alt="Imagen del usuario">
 												<div class="media-body media-body-coment">
 													<form id="mostrarUpdate-{{comentPublication._id}}" class="ocultarUpdateFormComent" #updateForm="ngForm" (ngSubmit)="updateComent(updateForm)">
 														<textarea rows="5" cols="100" id="inputComent-{{comentPublication._id}}" type="text" class="form-control" name="text" #validationComent="ngModel" placeholder="Escribe tu comentario" [(ngModel)]="comentPublication.text" required></textarea>

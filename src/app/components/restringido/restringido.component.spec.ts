@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { RestringidoComponent } from './restringido.component';
 
@@ -6,7 +6,7 @@ xdescribe('RestringidoComponent', () => {
   let component: RestringidoComponent;
   let fixture: ComponentFixture<RestringidoComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ RestringidoComponent ]
     })
