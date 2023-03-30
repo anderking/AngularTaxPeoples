@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from "@angular/core";
+import { Component, ViewChild } from "@angular/core";
 import { AuthService } from "../../../services/auth.service";
 import { UserService } from "../../../services/user.service";
 import { User } from "../../../models/user";
@@ -69,7 +69,7 @@ export class LoginComponent {
     this.spinner.hide();
     localStorage.setItem("token", res.token);
     localStorage.setItem("resID", res.user[0]._id);
-    var actualRoute = window.location.origin;
+    const actualRoute = window.location.origin;
     window.location.replace(actualRoute + "/perfil/" + this.resID);
   }
 

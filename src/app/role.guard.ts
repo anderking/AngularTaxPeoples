@@ -24,7 +24,7 @@ export class RoleGuard implements CanActivate {
         this.user = response.user;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }

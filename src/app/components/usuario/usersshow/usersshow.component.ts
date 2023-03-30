@@ -61,7 +61,7 @@ export class UsersshowComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.failedConect = Global.failed;
@@ -80,7 +80,7 @@ export class UsersshowComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.failedConect = Global.failed;
@@ -99,7 +99,7 @@ export class UsersshowComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.failedConect = Global.failed;
@@ -116,7 +116,7 @@ export class UsersshowComponent implements OnInit {
         this.total = this.publicationsUser.length;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.failedConect = Global.failed;
@@ -141,7 +141,7 @@ export class UsersshowComponent implements OnInit {
         this.message = error.message;
         this.isAlert = false;
         this.onIsError();
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }

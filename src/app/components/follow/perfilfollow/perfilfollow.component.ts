@@ -90,7 +90,7 @@ export class PerfilfollowComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -101,7 +101,7 @@ export class PerfilfollowComponent implements OnInit {
         this.persona = response.persona;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -112,7 +112,7 @@ export class PerfilfollowComponent implements OnInit {
         this.empresa = response.empresa;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -150,7 +150,7 @@ export class PerfilfollowComponent implements OnInit {
         } else this.calificacionBool = false;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -163,7 +163,7 @@ export class PerfilfollowComponent implements OnInit {
           this.totalCalificacionesR = 0;
           this.countCalificacionesR = 0;
           this.promedioCalificaciones = 0;
-          for (var i = 0; i < this.calificacionesR.length; i++) {
+          for (let i = 0; i < this.calificacionesR.length; i++) {
             this.totalCalificacionesR =
               this.totalCalificacionesR + this.calificacionesR[i].value;
             this.countCalificacionesR = this.countCalificacionesR + 1;
@@ -178,7 +178,7 @@ export class PerfilfollowComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -192,7 +192,7 @@ export class PerfilfollowComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -207,9 +207,6 @@ export class PerfilfollowComponent implements OnInit {
           $("body").removeAttr("style");
           $(".modal-backdrop.fade.show").css("display", "none");
           $("#desCalificar").css("display", "none");
-          //$('#desCalificar').removeClass('show');
-          //$("#desCalificar").removeAttr("aria-modal");
-          //$("#desCalificar").attr("aria-hidden","true");
           this.getUser(this.userReceptorID);
           this.isCalificacion(this.userEmisorID, this.userReceptorID);
         },

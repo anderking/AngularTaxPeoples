@@ -43,7 +43,7 @@ export class CategoriasshowComponent implements OnInit {
         this.categoria = response.categoria;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.failedConect = Global.failed;
@@ -60,7 +60,7 @@ export class CategoriasshowComponent implements OnInit {
         this.total = this.publicationsCategoria.length;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.failedConect = Global.failed;

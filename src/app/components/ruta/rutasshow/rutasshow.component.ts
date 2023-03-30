@@ -43,7 +43,7 @@ export class RutasshowComponent implements OnInit {
         this.ruta = response.ruta;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.failedConect = Global.failed;
@@ -60,7 +60,7 @@ export class RutasshowComponent implements OnInit {
         this.total = this.publicationsRuta.length;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
         if (error instanceof HttpErrorResponse) {
           if (error.status === 0) {
             this.failedConect = Global.failed;

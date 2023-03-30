@@ -65,8 +65,8 @@ export class EditpersonaComponent implements OnInit {
       this.getUser(id);
       this.getPersona(id);
     });
-    var fecha = new Date();
-    var fecha2 = fecha.setDate(fecha.getDate() - 1);
+    const fecha = new Date();
+    const fecha2 = fecha.setDate(fecha.getDate() - 1);
     this.fechaActual = new Date(fecha2).toISOString().split("T")[0];
   }
 
@@ -76,7 +76,7 @@ export class EditpersonaComponent implements OnInit {
         this.user = response.user;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -89,16 +89,16 @@ export class EditpersonaComponent implements OnInit {
           this.persona.fechaNacimiento.split("T")[0];
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
 
   update(form: NgForm) {
     if (form.valid) {
-      var fechaActual = new Date();
-      var fechaForm = new Date(form.form.value.fechaNacimiento);
-      var fechaForm2 = new Date(fechaForm.setDate(fechaForm.getDate() + 1));
+      const fechaActual = new Date();
+      const fechaForm = new Date(form.form.value.fechaNacimiento);
+      const fechaForm2 = new Date(fechaForm.setDate(fechaForm.getDate() + 1));
 
       if (fechaForm2 < fechaActual) {
         this._personaService.updatePersona(this.persona).subscribe(
@@ -114,20 +114,8 @@ export class EditpersonaComponent implements OnInit {
               this.onIsError();
             }
           },
-          (error) => {
-            this.isAlert = false;
-            this.message = error.message;
-            this.onIsError();
-
-            if (error instanceof HttpErrorResponse) {
-              if (error.status === 404) {
-                this.message = error.error.message;
-                console.log(error);
-              }
-            } else {
-              this.message = error.message;
-              console.log(error);
-            }
+          (error: HttpErrorResponse) => {
+            this.messageError(error);
           }
         );
       } else {
@@ -139,6 +127,22 @@ export class EditpersonaComponent implements OnInit {
       }
     } else {
       this.onIsError();
+    }
+  }
+
+  messageError(error: HttpErrorResponse | any) {
+    this.isAlert = false;
+    this.message = error.message;
+    this.onIsError();
+
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 404) {
+        this.message = error.error.message;
+        console.log(error);
+      }
+    } else {
+      this.message = error.message;
+      console.log(error);
     }
   }
 

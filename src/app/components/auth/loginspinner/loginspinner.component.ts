@@ -15,7 +15,7 @@ export class LoginspinnerComponent implements OnInit {
     $("footer").css("display", "none");
     setTimeout(() => {
       this.spinner.hide();
-      var actualRoute = window.location.origin;
+      const actualRoute = window.location.origin;
       window.location.replace(
         actualRoute + "/perfil/" + localStorage.getItem("resID")
       );

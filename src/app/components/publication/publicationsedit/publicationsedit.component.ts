@@ -60,7 +60,7 @@ export class PublicationseditComponent implements OnInit {
         this.publication = response.publication;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -126,22 +126,26 @@ export class PublicationseditComponent implements OnInit {
             this.onIsError();
           }
         },
-        (error) => {
-          console.log(error);
-          this.isAlert = false;
-          this.message = error.message;
-          this.onIsError();
-
-          if (error instanceof HttpErrorResponse) {
-            if (error.status === 404) {
-              this.message = error.error.message;
-              this.onIsError();
-            }
-          }
+        (error: HttpErrorResponse) => {
+          this.messageError(error);
         }
       );
     } else {
       this.onIsError();
+    }
+  }
+
+  messageError(error: HttpErrorResponse) {
+    console.log(error);
+    this.isAlert = false;
+    this.message = error.message;
+    this.onIsError();
+
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 404) {
+        this.message = error.error.message;
+        this.onIsError();
+      }
     }
   }
 

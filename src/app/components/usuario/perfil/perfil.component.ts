@@ -65,7 +65,7 @@ export class PerfilComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -82,7 +82,7 @@ export class PerfilComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -99,7 +99,7 @@ export class PerfilComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -118,7 +118,7 @@ export class PerfilComponent implements OnInit {
                   "image"
                 )
                 .then((result: any) => {
-                  var actualRoute = window.location.href;
+                  const actualRoute = window.location.href;
                   window.location.replace(actualRoute);
                 });
             } else {
@@ -127,7 +127,7 @@ export class PerfilComponent implements OnInit {
           }
         },
         (error) => {
-          console.log(<any>error);
+          console.log(error);
         }
       );
     } else {

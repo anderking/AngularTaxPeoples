@@ -78,7 +78,7 @@ export class PublicationscategoriaComponent implements OnInit {
             this.failedConect = Global.failed;
           }
         }
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }

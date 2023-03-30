@@ -76,7 +76,7 @@ export class PublicationsshowComponent implements OnInit {
         this.user = response.user;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -92,7 +92,7 @@ export class PublicationsshowComponent implements OnInit {
         } else this.ispost = false;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -116,7 +116,7 @@ export class PublicationsshowComponent implements OnInit {
         $(".modal-backdrop.fade.show").css("display", "none");
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -128,7 +128,7 @@ export class PublicationsshowComponent implements OnInit {
         this.totalLikes = response.likesPublication.length;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -140,7 +140,7 @@ export class PublicationsshowComponent implements OnInit {
         this.totalComents = this.comentsPublication.length;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -168,10 +168,10 @@ export class PublicationsshowComponent implements OnInit {
 
   updateComent(update: NgForm) {
     if (update.valid) {
-      var textEdit = update.form.value.text;
+      const textEdit = update.form.value.text;
       this.getcomentFormUpdate(update.form.value._id, textEdit);
     } else {
-      var id = update.form.value._id;
+      const id = update.form.value._id;
       $("#inputComent-" + id + "").addClass("is-invalid");
     }
   }
@@ -196,7 +196,7 @@ export class PublicationsshowComponent implements OnInit {
         );
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -207,7 +207,7 @@ export class PublicationsshowComponent implements OnInit {
         this.comentSingle = response.coment;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -236,7 +236,7 @@ export class PublicationsshowComponent implements OnInit {
         this.getcomentsPublication(this.publicationID);
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -248,7 +248,7 @@ export class PublicationsshowComponent implements OnInit {
         else this.likebool = false;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -260,7 +260,7 @@ export class PublicationsshowComponent implements OnInit {
         this.islike(this.publication._id);
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -272,7 +272,7 @@ export class PublicationsshowComponent implements OnInit {
         this.islike(this.publication._id);
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -289,7 +289,7 @@ export class PublicationsshowComponent implements OnInit {
           this.totalCalificacionesR = 0;
           this.countCalificacionesR = 0;
           this.promedioCalificaciones = 0;
-          for (var i = 0; i < this.calificacionesR.length; i++) {
+          for (let i = 0; i < this.calificacionesR.length; i++) {
             this.totalCalificacionesR =
               this.totalCalificacionesR + this.calificacionesR[i].value;
             this.countCalificacionesR = this.countCalificacionesR + 1;
@@ -304,7 +304,7 @@ export class PublicationsshowComponent implements OnInit {
         }
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }

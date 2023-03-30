@@ -18,7 +18,7 @@ export class LogoutComponent implements OnInit {
     setTimeout(() => {
       this.spinner.hide();
       this._authService.logoutClear();
-      var actualRoute = window.location.origin;
+      const actualRoute = window.location.origin;
       window.location.replace(actualRoute + "/login/");
     }, 3000);
   }

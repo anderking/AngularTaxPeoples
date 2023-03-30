@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { Ruta } from "../../../models/ruta";
 import { RutaService } from "../../../services/ruta.service";
 import { NgForm } from "@angular/forms";
@@ -9,7 +9,7 @@ import { HttpErrorResponse } from "@angular/common/http";
   selector: "app-rutascreate",
   templateUrl: "./rutascreate.component.html",
 })
-export class RutascreateComponent implements OnInit {
+export class RutascreateComponent {
   public ruta: Ruta;
   public name: string;
   public description: string;
@@ -22,15 +22,13 @@ export class RutascreateComponent implements OnInit {
     this.ruta = new Ruta("", "", "");
   }
 
-  ngOnInit() {}
-
   register(form: NgForm) {
     if (form.valid) {
       this.ruta.name = form.form.value.name;
       this.ruta.description = form.form.value.description;
 
       this._rutaService.saveRuta(this.ruta).subscribe(
-        (response) => {
+        (response: any) => {
           if (response.ruta) {
             this.save_ruta = response.ruta;
             this.message = response.message;
@@ -44,33 +42,35 @@ export class RutascreateComponent implements OnInit {
             this.onIsError();
           }
         },
-        (error) => {
-          this.message = error.message;
-          console.log(error);
-          this.isAlert = false;
-          this.onIsError();
-          if (error instanceof HttpErrorResponse) {
-            if (error.status === 404) {
-              this.message = error.error.message;
-              console.log(error);
-              this.isAlert = false;
-              this.onIsError();
-            }
-
-            if (error.status === 500) {
-              this.message = error.error.message;
-              console.log(error);
-              this.isAlert = false;
-              this.onIsError();
-            }
-          }
+        (error: HttpErrorResponse) => {
+          this.messageError(error);
         }
       );
     } else {
       this.onIsError();
     }
   }
+  messageError(error: HttpErrorResponse) {
+    this.message = error.message;
+    console.log(error);
+    this.isAlert = false;
+    this.onIsError();
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 404) {
+        this.message = error.error.message;
+        console.log(error);
+        this.isAlert = false;
+        this.onIsError();
+      }
 
+      if (error.status === 500) {
+        this.message = error.error.message;
+        console.log(error);
+        this.isAlert = false;
+        this.onIsError();
+      }
+    }
+  }
   onIsError() {
     this.isError = true;
     window.scrollTo(0, 0);

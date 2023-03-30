@@ -72,8 +72,8 @@ export class RegisterNComponent implements OnInit {
       { _id: "Zulia", name: "Zulia", description: "" },
     ];
 
-    var fecha = new Date();
-    var fecha2 = fecha.setDate(fecha.getDate() - 1);
+    const fecha = new Date();
+    const fecha2 = fecha.setDate(fecha.getDate() - 1);
     this.fechaActual = new Date(fecha2).toISOString().split("T")[0];
   }
 
@@ -93,16 +93,16 @@ export class RegisterNComponent implements OnInit {
         this.user = response.user;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
 
   register(form: NgForm) {
     if (form.valid) {
-      var fechaActual = new Date();
-      var fechaForm = new Date(form.form.value.fechaNacimiento);
-      var fechaForm2 = new Date(fechaForm.setDate(fechaForm.getDate() + 1));
+      const fechaActual = new Date();
+      const fechaForm = new Date(form.form.value.fechaNacimiento);
+      const fechaForm2 = new Date(fechaForm.setDate(fechaForm.getDate() + 1));
 
       if (fechaForm2 < fechaActual) {
         this.persona.name = form.form.value.name;
@@ -158,7 +158,7 @@ export class RegisterNComponent implements OnInit {
         this.message = error.message;
         this.isAlert = false;
         this.onIsError();
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -177,7 +177,7 @@ export class RegisterNComponent implements OnInit {
 
     setTimeout(() => {
       this.spinner.hide();
-      var actualRoute = window.location.origin;
+      const actualRoute = window.location.origin;
       window.location.replace(actualRoute + "/perfil/" + this.resID);
     }, 3000);
   }

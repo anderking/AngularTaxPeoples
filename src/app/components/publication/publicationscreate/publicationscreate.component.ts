@@ -48,9 +48,9 @@ export class PublicationscreateComponent implements OnInit {
     private _categoriaService: CategoriaService,
     private _rutaService: RutaService,
     private _uploadService: UploadService,
-    private _location: Location,
+    private _location: Location
   ) {
-    var fecha = new Date();
+    const fecha = new Date();
     this.create_at = new Date(fecha).toISOString().split("T")[0];
     this.publication = new Publication(
       "",
@@ -76,7 +76,6 @@ export class PublicationscreateComponent implements OnInit {
       (response) => {
         if (response.categorias) {
           this.categorias = response.categorias;
-          //this.categoriaID = this.categorias[0]._id;
           this.categoriaID = "";
         }
       },
@@ -91,7 +90,6 @@ export class PublicationscreateComponent implements OnInit {
       (response) => {
         if (response.rutas) {
           this.rutas = response.rutas;
-          //this.rutaID = this.rutas[0]._id;
           this.rutaID = "";
         }
       },
@@ -110,7 +108,7 @@ export class PublicationscreateComponent implements OnInit {
       this.publication.rutaID = form.form.value.rutaID;
 
       this._publicationService.savePublication(this.publication).subscribe(
-        (response) => {
+        (response: any) => {
           if (this.filesToUpload) {
             this._uploadService
               .makeFileRequest(
@@ -122,7 +120,6 @@ export class PublicationscreateComponent implements OnInit {
                 "image"
               )
               .then((result: any) => {
-                //this.publication.image = form.form.value.image;
                 this.save_publication = result.publication;
                 this.isAlert = true;
                 this.message = "Publicación Creada Correctamente";
@@ -139,22 +136,25 @@ export class PublicationscreateComponent implements OnInit {
             this.onIsError();
           }
         },
-        (error) => {
-          console.log(error);
-          this.isAlert = false;
-          this.message = error.message;
-          this.onIsError();
-
-          if (error instanceof HttpErrorResponse) {
-            if (error.status === 404) {
-              this.message = error.error.message;
-              this.onIsError();
-            }
-          }
+        (error: HttpErrorResponse) => {
+          this.messageError(error);
         }
       );
     } else {
       this.onIsError();
+    }
+  }
+  messageError(error: HttpErrorResponse) {
+    console.log(error);
+    this.isAlert = false;
+    this.message = error.message;
+    this.onIsError();
+
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 404) {
+        this.message = error.error.message;
+        this.onIsError();
+      }
     }
   }
 

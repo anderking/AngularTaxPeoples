@@ -43,8 +43,6 @@ export class CalificacionService {
   }
 
   getCalificacion(idE, idR): Observable<any> {
-    let headers = new HttpHeaders().set("Content-Type", "application/json");
-
     return this._http.get(this.url + "getCalificacion/" + idE + "/" + idR);
   }
 }

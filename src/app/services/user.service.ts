@@ -7,18 +7,10 @@ import { Global } from "./global";
 @Injectable()
 export class UserService {
   public url: string;
-  private isUserLoggedIn;
   public usserLogged: User;
 
   constructor(private _http: HttpClient) {
     this.url = Global.url;
-    this.isUserLoggedIn = false;
-  }
-
-  setUserLoggedIn(user: User) {
-    this.isUserLoggedIn = true;
-    this.usserLogged = user;
-    localStorage.setItem("currentUser", JSON.stringify(user));
   }
 
   getUserLoggedIn() {

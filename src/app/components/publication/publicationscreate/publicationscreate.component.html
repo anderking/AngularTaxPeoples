@@ -17,8 +17,6 @@
 				</div>
 				<div class="row justify-content-center my-3">
 					<div class="col-12">
-						<!--<button *ngIf="rolID=='admin' || rolID=='cliente'" class="btn btn-dark" [routerLink]="['/publicaciones/show',publication._id]">Regresar</button>
-						<button *ngIf="rolID=='miembro'" class="btn btn-dark" [routerLink]="['/publicaciones/user',resID]">Regresar</button>-->
 						<button class="btn btn-dark" (click)="goBack()">Regresar</button>
 					</div>
 				</div>
@@ -91,19 +89,6 @@
 							</div>
 
 						</div>
-						<!--
-						<div class="col-md-12 mb-3">
-							
-							<label for="ruta">Imagen destacada</label>
-							<div class="input-group">
-								<div class="custom-file">
-									<input type="file" class="custom-file-input" name="image" (change)="preUpload($event);fileChangeEvent($event)" required >
-									<label class="custom-file-label" for="inputGroupFile04">{{fileName}}</label>
-								</div>
-							</div>
-
-						</div>
-						-->
 					</div>
 
 					<button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registrar</button>

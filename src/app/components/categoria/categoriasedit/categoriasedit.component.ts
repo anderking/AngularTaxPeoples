@@ -37,7 +37,7 @@ export class CategoriaseditComponent implements OnInit {
         this.categoria = response.categoria;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -45,7 +45,7 @@ export class CategoriaseditComponent implements OnInit {
   update(form: NgForm) {
     if (form.valid) {
       this._categoriaService.updateCategoria(this.categoria).subscribe(
-        (response) => {
+        (response: any) => {
           if (response.categoria) {
             this.update_categoria = response.categoria;
             this.getCategoria(this.update_categoria._id);
@@ -58,30 +58,34 @@ export class CategoriaseditComponent implements OnInit {
             this.onIsError();
           }
         },
-        (error) => {
-          this.message = error.message;
-          console.log(error);
-          this.isAlert = false;
-          this.onIsError();
-          if (error instanceof HttpErrorResponse) {
-            if (error.status === 404) {
-              this.message = error.error.message;
-              console.log(error);
-              this.isAlert = false;
-              this.onIsError();
-            }
-
-            if (error.status === 500) {
-              this.message = error.error.message;
-              console.log(error);
-              this.isAlert = false;
-              this.onIsError();
-            }
-          }
+        (error: HttpErrorResponse) => {
+          this.messageError(error);
         }
       );
     } else {
       this.onIsError();
+    }
+  }
+
+  messageError(error: HttpErrorResponse) {
+    this.message = error.message;
+    console.log(error);
+    this.isAlert = false;
+    this.onIsError();
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 404) {
+        this.message = error.error.message;
+        console.log(error);
+        this.isAlert = false;
+        this.onIsError();
+      }
+
+      if (error.status === 500) {
+        this.message = error.error.message;
+        console.log(error);
+        this.isAlert = false;
+        this.onIsError();
+      }
     }
   }
 

@@ -36,7 +36,7 @@ export class RutaseditComponent implements OnInit {
         this.ruta = response.ruta;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -44,7 +44,7 @@ export class RutaseditComponent implements OnInit {
   update(form: NgForm) {
     if (form.valid) {
       this._rutaService.updateRuta(this.ruta).subscribe(
-        (response) => {
+        (response: any) => {
           if (response.ruta) {
             this.update_ruta = response.ruta;
             this.getRuta(this.update_ruta._id);
@@ -57,30 +57,33 @@ export class RutaseditComponent implements OnInit {
             this.onIsError();
           }
         },
-        (error) => {
-          this.message = error.message;
-          console.log(error);
-          this.isAlert = false;
-          this.onIsError();
-          if (error instanceof HttpErrorResponse) {
-            if (error.status === 404) {
-              this.message = error.error.message;
-              console.log(error);
-              this.isAlert = false;
-              this.onIsError();
-            }
-
-            if (error.status === 500) {
-              this.message = error.error.message;
-              console.log(error);
-              this.isAlert = false;
-              this.onIsError();
-            }
-          }
+        (error: HttpErrorResponse) => {
+          this.messageError(error);
         }
       );
     } else {
       this.onIsError();
+    }
+  }
+  messageError(error: HttpErrorResponse) {
+    this.message = error.message;
+    console.log(error);
+    this.isAlert = false;
+    this.onIsError();
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 404) {
+        this.message = error.error.message;
+        console.log(error);
+        this.isAlert = false;
+        this.onIsError();
+      }
+
+      if (error.status === 500) {
+        this.message = error.error.message;
+        console.log(error);
+        this.isAlert = false;
+        this.onIsError();
+      }
     }
   }
 

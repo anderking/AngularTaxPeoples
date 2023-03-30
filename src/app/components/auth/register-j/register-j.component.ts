@@ -9,7 +9,6 @@ import { Router, ActivatedRoute, Params } from "@angular/router";
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { NgForm } from "@angular/forms";
-import { SelectControlValueAccessor } from "@angular/forms";
 import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
@@ -86,7 +85,7 @@ export class RegisterJComponent implements OnInit {
         this.user = response.user;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -137,7 +136,7 @@ export class RegisterJComponent implements OnInit {
         this.isAlert = false;
         this.message = error.message;
         this.onIsError();
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
@@ -156,7 +155,7 @@ export class RegisterJComponent implements OnInit {
 
     setTimeout(() => {
       this.spinner.hide();
-      var actualRoute = window.location.origin;
+      const actualRoute = window.location.origin;
       window.location.replace(actualRoute + "/perfil/" + this.resID);
     }, 3000);
   }

@@ -44,7 +44,7 @@ export class AuthGuard implements CanActivate, CanActivateChild {
         this.user = response.user;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }

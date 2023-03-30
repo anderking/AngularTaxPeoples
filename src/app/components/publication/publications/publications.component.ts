@@ -3,7 +3,6 @@ import { PublicationService } from "../../../services/publication.service";
 import { CategoriaService } from "../../../services/categoria.service";
 import { RutaService } from "../../../services/ruta.service";
 import { Global } from "../../../services/global";
-import { ActivatedRoute} from "@angular/router";
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -26,7 +25,6 @@ export class PublicationsComponent implements OnInit {
     private _categoriaService: CategoriaService,
     private _rutaService: RutaService,
     private _location: Location,
-    private _route: ActivatedRoute
   ) {
     this.url = Global.url;
     this.resID = localStorage.getItem("resID");
@@ -34,9 +32,6 @@ export class PublicationsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this._route.params.subscribe((params) => {
-      let id = params.id;
-    });
     this.getPublications();
     this.getCategorias();
     this.getRutas();

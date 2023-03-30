@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import { AuthService } from "../../../services/auth.service";
 import { User } from "../../../models/user";
 import { Location } from "@angular/common";
@@ -10,7 +10,7 @@ import { NgxSpinnerService } from "ngx-spinner";
   selector: "app-register",
   templateUrl: "./register.component.html",
 })
-export class RegisterComponent implements OnInit {
+export class RegisterComponent {
   public user: User;
   public email: string;
   public password: string;
@@ -25,8 +25,6 @@ export class RegisterComponent implements OnInit {
     private spinner: NgxSpinnerService,
     private _location: Location
   ) {}
-
-  ngOnInit() {}
 
   register(form: NgForm) {
     if (form.valid) {
@@ -69,7 +67,7 @@ export class RegisterComponent implements OnInit {
 
     setTimeout(() => {
       this.spinner.hide();
-      var actualRoute = window.location.origin;
+      const actualRoute = window.location.origin;
       window.location.replace(actualRoute + "/perfil/" + this.resID);
     }, 3000);
   }

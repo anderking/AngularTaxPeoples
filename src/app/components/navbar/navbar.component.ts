@@ -2,7 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { AuthService } from "../../services/auth.service";
 import { Router } from "@angular/router";
 import { UserService } from "../../services/user.service";
-import { User } from "../../models/user"; //Importo el modelo
+import { User } from "../../models/user";
 import { Global } from "../../services/global";
 
 @Component({
@@ -43,7 +43,7 @@ export class NavbarComponent implements OnInit {
         this.tipo = response.user.tipo;
       },
       (error) => {
-        console.log(<any>error);
+        console.log(error);
       }
     );
   }
