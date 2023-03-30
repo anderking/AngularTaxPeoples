@@ -1,15 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from "@angular/core";
 
 @Component({
-  selector: 'app-restringido',
-  templateUrl: './restringido.component.html',
-  styleUrls: ['./restringido.component.css']
+  selector: "app-restringido",
+  templateUrl: "./restringido.component.html",
 })
-export class RestringidoComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit() {
-  }
-
-}
+export class RestringidoComponent {}

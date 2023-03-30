@@ -10,10 +10,9 @@ import { HttpErrorResponse } from "@angular/common/http";
 @Component({
   selector: "app-login",
   templateUrl: "./login.component.html",
-  styleUrls: ["./login.component.css"],
   providers: [AuthService, UserService],
 })
-export class LoginComponent implements OnInit {
+export class LoginComponent {
   @ViewChild("loginForm", { read: NgForm }) loginForm: NgForm;
   public user: User;
   public email: string = "admin@admin.com";
@@ -30,10 +29,8 @@ export class LoginComponent implements OnInit {
     private _location: Location
   ) {}
 
-  ngOnInit() {}
-
   login(form: NgForm) {
-    console.log(form.valid)
+    console.log(form.valid);
     if (form.valid) {
       this.spinner.show();
       this.authService.login(this.email, this.password).subscribe(

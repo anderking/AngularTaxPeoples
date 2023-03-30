@@ -42,8 +42,8 @@
 						<div class="card booking-card">
 							<div class="view overlay">
 								<a [routerLink]="['/publicaciones/show', publicationUser._id]">
-									<img *ngIf="publicationUser.image" class="card-img-top img-fluid"  src="{{publicationUser.image}}"/>
-									<img *ngIf="!publicationUser.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="...">
+									<img *ngIf="publicationUser.image" class="card-img-top img-fluid"  src="{{publicationUser.image}}" alt="Imagen del usuario"/>
+									<img *ngIf="!publicationUser.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="Imagen del usuario">
 								</a>
 							</div>
 							<div class="card-body">

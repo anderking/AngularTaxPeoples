@@ -1,10 +1,8 @@
 import { Injectable } from "@angular/core";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Observable } from "rxjs/Observable";
-import { User } from "../models/user";
+import { HttpClient } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";;
 import { Global } from "./global";
 import { map } from "rxjs/operators";
-import { Router, ActivatedRoute, Params } from "@angular/router";
 import { LoginResponse, RegisterResponse } from "../models/response/login";
 
 @Injectable({

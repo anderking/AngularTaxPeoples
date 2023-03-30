@@ -1,12 +1,10 @@
-import { Pipe, PipeTransform } from '@angular/core';
+import { Pipe, PipeTransform } from "@angular/core";
 
 @Pipe({
-  name: 'buscarPublicaciones'
+  name: "buscarPublicaciones",
 })
 export class BuscarPublicacionesPipe implements PipeTransform {
-
   transform(value: any, args?: any): any {
     return null;
   }
-
 }

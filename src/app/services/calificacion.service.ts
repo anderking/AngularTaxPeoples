@@ -1,50 +1,50 @@
-import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { Calificacion } from '../models/calificacion';
-import { Global } from './global';
+import { Injectable } from "@angular/core";
+import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Observable } from "rxjs/Observable";
+import { Global } from "./global";
 
 @Injectable()
-export class CalificacionService{
-	public url:string;
+export class CalificacionService {
+  public url: string;
 
-	constructor(
-		private _http: HttpClient
-	){
-		this.url = Global.url;
-	}
+  constructor(private _http: HttpClient) {
+    this.url = Global.url;
+  }
 
-	upCalificacion(calificacion): Observable<any>
-	{
-		let params = JSON.stringify(calificacion);
-		let headers = new HttpHeaders().set('Content-Type','application/json');
-		return this._http.post(this.url+'upCalificacion', params, {headers: headers});
-	}
+  upCalificacion(calificacion): Observable<any> {
+    let params = JSON.stringify(calificacion);
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
+    return this._http.post(this.url + "upCalificacion", params, {
+      headers: headers,
+    });
+  }
 
-	isCalificacion(idE,idR): Observable<any>
-	{
-		return this._http.get(this.url+'calificacion/'+idE+'/'+idR);
-	}
+  isCalificacion(idE, idR): Observable<any> {
+    return this._http.get(this.url + "calificacion/" + idE + "/" + idR);
+  }
 
-	updateCalificacion(calificacion): Observable<any>{
-		let params = JSON.stringify(calificacion);
-		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+  updateCalificacion(calificacion): Observable<any> {
+    let params = JSON.stringify(calificacion);
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
 
-		return this._http.put(this.url+'calificacion/'+calificacion._id, params, {headers: headers});
-	}
+    return this._http.put(
+      this.url + "calificacion/" + calificacion._id,
+      params,
+      { headers: headers }
+    );
+  }
 
-	getCalificacionesR(idR): Observable<any>
-	{
-		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+  getCalificacionesR(idR): Observable<any> {
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
 
-		return this._http.get(this.url+'calificaciones/'+idR, {headers: headers});
-	}
+    return this._http.get(this.url + "calificaciones/" + idR, {
+      headers: headers,
+    });
+  }
 
-	getCalificacion(idE,idR): Observable<any>
-	{
-		let headers = new HttpHeaders().set('Content-Type', 'application/json');
+  getCalificacion(idE, idR): Observable<any> {
+    let headers = new HttpHeaders().set("Content-Type", "application/json");
 
-		return this._http.get(this.url+'getCalificacion/'+idE+'/'+idR);
-	}
-
+    return this._http.get(this.url + "getCalificacion/" + idE + "/" + idR);
+  }
 }
