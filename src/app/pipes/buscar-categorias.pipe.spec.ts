@@ -1,7 +1,7 @@
-import { BuscarCategoriasPipe } from './buscar-categorias.pipe';
+import { BuscarCategoriasPipe } from "./buscar-categorias.pipe";
 
-xdescribe('BuscarCategoriasPipe', () => {
-  it('create an instance', () => {
+xdescribe("BuscarCategoriasPipe", () => {
+  it("create an instance", () => {
     const pipe = new BuscarCategoriasPipe();
     expect(pipe).toBeTruthy();
   });

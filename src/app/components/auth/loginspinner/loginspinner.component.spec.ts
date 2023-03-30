@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { waitForAsync, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { LoginspinnerComponent } from './loginspinner.component';
 
@@ -6,7 +6,7 @@ xdescribe('LoginspinnerComponent', () => {
   let component: LoginspinnerComponent;
   let fixture: ComponentFixture<LoginspinnerComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ LoginspinnerComponent ]
     })

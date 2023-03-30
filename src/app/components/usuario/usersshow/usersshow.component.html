@@ -51,7 +51,7 @@
 					<li class="list-group-item"><b>Dirección: </b>{{ empresa.direccion }}</li>
 					<li class="list-group-item"><b>Estado: </b>{{ empresa.estado }}</li>
 				</ul>
-				
+
 				<div *ngIf="( !user ) && !failedConect">
 					<div class="text-center">
 				  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
@@ -78,7 +78,7 @@
 				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
 					<div *ngIf="total>0">
 						<div class="table-responsive">
-							<table class="table">
+							<table class="table" aria-labelldby="Tabla de resultados" aria-describedby="Muestra todos los registros segun los filtros aplicados de usuarios">
 								<thead class="thead-dark">
 									<tr>
 										<th scope="col">#</th>

@@ -36,14 +36,14 @@
 		<hr>
 
 		<div *ngIf="publicationsCategoria">
-			<div *ngIf="total>0">	
+			<div *ngIf="total>0">
 				<div class="row">
 					<div class="col-12 col-sm-10 offset-sm-1 col-md-8 offset-md-2 col-lg-6 offset-lg-0 mb-3" *ngFor="let publicationCategoria of publicationsCategoria; let i = index">
 						<div class="card booking-card">
 							<div class="view overlay">
 								<a [routerLink]="['/publicaciones/show', publicationCategoria._id]">
-									<img *ngIf="publicationCategoria.image" class="card-img-top img-fluid"  src="{{publicationCategoria.image}}"/>
-									<img *ngIf="!publicationCategoria.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="...">
+									<img *ngIf="publicationCategoria.image" class="card-img-top img-fluid"  src="{{publicationCategoria.image}}" alt="Imagen de la publicación"/>
+									<img *ngIf="!publicationCategoria.image" class="card-img-top img-fluid" src="../../../../assets/img/notimg.jpg" alt="Imagen de la publicación">
 								</a>
 							</div>
 							<div class="card-body">
