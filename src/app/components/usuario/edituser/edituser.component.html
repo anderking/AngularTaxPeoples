@@ -47,7 +47,7 @@
                 <div class="input-group">
                   <input type="{{type}}" [ngClass]="{'is-invalid': validationPassword.touched && !validationPassword.valid, 'is-valid': validationPassword.touched && validationPassword.valid}" class="form-control" name="password" #validationPassword="ngModel" placeholder="Password" [(ngModel)]="user.password" required minlength="4" maxlength="25" pattern="(?=[#$-/:-?{-~!'^_`\[\]a-zA-Z]*([0-9#$-/:-?{-~!'^_`\[\]]))(?=[#$-/:-?{-~!'^_`\[\]a-zA-Z0-9]*[a-zA-Z])[#$-/:-?{-~!'^_`\[\]a-zA-Z0-9]{4,}">
                   <div class="input-group-append">
-                    <button class="btn btn-outline-primary show-password" type="button" (click)="toggleShow()"><fa-icon [icon]="['fas', 'eyes-slash']"></fa-icon></button>
+                    <button class="btn btn-outline-primary show-password" type="button" (click)="toggleShow()"><fa-icon [icon]="['fas', 'eye-slash']"></fa-icon></button>
                   </div>
                   <div class="invalid-feedback" *ngIf="validationPassword.touched && !validationPassword.valid">
                     <div *ngIf="validationPassword.errors.required">Por favor, introduzca un Password</div>

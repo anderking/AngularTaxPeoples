@@ -3,7 +3,6 @@ import { AuthService } from "../../../services/auth.service";
 import { UserService } from "../../../services/user.service";
 import { User } from "../../../models/user";
 import { NgForm } from "@angular/forms";
-import { NgxSpinnerService } from "ngx-spinner";
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -23,16 +22,12 @@ export class LoginComponent {
   public url: string;
   public isError: boolean = false;
   public messageError: string;
-  constructor(
-    private authService: AuthService,
-    private spinner: NgxSpinnerService,
-    private _location: Location
-  ) {}
+  public isLoading: boolean = false;
+  constructor(private authService: AuthService, private _location: Location) {}
 
   login(form: NgForm) {
-    console.log(form.valid);
+    this.isLoading = true;
     if (form.valid) {
-      this.spinner.show();
       this.authService.login(this.email, this.password).subscribe(
         (res) => {
           this.resID = res.user[0]._id;
@@ -40,16 +35,16 @@ export class LoginComponent {
           this.loginRedirect(res);
         },
         (error) => {
-          this.spinner.hide();
+          this.isLoading = false;
+          console.error(error)
+          console.log(error instanceof HttpErrorResponse)
           if (error instanceof HttpErrorResponse) {
             if (error.status === 404) {
-              this.messageError = error.error.message;
-              console.log(error);
+              this.messageError = error.message;
               this.onIsError();
             }
           } else {
             this.messageError = error.message;
-            console.log(error);
             this.onIsError();
           }
         }
@@ -66,7 +61,6 @@ export class LoginComponent {
   }
 
   loginRedirect(res) {
-    this.spinner.hide();
     localStorage.setItem("token", res.token);
     localStorage.setItem("resID", res.user[0]._id);
     const actualRoute = window.location.origin;

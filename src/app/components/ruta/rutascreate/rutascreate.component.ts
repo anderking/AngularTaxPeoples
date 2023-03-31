@@ -35,7 +35,6 @@ export class RutascreateComponent {
             this.isAlert = true;
             this.onIsError();
             form.reset();
-            $("#inputName").focus();
           } else {
             this.message = response.message;
             this.isAlert = false;

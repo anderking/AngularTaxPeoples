@@ -77,9 +77,6 @@ export class RutasshowComponent implements OnInit {
         this.isAlert = true;
         this.onIsError();
         this.getpublicationsRuta(this.publicationsRutaID);
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
       },
       (error) => {
         this.message = error.message;

@@ -124,7 +124,6 @@ export class PublicationscreateComponent implements OnInit {
                 this.isAlert = true;
                 this.message = "Publicación Creada Correctamente";
                 form.reset();
-                $("#inputTitle").focus();
                 this.onIsError();
               });
           } else {
@@ -132,7 +131,6 @@ export class PublicationscreateComponent implements OnInit {
             this.isAlert = true;
             this.message = response.message;
             form.reset();
-            $("#inputTitle").focus();
             this.onIsError();
           }
         },

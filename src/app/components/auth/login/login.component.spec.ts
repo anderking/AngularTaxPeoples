@@ -2,7 +2,6 @@ import { HttpClientModule } from "@angular/common/http";
 import { waitForAsync, ComponentFixture, TestBed } from "@angular/core/testing";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { RouterTestingModule } from "@angular/router/testing";
-import { NgxSpinnerService } from "ngx-spinner";
 import { AuthService } from "src/app/services/auth.service";
 import { appRoutes } from "./../../../app.routing";
 
@@ -21,7 +20,7 @@ describe("LoginComponent", () => {
         FormsModule,
         RouterTestingModule.withRoutes(appRoutes),
       ],
-      providers: [HttpClientModule, AuthService, NgxSpinnerService],
+      providers: [HttpClientModule, AuthService],
       declarations: [LoginComponent],
     }).compileComponents();
   }));
@@ -29,7 +28,6 @@ describe("LoginComponent", () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
     authService = TestBed.inject(AuthService);
-    TestBed.inject(NgxSpinnerService);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

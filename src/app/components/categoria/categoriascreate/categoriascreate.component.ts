@@ -17,6 +17,7 @@ export class CategoriascreateComponent {
   public message: string;
   public isError: boolean = false;
   public isAlert: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private _categoriaService: CategoriaService,
@@ -26,6 +27,7 @@ export class CategoriascreateComponent {
   }
 
   register(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       this.categoria.name = form.form.value.name;
       this.categoria.description = form.form.value.description;
@@ -38,11 +40,12 @@ export class CategoriascreateComponent {
             this.isAlert = true;
             this.onIsError();
             form.reset();
-            $("#inputName").focus();
+            this.isLoading = false;
           } else {
             this.message = response.message;
             this.isAlert = false;
             this.onIsError();
+            this.isLoading = false;
           }
         },
         (error: HttpErrorResponse) => {
@@ -55,6 +58,7 @@ export class CategoriascreateComponent {
   }
 
   messageError(error: HttpErrorResponse) {
+    this.isLoading = false;
     this.message = error.message;
     console.log(error);
     this.isAlert = false;

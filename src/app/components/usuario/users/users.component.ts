@@ -56,10 +56,6 @@ export class UsersComponent implements OnInit {
         this.isAlert = true;
         this.onIsError();
         this.getUsers(this.resID);
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
-        $(".modal.fade").css("display", "none");
       },
       (error) => {
         this.message = error.message;
@@ -72,10 +68,6 @@ export class UsersComponent implements OnInit {
   deleteUsers() {
     this._userService.deleteUsers(this.resID).subscribe(
       (response) => {
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
-        $("#delete-users").css("display", "none");
         this.message = response.message;
         this.isAlert = true;
         this.onIsError();

@@ -77,9 +77,6 @@ export class CategoriasshowComponent implements OnInit {
         this.isAlert = true;
         this.onIsError();
         this.getpublicationsCategoria(this.publicationsCategoriaID);
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
       },
       (error) => {
         this.message = error.message;

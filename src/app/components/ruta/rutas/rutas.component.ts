@@ -53,9 +53,6 @@ export class RutasComponent implements OnInit {
         this.isAlert = true;
         this.onIsError();
         this.getRutas();
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
       },
       (error) => {
         this.message = error.message;
@@ -68,10 +65,6 @@ export class RutasComponent implements OnInit {
   deleterutas() {
     this._rutaService.deleteRutas().subscribe(
       (response) => {
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
-        $("#delete-users").css("display", "none");
         this.message = response.message;
         this.isAlert = true;
         this.onIsError();

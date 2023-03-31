@@ -8,7 +8,6 @@ import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { NgForm } from "@angular/forms";
-import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-register-j",
@@ -35,7 +34,6 @@ export class RegisterJComponent implements OnInit {
     private _route: ActivatedRoute,
     private _userService: UserService,
     private _empresaService: EmpresaService,
-    private spinner: NgxSpinnerService,
     private _location: Location
   ) {
     this.categoria = [
@@ -148,13 +146,8 @@ export class RegisterJComponent implements OnInit {
   }
 
   loginRedirect() {
-    this.spinner.show();
-
-    setTimeout(() => {
-      this.spinner.hide();
-      const actualRoute = window.location.origin;
-      window.location.replace(actualRoute + "/perfil/" + this.resID);
-    }, 3000);
+    const actualRoute = window.location.origin;
+    window.location.replace(actualRoute + "/perfil/" + this.resID);
   }
 
   goBack() {

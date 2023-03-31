@@ -133,9 +133,6 @@ export class UsersshowComponent implements OnInit {
         this.isAlert = true;
         this.onIsError();
         this.getPublicationsUser(this.publicactionUserID);
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
       },
       (error) => {
         this.message = error.message;

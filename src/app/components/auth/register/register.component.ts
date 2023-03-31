@@ -4,7 +4,6 @@ import { User } from "../../../models/user";
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
 import { NgForm } from "@angular/forms";
-import { NgxSpinnerService } from "ngx-spinner";
 
 @Component({
   selector: "app-register",
@@ -20,11 +19,7 @@ export class RegisterComponent {
   public isAlert: boolean = false;
   public message: string;
 
-  constructor(
-    private authService: AuthService,
-    private spinner: NgxSpinnerService,
-    private _location: Location
-  ) {}
+  constructor(private authService: AuthService, private _location: Location) {}
 
   register(form: NgForm) {
     if (form.valid) {
@@ -63,13 +58,8 @@ export class RegisterComponent {
   }
 
   loginRedirect() {
-    this.spinner.show();
-
-    setTimeout(() => {
-      this.spinner.hide();
-      const actualRoute = window.location.origin;
-      window.location.replace(actualRoute + "/perfil/" + this.resID);
-    }, 3000);
+    const actualRoute = window.location.origin;
+    window.location.replace(actualRoute + "/perfil/" + this.resID);
   }
 
   goBack() {

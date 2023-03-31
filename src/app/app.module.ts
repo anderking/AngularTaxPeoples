@@ -33,7 +33,6 @@ import { RegisterComponent } from "./components/auth/register/register.component
 import { RegisterTComponent } from "./components/auth/register-t/register-t.component";
 import { RegisterNComponent } from "./components/auth/register-n/register-n.component";
 import { RegisterJComponent } from "./components/auth/register-j/register-j.component";
-import { LoginspinnerComponent } from "./components/auth/loginspinner/loginspinner.component";
 import { LogoutComponent } from "./components/auth/logout/logout.component";
 
 import { UserspadreComponent } from "./components/usuario/userspadre/userspadre.component";
@@ -118,7 +117,6 @@ import {
     PerfilComponent,
     UsersshowComponent,
     UserspadreComponent,
-    LoginspinnerComponent,
     RestringidoComponent,
     FooterComponent,
     RegisterJComponent,
@@ -214,7 +212,7 @@ export class AppModule {
       faShare,
       faTrash,
       faTrashAlt,
-      faComments,
+      faComments
     );
   }
 }

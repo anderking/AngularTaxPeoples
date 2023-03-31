@@ -5,6 +5,7 @@ import { NgForm } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
+import { Global } from "src/app/services/global";
 
 @Component({
   selector: "app-categoriasedit",
@@ -17,6 +18,8 @@ export class CategoriaseditComponent implements OnInit {
   public message: string;
   public isError: boolean = false;
   public isAlert: boolean = false;
+  public isLoading: boolean = false;
+  public failedConect: string;
 
   constructor(
     private _categoriaService: CategoriaService,
@@ -32,17 +35,21 @@ export class CategoriaseditComponent implements OnInit {
   }
 
   getCategoria(id) {
+    this.isLoading = true;
     this._categoriaService.getCategoria(id).subscribe(
       (response) => {
         this.categoria = response.categoria;
+        this.isLoading = false;
       },
       (error) => {
-        console.log(error);
+        this.isLoading = false;
+        this.failedConect = Global.failed;
       }
     );
   }
 
   update(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       this._categoriaService.updateCategoria(this.categoria).subscribe(
         (response: any) => {
@@ -51,10 +58,12 @@ export class CategoriaseditComponent implements OnInit {
             this.getCategoria(this.update_categoria._id);
             this.message = response.message;
             this.isAlert = true;
+            this.isLoading = false;
             this.onIsError();
           } else {
             this.message = response.message;
             this.isAlert = false;
+            this.isLoading = false;
             this.onIsError();
           }
         },
@@ -68,6 +77,7 @@ export class CategoriaseditComponent implements OnInit {
   }
 
   messageError(error: HttpErrorResponse) {
+    this.isLoading = false;
     this.message = error.message;
     console.log(error);
     this.isAlert = false;

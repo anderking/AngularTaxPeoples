@@ -54,9 +54,6 @@ export class CategoriasComponent implements OnInit {
         this.isAlert = true;
         this.onIsError();
         this.getCategorias();
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
       },
       (error) => {
         this.message = error.message;
@@ -69,10 +66,6 @@ export class CategoriasComponent implements OnInit {
   deletecategorias() {
     this._categoriaService.deleteCategorias().subscribe(
       (response) => {
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
-        $("#delete-users").css("display", "none");
         this.message = response.message;
         this.isAlert = true;
         this.onIsError();

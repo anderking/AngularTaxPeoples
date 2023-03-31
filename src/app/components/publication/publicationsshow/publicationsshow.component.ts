@@ -111,9 +111,6 @@ export class PublicationsshowComponent implements OnInit {
             this._router.navigate(["/publicaciones/"]);
           }
         }
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
       },
       (error) => {
         console.log(error);
@@ -172,7 +169,6 @@ export class PublicationsshowComponent implements OnInit {
       this.getcomentFormUpdate(update.form.value._id, textEdit);
     } else {
       const id = update.form.value._id;
-      $("#inputComent-" + id + "").addClass("is-invalid");
     }
   }
 
@@ -185,9 +181,6 @@ export class PublicationsshowComponent implements OnInit {
           (res) => {
             this.update_coment = res.coment;
             this.iscoment = true;
-            $("#inputComent-" + id + "").removeClass("is-invalid");
-            $("#mostrarUpdate-" + id + "").css("display", "none");
-            $("#mostrarComent-" + id + "").css("display", "block");
             this.getcoment(this.update_coment._id);
           },
           (error) => {
@@ -212,27 +205,13 @@ export class PublicationsshowComponent implements OnInit {
     );
   }
 
-  mostrarUpdate(id) {
-    $("#mostrarUpdate-" + id + "").css("display", "block");
-    $("#mostrarComent-" + id + "").css("display", "none");
-    $("#inputComent-" + id + "").css("heigth", "auto");
-  }
-
   cancelarUpdate(id) {
     this.getcomentsPublication(this.publicationID);
-    setTimeout(() => {
-      $("#inputComent-" + id + "").removeClass("is-invalid");
-      $("#mostrarUpdate-" + id + "").css("display", "none");
-      $("#mostrarComent-" + id + "").css("display", "block");
-    }, 50);
   }
 
   deleteComent(id) {
     this._comentService.deleteComent(id).subscribe(
       (response) => {
-        $("body").removeClass("modal-open");
-        $("body").removeAttr("style");
-        $(".modal-backdrop.fade.show").css("display", "none");
         this.getcomentsPublication(this.publicationID);
       },
       (error) => {
@@ -277,10 +256,6 @@ export class PublicationsshowComponent implements OnInit {
     );
   }
 
-  comentarioFocus() {
-    $("#comentarioFocusInput").focus();
-  }
-
   getCalificacionesR(idR) {
     this._calificacionService.getCalificacionesR(idR).subscribe(
       (response) => {
@@ -311,12 +286,5 @@ export class PublicationsshowComponent implements OnInit {
 
   goBack() {
     this._location.back();
-  }
-
-  removerModal() {
-    $("body").removeClass("modal-open");
-    $("body").removeAttr("style");
-    $(".modal-backdrop.fade.show").css("display", "none");
-    $("#listaCalificaciones").css("display", "none");
   }
 }
