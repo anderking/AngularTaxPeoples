@@ -3,6 +3,8 @@ import { CategoriaService } from "../../../services/categoria.service";
 import { Global } from "../../../services/global";
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
+import Swal from "sweetalert2";
+
 @Component({
   selector: "app-categorias",
   templateUrl: "./categorias.component.html",
@@ -64,19 +66,30 @@ export class CategoriasComponent implements OnInit {
   }
 
   deletecategorias() {
-    this._categoriaService.deleteCategorias().subscribe(
-      (response) => {
-        this.message = response.message;
-        this.isAlert = true;
-        this.onIsError();
-        this.getCategorias();
-      },
-      (error) => {
-        this.message = error.message;
-        this.isAlert = false;
-        this.onIsError();
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Este proceso es irreversible.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.value) {
+        this._categoriaService.deleteCategorias().subscribe(
+          (response) => {
+            this.message = response.message;
+            this.isAlert = true;
+            this.onIsError();
+            this.getCategorias();
+          },
+          (error) => {
+            this.message = error.message;
+            this.isAlert = false;
+            this.onIsError();
+          }
+        );
       }
-    );
+    });
   }
 
   onIsError() {
@@ -90,5 +103,20 @@ export class CategoriasComponent implements OnInit {
 
   goBack() {
     this._location.back();
+  }
+
+  deleteConfirmation(id: string) {
+    Swal.fire({
+      title: "¿Estás seguro?",
+      text: "Este proceso es irreversible.",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonText: "Si",
+      cancelButtonText: "No",
+    }).then((result) => {
+      if (result.value) {
+        this.delete(id);
+      }
+    });
   }
 }

@@ -3,119 +3,135 @@
     <div class="row">
       <div class="col-12">
 
-        <div *ngIf="user && persona">
-          <div class="pz bpi afo">
-            <div class="qf" style="background-image: url(assets/img/biografia.jpg);"></div>
-            <div class="qa avz">
-              <img *ngIf="user.image" class="bpj" src="{{user.image}}" alt="Imagen del usuario">
-              <img *ngIf="!user.image" class="bpj" src="../../../../assets/img/user.png" alt="Imagen del usuario">
+        <div *ngIf="!this.isLoading">
 
-              <h2 class="qb">
-                <div class="boa" href="profile/index.html">{{ persona.name }}</div>
-              </h2>
-              <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
-                <div class="row justify-content-center">
-                  <div class="col-12 col-sm-8 col-md-4 col-lg-3">
-                    <h4>Cambiar Foto</h4>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" (change)="preUpload($event)" required>
-                        <label class="custom-file-label" for="inputGroupFile04">{{fileName}}</label>
-                      </div>
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit"><fa-icon
-                            [icon]="['fas', 'paper-plane']"></fa-icon></button>
+          <div *ngIf="user && persona">
+            <div class="pz bpi afo">
+              <div class="qf" style="background-image: url(assets/img/biografia.jpg);"></div>
+              <div class="qa avz">
+                <img *ngIf="user.image" class="bpj" src="{{user.image}}" alt="Imagen del usuario">
+                <img *ngIf="!user.image" class="bpj" src="../../../../assets/img/user.png" alt="Imagen del usuario">
+
+                <h2 class="qb">
+                  <div class="boa" href="profile/index.html">{{ persona.name }}</div>
+                </h2>
+                <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+                  <div class="row justify-content-center">
+                    <div class="col-12 col-sm-8 col-md-4 col-lg-3">
+                      <h4>Cambiar Foto</h4>
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" (change)="preUpload($event)" required>
+                          <label class="custom-file-label" for="inputGroupFile04">{{fileName}}</label>
+                        </div>
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-primary" type="submit"><fa-icon
+                              [icon]="['fas', 'paper-plane']"></fa-icon></button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </form>
-              <p class="afo">{{ user.description }}</p>
-              <hr>
+                </form>
+                <p class="afo">{{ user.description }}</p>
+                <hr>
 
-              <p class="afo"><b>Cedula: </b>{{ persona.cedula.toUpperCase() }}</p>
-              <p class="afo"><b>Telefono: </b>{{ persona.telefono }}</p>
-              <p class="afo"><b>Direccion: </b>{{ persona.direccion }}</p>
-              <p class="afo"><b>Estado: </b>{{ persona.estado }}</p>
-              <p class="afo"><b>Sexo: </b>
-                <span *ngIf=" persona.sexo=='M' ">Masculino</span>
-                <span *ngIf=" persona.sexo=='F' ">Femenino</span>
-              </p>
-              <p class="afo"><b>Estado Civil: </b>
-                <span *ngIf=" persona.edoCivil=='S' ">Soltero</span>
-                <span *ngIf=" persona.edoCivil=='C' ">Casado</span>
-              </p>
-              <p class="afo"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento |date:"longDate" }}</p>
-              <p class="afo"><b>Tipo de Usuario: </b><span class="badge"
-                  [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }">{{
-                  rolID }}</span></p>
+                <p class="afo"><b>Cedula: </b>{{ persona.cedula.toUpperCase() }}</p>
+                <p class="afo"><b>Telefono: </b>{{ persona.telefono }}</p>
+                <p class="afo"><b>Direccion: </b>{{ persona.direccion }}</p>
+                <p class="afo"><b>Estado: </b>{{ persona.estado }}</p>
+                <p class="afo"><b>Sexo: </b>
+                  <span *ngIf=" persona.sexo=='M' ">Masculino</span>
+                  <span *ngIf=" persona.sexo=='F' ">Femenino</span>
+                </p>
+                <p class="afo"><b>Estado Civil: </b>
+                  <span *ngIf=" persona.edoCivil=='S' ">Soltero</span>
+                  <span *ngIf=" persona.edoCivil=='C' ">Casado</span>
+                </p>
+                <p class="afo"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento |date:"longDate" }}</p>
+                <p class="afo"><b>Tipo de Usuario: </b><span class="badge"
+                    [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }">{{
+                    rolID }}</span></p>
 
-              <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/persona/edit', resID]" role="button">Editar
-                Información</button>
-              <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/user/configure', resID]"
-                role="button">Configuración</button>
-              <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/users']"
-                role="button">Administrar Usuarios</button>
-              <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/publicaciones']"
-                role="button">Ver Publicaciones</button>
-              <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/categorias']"
-                role="button">Administrar Categorías</button>
-              <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/rutas']"
-                role="button">Administrar Rutas</button>
-              <button class="btn btn-dark" [routerLink]="['/publicaciones']" role="button">TimeLine</button>
-              <button class="btn btn-primary" [routerLink]="['/logout']" role="button">Cerrar Sesión</button>
+                <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/persona/edit', resID]"
+                  role="button">Editar
+                  Información</button>
+                <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/user/configure', resID]"
+                  role="button">Configuración</button>
+                <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/users']"
+                  role="button">Administrar Usuarios</button>
+                <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/publicaciones']"
+                  role="button">Ver Publicaciones</button>
+                <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/categorias']"
+                  role="button">Administrar Categorías</button>
+                <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/rutas']"
+                  role="button">Administrar Rutas</button>
+                <button class="btn btn-dark" [routerLink]="['/publicaciones']" role="button">TimeLine</button>
+                <button class="btn btn-primary" [routerLink]="['/logout']" role="button">Cerrar Sesión</button>
 
+              </div>
             </div>
           </div>
-        </div>
 
 
-        <div *ngIf="user && empresa">
-          <div class="pz bpi afo">
-            <div class="qf" style="background-image: url(assets/img/biografia.jpg);"></div>
-            <div class="qa avz">
-              <img *ngIf="user.image" class="bpj" src="{{user.image}}" alt="Imagen del usuario">
-              <img *ngIf="!user.image" class="bpj" src="../../../../assets/img/user.png" alt="Imagen del usuario">
+          <div *ngIf="user && empresa">
+            <div class="pz bpi afo">
+              <div class="qf" style="background-image: url(assets/img/biografia.jpg);"></div>
+              <div class="qa avz">
+                <img *ngIf="user.image" class="bpj" src="{{user.image}}" alt="Imagen del usuario">
+                <img *ngIf="!user.image" class="bpj" src="../../../../assets/img/user.png" alt="Imagen del usuario">
 
-              <h2 class="qb">
-                <div class="boa" href="profile/index.html">{{ empresa.name }}</div>
-              </h2>
-              <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
-                <div class="row justify-content-center">
-                  <div class="col-12 col-sm-8 col-md-4 col-lg-3">
-                    <h4>Cambiar Foto</h4>
-                    <div class="input-group">
-                      <div class="custom-file">
-                        <input type="file" class="custom-file-input" (change)="preUpload($event)" required>
-                        <label class="custom-file-label" for="inputGroupFile04">{{fileName}}</label>
-                      </div>
-                      <div class="input-group-append">
-                        <button class="btn btn-outline-primary" type="submit">
-                          <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon></button>
+                <h2 class="qb">
+                  <div class="boa" href="profile/index.html">{{ empresa.name }}</div>
+                </h2>
+                <form #userForm="ngForm" (ngSubmit)="onSubmit(userForm)">
+                  <div class="row justify-content-center">
+                    <div class="col-12 col-sm-8 col-md-4 col-lg-3">
+                      <h4>Cambiar Foto</h4>
+                      <div class="input-group">
+                        <div class="custom-file">
+                          <input type="file" class="custom-file-input" (change)="preUpload($event)" required>
+                          <label class="custom-file-label" for="inputGroupFile04">{{fileName}}</label>
+                        </div>
+                        <div class="input-group-append">
+                          <button class="btn btn-outline-primary" type="submit">
+                            <fa-icon [icon]="['fas', 'paper-plane']"></fa-icon></button>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </form>
-              <p class="afo">{{ user.description }}</p>
-              <hr>
+                </form>
+                <p class="afo">{{ user.description }}</p>
+                <hr>
 
-              <p class="afo"><b>RIF: </b>{{ empresa.rif.toUpperCase() }}</p>
-              <p class="afo"><b>Telefono: </b>{{ empresa.telefono }}</p>
-              <p class="afo"><b>Direccion: </b>{{ empresa.direccion }}</p>
-              <p class="afo"><b>Estado: </b>{{ empresa.estado }}</p>
-              <p class="afo"><b>Tipo de Usuario: </b><span class="badge"
-                  [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }">{{
-                  rolID }}</span></p>
+                <p class="afo"><b>RIF: </b>{{ empresa.rif.toUpperCase() }}</p>
+                <p class="afo"><b>Telefono: </b>{{ empresa.telefono }}</p>
+                <p class="afo"><b>Direccion: </b>{{ empresa.direccion }}</p>
+                <p class="afo"><b>Estado: </b>{{ empresa.estado }}</p>
+                <p class="afo"><b>Tipo de Usuario: </b><span class="badge"
+                    [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }">{{
+                    rolID }}</span></p>
 
-              <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/empresa/edit', resID]" role="button">Editar
-                Información</button>
-              <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/user/configure', resID]"
-                role="button">Configuración</button>
-              <button class="btn btn-dark" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis
-                publicaciones</button>
-              <button class="btn btn-dark" [routerLink]="['/publicaciones']" role="button">TimeLine</button>
-              <button class="btn btn-primary" [routerLink]="['/logout']" role="button">Cerrar Sesión</button>
+                <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/empresa/edit', resID]"
+                  role="button">Editar
+                  Información</button>
+                <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/user/configure', resID]"
+                  role="button">Configuración</button>
+                <button class="btn btn-dark" [routerLink]="['/publicaciones/user/', resID]" role="button">Mis
+                  publicaciones</button>
+                <button class="btn btn-dark" [routerLink]="['/publicaciones']" role="button">TimeLine</button>
+                <button class="btn btn-primary" [routerLink]="['/logout']" role="button">Cerrar Sesión</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <div *ngIf="this.isLoading">
+          <div class="text-center pt-3">
+            <div class="d-flex justify-content-center">
+              <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
             </div>
           </div>
         </div>

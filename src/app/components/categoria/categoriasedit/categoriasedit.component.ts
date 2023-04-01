@@ -19,7 +19,6 @@ export class CategoriaseditComponent implements OnInit {
   public isError: boolean = false;
   public isAlert: boolean = false;
   public isLoading: boolean = false;
-  public failedConect: string;
 
   constructor(
     private _categoriaService: CategoriaService,
@@ -41,9 +40,8 @@ export class CategoriaseditComponent implements OnInit {
         this.categoria = response.categoria;
         this.isLoading = false;
       },
-      (error) => {
+      () => {
         this.isLoading = false;
-        this.failedConect = Global.failed;
       }
     );
   }

@@ -167,8 +167,6 @@ export class PublicationsshowComponent implements OnInit {
     if (update.valid) {
       const textEdit = update.form.value.text;
       this.getcomentFormUpdate(update.form.value._id, textEdit);
-    } else {
-      const id = update.form.value._id;
     }
   }
 

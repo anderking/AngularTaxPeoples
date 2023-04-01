@@ -23,6 +23,7 @@ export class UserscreateComponent implements OnInit {
   public isError: boolean = false;
   public isAlert: boolean = false;
   public message: string;
+  public isLoading: boolean = false;
 
   constructor(private _userService: UserService, private _location: Location) {
     this.user = new User("", "", "", "", "", "", "");
@@ -37,6 +38,7 @@ export class UserscreateComponent implements OnInit {
   }
 
   register(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       this.user.tipo = form.form.value.tipo;
 
@@ -47,12 +49,14 @@ export class UserscreateComponent implements OnInit {
           this.message = response.message;
           this.isAlert = true;
           this.onIsError();
+          this.isLoading = false;
         },
         (error) => {
           this.message = error.message;
           console.log(error);
           this.isAlert = false;
           this.onIsError();
+          this.isLoading = false;
 
           if (error instanceof HttpErrorResponse) {
             if (error.status === 404) {

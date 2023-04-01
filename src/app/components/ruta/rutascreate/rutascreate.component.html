@@ -1,58 +1,76 @@
 <main class="main_rutas_create">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-12 col-sm-10 col-md-8 col-lg-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
 
-				<div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
-					{{message}}
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+        <div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert"
+          [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}">
+          {{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-				<div class="row justify-content-center my-3">
-					<div class="col-12">
-						<h2 class="text-center">Crear ruta</h2>
-					</div>
-				</div>
-				<div class="row justify-content-center my-3">
-					<div class="col-12">
-						<button class="btn btn-dark" (click)="goBack()">Regresar</button>
-					</div>
-				</div>
-				<hr>
+        <div class="row justify-content-center my-3">
+          <div class="col-12">
+            <h2 class="text-center">Crear ruta</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center my-3">
+          <div class="col-12">
+            <button class="btn btn-dark" (click)="goBack()">Regresar</button>
+          </div>
+        </div>
+        <hr>
 
-				<form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
-					<div class="form-row">
+        <div *ngIf="!isLoading">
+          <form #registerForm="ngForm" (ngSubmit)="register(registerForm)">
+            <div class="form-row">
 
-						<div class="col-md-12 mb-3">
+              <div class="col-md-12 mb-3">
 
-							<label for="name">Nombre</label>
-							<input type="text" [ngClass]="{'is-invalid': validationName.touched && !validationName.valid, 'is-valid': validationName.touched && validationName.valid}" id="inputName" class="form-control" #nameField name="name" #validationName="ngModel" placeholder="Nombre" [(ngModel)]="name" required>
+                <label for="name">Nombre</label>
+                <input type="text"
+                  [ngClass]="{'is-invalid': validationName.touched && !validationName.valid, 'is-valid': validationName.touched && validationName.valid}"
+                  id="inputName" class="form-control" #nameField name="name" #validationName="ngModel"
+                  placeholder="Nombre" [(ngModel)]="name" required>
 
-							<div class="invalid-feedback" *ngIf="validationName.touched && !validationName.valid">
-								<div *ngIf="validationName.errors.required">Por favor, introduzca un Nombre</div>
-							</div>
+                <div class="invalid-feedback" *ngIf="validationName.touched && !validationName.valid">
+                  <div *ngIf="validationName.errors.required">Por favor, introduzca un Nombre</div>
+                </div>
 
-						</div>
+              </div>
 
-						<div class="col-md-12 mb-3">
+              <div class="col-md-12 mb-3">
 
-							<label for="password">Descripción</label>
-							<input type="text" [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}" class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción" [(ngModel)]="description" required>
+                <label for="password">Descripción</label>
+                <input type="text"
+                  [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}"
+                  class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción"
+                  [(ngModel)]="description" required>
 
-							<div class="invalid-feedback" *ngIf="validationDescription.touched && !validationDescription.valid">
-								<div *ngIf="validationDescription.errors.required">Por favor, introduzca un Descripción completo</div>
-							</div>
+                <div class="invalid-feedback" *ngIf="validationDescription.touched && !validationDescription.valid">
+                  <div *ngIf="validationDescription.errors.required">Por favor, introduzca un Descripción completo</div>
+                </div>
 
-						</div>
+              </div>
 
-					</div>
+            </div>
 
-					<button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registrar</button>
+            <button type="submit" class="btn btn-primary" [disabled]="!registerForm.form.valid">Registrar</button>
 
-				</form>
-			</div>
-		</div>
-	</div>
+          </form>
+        </div>
+
+        <div *ngIf="isLoading">
+          <div class="text-center">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
 </main>

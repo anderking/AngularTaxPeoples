@@ -1,132 +1,100 @@
 <main class="main_users">
-	<div class="container">
+  <div class="container">
 
-		<div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
-			{{message}}
-			<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
-				<span aria-hidden="true">&times;</span>
-			</button>
-		</div>
+    <div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert"
+      [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}">
+      {{message}}
+      <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
 
-		<div class="row justify-content-center my-3">
-			<div class="col-12">
-				<h2 class="text-center">Usuarios</h2>
-				<h6 class="text-center">{{ total }} Usuarios</h6>
-			</div>
-		</div>
+    <div class="row justify-content-center my-3">
+      <div class="col-12">
+        <h2 class="text-center">Usuarios</h2>
+        <h6 class="text-center">{{ total }} Usuarios</h6>
+      </div>
+    </div>
 
-		<div class="row justify-content-center my-3">
-			<div class="col-12">
-				<button class="btn btn-dark" (click)="goBack()">Regresar</button>
-				<button [routerLink]="['/users/create']" class="btn btn-primary">Nuevo</button>
-				<span *ngIf="total>0">
-					<a href="#delete-users" class="btn btn-danger" data-toggle="modal">Eliminar Todos</a>
-					<div class="modal fade" id="delete-users" tabindex="-1" role="dialog" aria-labelledby="deleteusers" aria-hidden="true">
-						<div class="modal-dialog" role="document">
-							<div class="modal-content">
-								<div class="modal-header">
-									<h5 class="modal-title" id="deleteusers">Confirmación</h5>
-									<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-										<span aria-hidden="true">&times;</span>
-									</button>
-								</div>
-								<div class="modal-body">
-									¿Estas seguro de eliminar este usuario?
-								</div>
-								<div class="modal-footer">
-									<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-									<button (click)="deleteUsers()" type="button" class="btn btn-primary">Si</button>
-								</div>
-							</div>
-						</div>
-					</div>
-				</span>
-			</div>
-		</div>
+    <div class="row justify-content-center my-3">
+      <div class="col-12">
+        <button class="btn btn-dark" (click)="goBack()">Regresar</button>
+        <button [routerLink]="['/users/create']" class="btn btn-primary">Nuevo</button>
+        <span *ngIf="total>0">
+          <a class="btn btn-danger" (click)="deleteUsers()">Eliminar Todos</a>
+        </span>
+      </div>
+    </div>
 
-		<hr>
+    <hr>
 
-		<div *ngIf="users">
-			<div class="row justify-content-center">
-				<div class="col-12 col-sm-12 col-md-12 col-lg-12">
-					<div *ngIf="users">
-						<div *ngIf="total>0">
+    <div *ngIf="users">
+      <div class="row justify-content-center">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-12">
+          <div *ngIf="users">
+            <div *ngIf="total>0">
 
-							<div class="form-group">
-								<input type="text" class="form-control" id="filterUsers" name="filterUsers" [(ngModel)]="filterUsers" placeholder="Buscar...">
-							</div>
+              <div class="form-group">
+                <input type="text" class="form-control" id="filterUsers" name="filterUsers" [(ngModel)]="filterUsers"
+                  placeholder="Buscar...">
+              </div>
 
-							<div class="table-responsive">
-								<table class="table" aria-labelldby="Tabla de resultados" aria-describedby="Muestra todos los registros segun los filtros aplicados de usuarios">
-									<thead class="thead-dark">
-										<tr>
-											<th scope="col">#</th>
-											<th scope="col">Email</th>
-											<th scope="col">Descripción</th>
-											<th scope="col">Rol</th>
-											<th scope="col">Editar</th>
-											<th scope="col">Eliminar</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page } | buscarUsers:filterUsers">
-											<th scope="row">
-												<button class="btn btn-dark" [routerLink]="['/users/show', user._id]">Ver</button>
-											</th>
-											<td>{{user.email}}</td>
-											<td>{{user.description}}</td>
-											<td><span class="badge" [ngClass]="{ 'badge-primary': user.tipo=='cliente', 'badge-success': user.tipo=='miembro', 'badge-dark': user.tipo=='admin' }">{{user.tipo}}</span></td>
-											<td><button [routerLink]="['/users/edit', user._id]" class="btn btn-info">Editar</button></td>
-											<td><a href="#delete-user-{{user._id}}" class="btn btn-danger" data-toggle="modal">Eliminar</a></td>
-											<div class="modal fade" id="delete-user-{{user._id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-												<div class="modal-dialog" role="document">
-													<div class="modal-content">
-														<div class="modal-header">
-															<h5 class="modal-title" id="exampleModalLabel">Confirmación</h5>
-															<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-																<span aria-hidden="true">&times;</span>
-															</button>
-														</div>
-														<div class="modal-body">
-															¿Estas seguro de eliminar este usuario?
-														</div>
-														<div class="modal-footer">
-															<button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-															<button (click)="delete(user._id)" type="button" class="btn btn-primary">Si</button>
-														</div>
-													</div>
-												</div>
-											</div>
-										</tr>
-									</tbody>
-								</table>
-							</div>
-							<pagination-controls (pageChange)="page = $event"></pagination-controls>
-						</div>
-					</div>
+              <div class="table-responsive">
+                <table class="table" aria-labelldby="Tabla de resultados"
+                  aria-describedby="Muestra todos los registros segun los filtros aplicados de usuarios">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Email</th>
+                      <th scope="col">Descripción</th>
+                      <th scope="col">Rol</th>
+                      <th scope="col">Editar</th>
+                      <th scope="col">Eliminar</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr
+                      *ngFor="let user of users | paginate: { itemsPerPage: 10, currentPage: page } | buscarUsers:filterUsers">
+                      <th scope="row">
+                        <button class="btn btn-dark" [routerLink]="['/users/show', user._id]">Ver</button>
+                      </th>
+                      <td>{{user.email}}</td>
+                      <td>{{user.description}}</td>
+                      <td><span class="badge"
+                          [ngClass]="{ 'badge-primary': user.tipo=='cliente', 'badge-success': user.tipo=='miembro', 'badge-dark': user.tipo=='admin' }">{{user.tipo}}</span>
+                      </td>
+                      <td><button [routerLink]="['/users/edit', user._id]" class="btn btn-info">Editar</button></td>
+                      <td><a class="btn btn-danger" (click)="deleteConfirmation(user._id)">Eliminar</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <pagination-controls (pageChange)="page = $event"></pagination-controls>
+            </div>
+          </div>
 
-					<div *ngIf="!users">
-						<div class="text-center">
-							<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-								<span class="sr-only">Loading...</span>
-							</div>
-						</div>
-					</div>
+          <div *ngIf="!users">
+            <div class="text-center">
+              <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+                <span class="sr-only">Loading...</span>
+              </div>
+            </div>
+          </div>
 
-				</div>
-			</div>
-		</div>
+        </div>
+      </div>
+    </div>
 
-		<div *ngIf="!users && !failedConect">
-			<div class="text-center">
-		  		<div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
-		    		<span class="sr-only">Loading...</span>
-		  		</div>
-			</div>
-		</div>
-		<div *ngIf="failedConect">
-			<h6 class="text-center">{{failedConect}}</h6>
-		</div>
+    <div *ngIf="!users && !failedConect">
+      <div class="text-center">
+        <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+          <span class="sr-only">Loading...</span>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="failedConect">
+      <h6 class="text-center">{{failedConect}}</h6>
+    </div>
 
-	</div>
+  </div>
 </main>

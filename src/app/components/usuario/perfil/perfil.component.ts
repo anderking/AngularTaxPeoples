@@ -26,6 +26,7 @@ export class PerfilComponent implements OnInit {
   public fileName: string = "";
   public url: string;
   public isFileChosen: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private _userService: UserService,
@@ -47,9 +48,11 @@ export class PerfilComponent implements OnInit {
     });
   }
 
-  getUser(id) {
+  getUser(id: string) {
+    this.isLoading = true;
     this._userService.getUser(id).subscribe(
       (response) => {
+        this.isLoading = false;
         this.user = response.user;
         localStorage.setItem("rolID", this.user.tipo);
         this.rolID = localStorage.getItem("rolID");
@@ -64,15 +67,17 @@ export class PerfilComponent implements OnInit {
           }
         }
       },
-      (error) => {
-        console.log(error);
+      () => {
+        this.isLoading = false;
       }
     );
   }
 
-  getPersona(id) {
+  getPersona(id: string) {
+    this.isLoading = true;
     this._personaService.getPersona(id).subscribe(
       (response) => {
+        this.isLoading = false;
         if (this.rolID == "cliente" || this.rolID == "admin") {
           if (!response.persona) {
             this._router.navigate(["/registerN/" + this.resID]);
@@ -81,15 +86,17 @@ export class PerfilComponent implements OnInit {
           }
         }
       },
-      (error) => {
-        console.log(error);
+      () => {
+        this.isLoading = false;
       }
     );
   }
 
-  getEmpresa(id) {
+  getEmpresa(id: string) {
+    this.isLoading = true;
     this._empresaService.getEmpresa(id).subscribe(
       (response) => {
+        this.isLoading = false;
         if (this.rolID == "miembro") {
           if (!response.empresa) {
             this._router.navigate(["/registerJ/" + this.resID]);
@@ -98,8 +105,8 @@ export class PerfilComponent implements OnInit {
           }
         }
       },
-      (error) => {
-        console.log(error);
+      () => {
+        this.isLoading = false;
       }
     );
   }

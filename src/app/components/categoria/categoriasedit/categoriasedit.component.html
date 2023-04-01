@@ -64,15 +64,12 @@
 
         </div>
 
-        <div *ngIf="isLoading && !failedConect">
+        <div *ngIf="isLoading">
           <div class="text-center">
             <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
               <span class="sr-only">Loading...</span>
             </div>
           </div>
-        </div>
-        <div *ngIf="failedConect">
-          <h6 class="text-center">{{failedConect}}</h6>
         </div>
       </div>
     </div>

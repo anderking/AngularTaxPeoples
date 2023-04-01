@@ -22,6 +22,7 @@ export class UserseditComponent implements OnInit {
   public message: string;
   public isError: boolean = false;
   public isAlert: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private _userService: UserService,
@@ -42,19 +43,22 @@ export class UserseditComponent implements OnInit {
     });
   }
 
-  getUser(id) {
+  getUser(id: string) {
+    this.isLoading = true;
     this._userService.getUser(id).subscribe(
       (response) => {
         this.user = response.user;
         this.tipo = this.user.tipo;
+        this.isLoading = false;
       },
-      (error) => {
-        console.log(error);
+      () => {
+        this.isLoading = false;
       }
     );
   }
 
   update(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       this.user.tipo = form.form.value.tipo;
 
@@ -66,10 +70,12 @@ export class UserseditComponent implements OnInit {
             this.message = response.message;
             this.isAlert = true;
             this.onIsError();
+            this.isLoading = false;
           } else {
             this.message = response.message;
             this.isAlert = false;
             this.onIsError();
+            this.isLoading = false;
           }
         },
         (error: HttpErrorResponse) => {
@@ -81,6 +87,7 @@ export class UserseditComponent implements OnInit {
     }
   }
   messageError(error: HttpErrorResponse) {
+    this.isLoading = false;
     this.message = error.message;
     console.log(error);
     this.isAlert = false;

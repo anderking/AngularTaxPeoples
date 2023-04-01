@@ -17,12 +17,14 @@ export class RutascreateComponent {
   public message: string;
   public isError: boolean = false;
   public isAlert: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(private _rutaService: RutaService, private _location: Location) {
     this.ruta = new Ruta("", "", "");
   }
 
   register(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       this.ruta.name = form.form.value.name;
       this.ruta.description = form.form.value.description;
@@ -34,11 +36,12 @@ export class RutascreateComponent {
             this.message = response.message;
             this.isAlert = true;
             this.onIsError();
-            form.reset();
+            this.isLoading = false;
           } else {
             this.message = response.message;
             this.isAlert = false;
             this.onIsError();
+            this.isLoading = false;
           }
         },
         (error: HttpErrorResponse) => {
@@ -50,6 +53,7 @@ export class RutascreateComponent {
     }
   }
   messageError(error: HttpErrorResponse) {
+    this.isLoading = false;
     this.message = error.message;
     console.log(error);
     this.isAlert = false;

@@ -16,6 +16,7 @@ export class RutaseditComponent implements OnInit {
   public message: string;
   public isError: boolean = false;
   public isAlert: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private _rutaService: RutaService,
@@ -30,18 +31,21 @@ export class RutaseditComponent implements OnInit {
     });
   }
 
-  getRuta(id) {
+  getRuta(id: string) {
+    this.isLoading = true;
     this._rutaService.getRuta(id).subscribe(
       (response) => {
         this.ruta = response.ruta;
+        this.isLoading = false;
       },
-      (error) => {
-        console.log(error);
+      () => {
+        this.isLoading = false;
       }
     );
   }
 
   update(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       this._rutaService.updateRuta(this.ruta).subscribe(
         (response: any) => {
@@ -51,10 +55,12 @@ export class RutaseditComponent implements OnInit {
             this.message = response.message;
             this.isAlert = true;
             this.onIsError();
+            this.isLoading = false;
           } else {
             this.message = response.message;
             this.isAlert = false;
             this.onIsError();
+            this.isLoading = false;
           }
         },
         (error: HttpErrorResponse) => {
@@ -66,6 +72,7 @@ export class RutaseditComponent implements OnInit {
     }
   }
   messageError(error: HttpErrorResponse) {
+    this.isLoading = false;
     this.message = error.message;
     console.log(error);
     this.isAlert = false;
