@@ -4,7 +4,6 @@ import { routing, appRoutingProviders } from "./app.routing";
 import { HttpClientModule, HTTP_INTERCEPTORS } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
-import { NgxSpinnerModule } from "ngx-spinner";
 import { AppRoutingModule } from "./app-routing.module";
 import { NgxPaginationModule } from "ngx-pagination";
 
@@ -164,7 +163,6 @@ import {
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    NgxSpinnerModule,
     NgxPaginationModule,
     FontAwesomeModule,
   ],

@@ -314,8 +314,8 @@ i, .ng-fa-icon {
 }
 
 .button-comentarios{
-  margin-bottom: 0 !important;
   margin: 5px;
+  margin-bottom: 0 !important;
 }
 
 .button-comentarios button:focus {
