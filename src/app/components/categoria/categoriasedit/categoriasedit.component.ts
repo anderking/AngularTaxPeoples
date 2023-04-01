@@ -5,7 +5,6 @@ import { NgForm } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { Location } from "@angular/common";
 import { HttpErrorResponse } from "@angular/common/http";
-import { Global } from "src/app/services/global";
 
 @Component({
   selector: "app-categoriasedit",

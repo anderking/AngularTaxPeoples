@@ -279,7 +279,7 @@ export class PublicationsshowComponent implements OnInit {
   }
 
   comentarioFocus() {
-    $("#comentarioFocusInput").focus();
+    $("#comentarioFocusInput").trigger("focus");
   }
 
   getCalificacionesR(idR) {
