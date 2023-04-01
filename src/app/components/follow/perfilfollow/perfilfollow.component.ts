@@ -43,6 +43,8 @@ export class PerfilfollowComponent implements OnInit {
   public calificacionBool: boolean;
   public resID: string = localStorage.getItem("resID");
 
+  public isLoading: boolean = false;
+
   constructor(
     private _userService: UserService,
     private _personaService: PersonaService,
@@ -80,6 +82,7 @@ export class PerfilfollowComponent implements OnInit {
   }
 
   getUser(id) {
+    this.isLoading = true;
     this._userService.getUser(id).subscribe(
       (response) => {
         this.user = response.user;
@@ -90,6 +93,7 @@ export class PerfilfollowComponent implements OnInit {
         }
       },
       (error) => {
+        this.isLoading = false;
         console.log(error);
       }
     );
@@ -98,9 +102,11 @@ export class PerfilfollowComponent implements OnInit {
   getPersona(id) {
     this._personaService.getPersona(id).subscribe(
       (response) => {
+        this.isLoading = false;
         this.persona = response.persona;
       },
       (error) => {
+        this.isLoading = false;
         console.log(error);
       }
     );
@@ -109,9 +115,11 @@ export class PerfilfollowComponent implements OnInit {
   getEmpresa(id) {
     this._empresaService.getEmpresa(id).subscribe(
       (response) => {
+        this.isLoading = false;
         this.empresa = response.empresa;
       },
       (error) => {
+        this.isLoading = false;
         console.log(error);
       }
     );
@@ -124,6 +132,10 @@ export class PerfilfollowComponent implements OnInit {
       this._calificacionService.upCalificacion(this.newCalificacion).subscribe(
         (response) => {
           this.save_calificacion = response.calificacion;
+          $("body").removeClass("modal-open");
+          $("body").removeAttr("style");
+          $(".modal-backdrop.fade.show").css("display", "none");
+          $("#calificar").css("display", "none");
           this.isCalificacion(this.userEmisorID, this.userReceptorID);
         },
         (error) => {
@@ -199,6 +211,10 @@ export class PerfilfollowComponent implements OnInit {
       this._calificacionService.updateCalificacion(this.calificacion).subscribe(
         (response) => {
           this.update_calificacion = response.categoria;
+          $("body").removeClass("modal-open");
+          $("body").removeAttr("style");
+          $(".modal-backdrop.fade.show").css("display", "none");
+          $("#desCalificar").css("display", "none");
           this.getUser(this.userReceptorID);
           this.isCalificacion(this.userEmisorID, this.userReceptorID);
         },

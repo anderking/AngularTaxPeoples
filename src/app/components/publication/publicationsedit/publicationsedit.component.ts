@@ -36,6 +36,8 @@ export class PublicationseditComponent implements OnInit {
   public isAlert: boolean = false;
   public message: string;
 
+  public isLoading: boolean = false;
+
   constructor(
     private _publicationService: PublicationService,
     private _categoriaService: CategoriaService,
@@ -46,6 +48,7 @@ export class PublicationseditComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoading = true;
     this._route.params.subscribe((params) => {
       let id = params.id;
       this.getPublication(id);
@@ -58,9 +61,11 @@ export class PublicationseditComponent implements OnInit {
     this._publicationService.getPublication(id).subscribe(
       (response) => {
         this.publication = response.publication;
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
+        this.isLoading = false;
       }
     );
   }
@@ -92,6 +97,7 @@ export class PublicationseditComponent implements OnInit {
   }
 
   update(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       this._publicationService.updatePublication(this.publication).subscribe(
         (response) => {
@@ -125,9 +131,11 @@ export class PublicationseditComponent implements OnInit {
             this.getPublication(this.update_publication._id);
             this.onIsError();
           }
+          this.isLoading = false;
         },
         (error: HttpErrorResponse) => {
           this.messageError(error);
+          this.isLoading = false;
         }
       );
     } else {

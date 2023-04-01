@@ -1,109 +1,137 @@
 <main class="main_publications_edit">
-	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-12 col-sm-10 col-md-8 col-lg-6">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-12 col-sm-10 col-md-8 col-lg-6">
 
-				<div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert" [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}" >
-					{{message}}
-					<button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
+        <div *ngIf="isError" id="alertError" class="alert alert-dismissible fade show" role="alert"
+          [ngClass]="{'alert-success': isAlert, 'alert-danger': !isAlert}">
+          {{message}}
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close" (click)="closeAlertError()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
 
-				<div *ngIf="publication">
-					<div class="row justify-content-center my-3">
-						<div class="col-12">
-							<h2 class="text-center">Actualizar publicación</h2>
-						</div>
-					</div>
-					<div class="row justify-content-center my-3">
-						<div class="col-12">
-							<button class="btn btn-dark" (click)="goBack()">Regresar</button>
-						</div>
-					</div>
-					<hr>
-					<form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
-						<div class="form-row">
 
-							<div class="col-md-12 mb-3">
+        <div class="row justify-content-center my-3">
+          <div class="col-12">
+            <h2 class="text-center">Actualizar publicación</h2>
+          </div>
+        </div>
+        <div class="row justify-content-center my-3">
+          <div class="col-12">
+            <button class="btn btn-dark" (click)="goBack()">Regresar</button>
+          </div>
+        </div>
+        <hr>
+        <div *ngIf="!isLoading">
 
-								<label for="title">Titulo</label>
-								<input type="text" [ngClass]="{'is-invalid': validationTitle.touched && !validationTitle.valid, 'is-valid': validationTitle.touched && validationTitle.valid}" class="form-control" name="title" #validationTitle="ngModel" placeholder="Nombre" [(ngModel)]="publication.title" required>
+          <form #updateForm="ngForm" (ngSubmit)="update(updateForm)">
+            <div class="form-row">
 
-								<div class="invalid-feedback" *ngIf="validationTitle.touched && !validationTitle.valid">
-									<div *ngIf="validationTitle.errors.required">Por favor, introduzca un Nombre</div>
-								</div>
+              <div class="col-md-12 mb-3">
 
-							</div>
+                <label for="title">Titulo</label>
+                <input type="text"
+                  [ngClass]="{'is-invalid': validationTitle.touched && !validationTitle.valid, 'is-valid': validationTitle.touched && validationTitle.valid}"
+                  class="form-control" name="title" #validationTitle="ngModel" placeholder="Nombre"
+                  [(ngModel)]="publication.title" required>
 
-							<div class="col-md-12 mb-3">
+                <div class="invalid-feedback" *ngIf="validationTitle.touched && !validationTitle.valid">
+                  <div *ngIf="validationTitle.errors.required">Por favor, introduzca un Nombre</div>
+                </div>
 
-								<label for="password">Descripción</label>
-								<textarea type="text" [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}" class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción" [(ngModel)]="publication.description" required>
+              </div>
+
+              <div class="col-md-12 mb-3">
+
+                <label for="password">Descripción</label>
+                <textarea type="text"
+                  [ngClass]="{'is-invalid': validationDescription.touched && !validationDescription.valid, 'is-valid': validationDescription.touched && validationDescription.valid}"
+                  class="form-control" name="description" #validationDescription="ngModel" placeholder="Descripción"
+                  [(ngModel)]="publication.description" required>
 								</textarea>
 
-								<div class="invalid-feedback" *ngIf="validationDescription.touched && !validationDescription.valid">
-									<div *ngIf="validationDescription.errors.required">Por favor, introduzca un Descripción completo</div>
-								</div>
+                <div class="invalid-feedback" *ngIf="validationDescription.touched && !validationDescription.valid">
+                  <div *ngIf="validationDescription.errors.required">Por favor, introduzca un Descripción completo</div>
+                </div>
 
-							</div>
+              </div>
 
-							<div class="col-md-12 mb-3">
+              <div class="col-md-12 mb-3">
 
-								<label for="tarifa">Tarifa</label>
-								<input type="text" [ngClass]="{'is-invalid': validationTarifa.touched && !validationTarifa.valid, 'is-valid': validationTarifa.touched && validationTarifa.valid}" class="form-control" name="tarifa" #validationTarifa="ngModel" placeholder="Tarifa" [(ngModel)]="publication.tarifa" required pattern="^[0-9]{0,12}([.][0-9]{1,2})?$">
+                <label for="tarifa">Tarifa</label>
+                <input type="text"
+                  [ngClass]="{'is-invalid': validationTarifa.touched && !validationTarifa.valid, 'is-valid': validationTarifa.touched && validationTarifa.valid}"
+                  class="form-control" name="tarifa" #validationTarifa="ngModel" placeholder="Tarifa"
+                  [(ngModel)]="publication.tarifa" required pattern="^[0-9]{0,12}([.][0-9]{1,2})?$">
 
-								<div class="invalid-feedback" *ngIf="validationTarifa.touched && !validationTarifa.valid">
-									<div *ngIf="validationTarifa.errors.required">Por favor, introduzca un Tarifa</div>
-									<div *ngIf="validationTarifa.errors.pattern">La tarifa debe ser solo numeros hasta maximo dos decimales, Ejemplo: 2050.50</div>
-								</div>
+                <div class="invalid-feedback" *ngIf="validationTarifa.touched && !validationTarifa.valid">
+                  <div *ngIf="validationTarifa.errors.required">Por favor, introduzca un Tarifa</div>
+                  <div *ngIf="validationTarifa.errors.pattern">La tarifa debe ser solo numeros hasta maximo dos
+                    decimales, Ejemplo: 2050.50</div>
+                </div>
 
-							</div>
+              </div>
 
-							<div class="col-md-12 mb-3">
+              <div class="col-md-12 mb-3">
 
-								<label for="categoriaID">Categoría</label>
-								<select [ngClass]="{'is-invalid': validationCategoria.touched && !validationCategoria.valid, 'is-valid': validationCategoria.touched && validationCategoria.valid}" name="categoriaID" #validationCategoria="ngModel" [(ngModel)]="publication.categoriaID._id" class="form-control" required>
-									<option *ngFor="let categoria of categorias" [value]="categoria._id"> {{categoria.name}}</option>
-								</select>
+                <label for="categoriaID">Categoría</label>
+                <select
+                  [ngClass]="{'is-invalid': validationCategoria.touched && !validationCategoria.valid, 'is-valid': validationCategoria.touched && validationCategoria.valid}"
+                  name="categoriaID" #validationCategoria="ngModel" [(ngModel)]="publication.categoriaID._id"
+                  class="form-control" required>
+                  <option *ngFor="let categoria of categorias" [value]="categoria._id"> {{categoria.name}}</option>
+                </select>
 
-								<div class="invalid-feedback" *ngIf="validationCategoria.touched && !validationCategoria.valid">
-									<div *ngIf="validationCategoria.errors.required">Por favor, introduzca una Categoría</div>
-								</div>
+                <div class="invalid-feedback" *ngIf="validationCategoria.touched && !validationCategoria.valid">
+                  <div *ngIf="validationCategoria.errors.required">Por favor, introduzca una Categoría</div>
+                </div>
 
-							</div>
+              </div>
 
-							<div class="col-md-12 mb-3">
+              <div class="col-md-12 mb-3">
 
-								<label for="rutaID">Ruta</label>
-								<select [ngClass]="{'is-invalid': validationRuta.touched && !validationRuta.valid, 'is-valid': validationRuta.touched && validationRuta.valid}" name="rutaID" #validationRuta="ngModel" [(ngModel)]="publication.rutaID._id" class="form-control" required>
-									<option *ngFor="let ruta of rutas" [value]="ruta._id"> {{ruta.name}}</option>
-								</select>
+                <label for="rutaID">Ruta</label>
+                <select
+                  [ngClass]="{'is-invalid': validationRuta.touched && !validationRuta.valid, 'is-valid': validationRuta.touched && validationRuta.valid}"
+                  name="rutaID" #validationRuta="ngModel" [(ngModel)]="publication.rutaID._id" class="form-control"
+                  required>
+                  <option *ngFor="let ruta of rutas" [value]="ruta._id"> {{ruta.name}}</option>
+                </select>
 
-								<div class="invalid-feedback" *ngIf="validationRuta.touched && !validationRuta.valid">
-									<div *ngIf="validationRuta.errors.required">Por favor, introduzca una Ruta</div>
-								</div>
+                <div class="invalid-feedback" *ngIf="validationRuta.touched && !validationRuta.valid">
+                  <div *ngIf="validationRuta.errors.required">Por favor, introduzca una Ruta</div>
+                </div>
 
-							</div>
+              </div>
 
-							<div class="col-md-12 mb-3">
+              <div class="col-md-12 mb-3">
 
-								<label for="ruta">Actualizar Imagen</label>
-								<div class="input-group">
-									<div class="custom-file">
-										<input type="file" class="custom-file-input" name="image" (change)="preUpload($event);fileChangeEvent($event)" required >
-										<label class="custom-file-label" for="inputGroupFile04">{{fileName}}</label>
-									</div>
-								</div>
+                <label for="ruta">Actualizar Imagen</label>
+                <div class="input-group">
+                  <div class="custom-file">
+                    <input type="file" class="custom-file-input" name="image"
+                      (change)="preUpload($event);fileChangeEvent($event)" required>
+                    <label class="custom-file-label" for="inputGroupFile04">{{fileName}}</label>
+                  </div>
+                </div>
 
-							</div>
+              </div>
 
-						</div>
+            </div>
 
-						<button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Actualizar</button>
-					</form>
-				</div>
-			</div>
-		</div>
-	</div>
+            <button type="submit" class="btn btn-primary" [disabled]="!updateForm.form.valid">Actualizar</button>
+          </form>
+        </div>
+
+        <div *ngIf="isLoading">
+          <div class="text-center">
+            <div class="spinner-border" style="width: 3rem; height: 3rem;" role="status">
+              <span class="sr-only">Loading...</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </main>

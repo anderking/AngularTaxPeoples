@@ -23,6 +23,7 @@ export class EditpersonaComponent implements OnInit {
   public message: string;
   public isError: boolean = false;
   public isAlert: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private _userService: UserService,
@@ -62,6 +63,7 @@ export class EditpersonaComponent implements OnInit {
   ngOnInit() {
     this._route.params.subscribe((params) => {
       let id = params.id;
+      this.isLoading = true;
       this.getUser(id);
       this.getPersona(id);
     });
@@ -74,9 +76,11 @@ export class EditpersonaComponent implements OnInit {
     this._userService.getUser(id).subscribe(
       (response) => {
         this.user = response.user;
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
+        this.isLoading = false;
       }
     );
   }
@@ -87,14 +91,17 @@ export class EditpersonaComponent implements OnInit {
         this.persona = response.persona;
         this.persona.fechaNacimiento =
           this.persona.fechaNacimiento.split("T")[0];
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
+        this.isLoading = false;
       }
     );
   }
 
   update(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       const fechaActual = new Date();
       const fechaForm = new Date(form.form.value.fechaNacimiento);
@@ -113,9 +120,11 @@ export class EditpersonaComponent implements OnInit {
               this.message = response.message;
               this.onIsError();
             }
+            this.isLoading = false;
           },
           (error: HttpErrorResponse) => {
             this.messageError(error);
+            this.isLoading = false;
           }
         );
       } else {

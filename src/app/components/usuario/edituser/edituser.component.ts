@@ -19,6 +19,7 @@ export class EdituserComponent implements OnInit {
   public message: string;
   public isError: boolean = false;
   public isAlert: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private _userService: UserService,
@@ -34,17 +35,21 @@ export class EdituserComponent implements OnInit {
   }
 
   getUser(id) {
+    this.isLoading = true;
     this._userService.getUser(id).subscribe(
       (response) => {
         this.user = response.user;
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
+        this.isLoading = false;
       }
     );
   }
 
   update(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       this._userService.updateUser(this.user).subscribe(
         (response) => {
@@ -53,14 +58,17 @@ export class EdituserComponent implements OnInit {
             this.message = response.message;
             this.isAlert = true;
             this.onIsError();
+            this.isLoading = false;
           } else {
             this.message = response.message;
             this.isAlert = false;
             this.onIsError();
+            this.isLoading = false;
           }
         },
         (error: HttpErrorResponse) => {
           this.messageError(error);
+          this.isLoading = false;
         }
       );
     } else {

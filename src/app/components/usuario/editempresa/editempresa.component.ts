@@ -23,6 +23,7 @@ export class EditempresaComponent implements OnInit {
   public message: string;
   public isError: boolean = false;
   public isAlert: boolean = false;
+  public isLoading: boolean = false;
 
   constructor(
     private _userService: UserService,
@@ -63,6 +64,7 @@ export class EditempresaComponent implements OnInit {
     this.resID = localStorage.getItem("resID");
     this._route.params.subscribe((params) => {
       let id = params.id;
+      this.isLoading = true;
       this.getUser(id);
       this.getEmpresa(id);
     });
@@ -72,9 +74,11 @@ export class EditempresaComponent implements OnInit {
     this._userService.getUser(id).subscribe(
       (response) => {
         this.user = response.user;
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
+        this.isLoading = false;
       }
     );
   }
@@ -83,14 +87,17 @@ export class EditempresaComponent implements OnInit {
     this._empresaService.getEmpresa(id).subscribe(
       (response) => {
         this.empresa = response.empresa;
+        this.isLoading = false;
       },
       (error) => {
         console.log(error);
+        this.isLoading = false;
       }
     );
   }
 
   update(form: NgForm) {
+    this.isLoading = true;
     if (form.valid) {
       this._empresaService.updateEmpresa(this.empresa).subscribe(
         (response) => {
@@ -99,10 +106,12 @@ export class EditempresaComponent implements OnInit {
             this.isAlert = true;
             this.message = response.message;
             this.onIsError();
+            this.isLoading = false;
           } else {
             this.isAlert = false;
             this.message = response.message;
             this.onIsError();
+            this.isLoading = false;
           }
         },
         (error) => {
@@ -116,6 +125,7 @@ export class EditempresaComponent implements OnInit {
               this.message = error.error.message;
             }
           }
+          this.isLoading = false;
         }
       );
     } else {
