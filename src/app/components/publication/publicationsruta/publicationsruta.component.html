@@ -32,7 +32,7 @@
     </div>
     <div class="row justify-content-center my-3">
       <div class="col-12">
-        <button *ngIf="rolID=='miembro' || rolID=='admin'" [routerLink]="['/publicaciones/create']"
+        <button *ngIf="rolID==='miembro' || rolID==='admin'" [routerLink]="['/publicaciones/create']"
           class="btn btn-primary">Nueva publicación</button>
         <button class="btn btn-dark" (click)="goBack()">Regresar</button>
       </div>
@@ -61,12 +61,12 @@
                 <p class="mb-2">
                   <fa-icon [icon]="['fas', 'user']"></fa-icon>
                   <b>Publicado por: </b>
-                  <a *ngIf="publicationRuta.userID._id!=resID"
+                  <a *ngIf="publicationRuta.userID._id!==resID"
                     [routerLink]="['/follow/perfil', publicationRuta.userID._id]">
                     <span class="badge badge-primary">{{ publicationRuta.userID.email }}</span>
                   </a>
 
-                  <a *ngIf="publicationRuta.userID._id==resID" [routerLink]="['/perfil', publicationRuta.userID._id]">
+                  <a *ngIf="publicationRuta.userID._id===resID" [routerLink]="['/perfil', publicationRuta.userID._id]">
                     <span class="badge badge-primary">Tú</span>
                   </a>
                 </p>

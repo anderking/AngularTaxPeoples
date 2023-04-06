@@ -40,16 +40,16 @@
                 <p class="afo"><b>Direccion: </b>{{ persona.direccion }}</p>
                 <p class="afo"><b>Estado: </b>{{ persona.estado }}</p>
                 <p class="afo"><b>Sexo: </b>
-                  <span *ngIf=" persona.sexo=='M' ">Masculino</span>
-                  <span *ngIf=" persona.sexo=='F' ">Femenino</span>
+                  <span *ngIf=" persona.sexo==='M' ">Masculino</span>
+                  <span *ngIf=" persona.sexo==='F' ">Femenino</span>
                 </p>
                 <p class="afo"><b>Estado Civil: </b>
-                  <span *ngIf=" persona.edoCivil=='S' ">Soltero</span>
-                  <span *ngIf=" persona.edoCivil=='C' ">Casado</span>
+                  <span *ngIf=" persona.edoCivil==='S' ">Soltero</span>
+                  <span *ngIf=" persona.edoCivil==='C' ">Casado</span>
                 </p>
                 <p class="afo"><b>Fecha de Nacimiento: </b>{{ persona.fechaNacimiento |date:"longDate" }}</p>
                 <p class="afo"><b>Tipo de Usuario: </b><span class="badge"
-                    [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }">{{
+                    [ngClass]="{ 'badge-primary': rolID==='cliente', 'badge-success': rolID==='miembro', 'badge-dark': rolID==='admin' }">{{
                     rolID }}</span></p>
 
                 <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/persona/edit', resID]"
@@ -57,13 +57,13 @@
                   Información</button>
                 <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/user/configure', resID]"
                   role="button">Configuración</button>
-                <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/users']"
+                <button *ngIf="user.tipo==='admin'" class="btn btn-dark" [routerLink]="['/users']"
                   role="button">Administrar Usuarios</button>
-                <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/publicaciones']"
+                <button *ngIf="user.tipo==='admin'" class="btn btn-dark" [routerLink]="['/publicaciones']"
                   role="button">Ver Publicaciones</button>
-                <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/categorias']"
+                <button *ngIf="user.tipo==='admin'" class="btn btn-dark" [routerLink]="['/categorias']"
                   role="button">Administrar Categorías</button>
-                <button *ngIf="user.tipo=='admin'" class="btn btn-dark" [routerLink]="['/rutas']"
+                <button *ngIf="user.tipo==='admin'" class="btn btn-dark" [routerLink]="['/rutas']"
                   role="button">Administrar Rutas</button>
                 <button class="btn btn-dark" [routerLink]="['/publicaciones']" role="button">TimeLine</button>
                 <button class="btn btn-primary" [routerLink]="['/logout']" role="button">Cerrar Sesión</button>
@@ -108,7 +108,7 @@
                 <p class="afo"><b>Direccion: </b>{{ empresa.direccion }}</p>
                 <p class="afo"><b>Estado: </b>{{ empresa.estado }}</p>
                 <p class="afo"><b>Tipo de Usuario: </b><span class="badge"
-                    [ngClass]="{ 'badge-primary': rolID=='cliente', 'badge-success': rolID=='miembro', 'badge-dark': rolID=='admin' }">{{
+                    [ngClass]="{ 'badge-primary': rolID==='cliente', 'badge-success': rolID==='miembro', 'badge-dark': rolID==='admin' }">{{
                     rolID }}</span></p>
 
                 <button class="btn btn-dark" [routerLink]="['/perfil/'+resID+'/empresa/edit', resID]"

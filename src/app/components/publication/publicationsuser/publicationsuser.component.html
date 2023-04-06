@@ -30,7 +30,7 @@
     </div>
     <div class="row justify-content-center my-3">
       <div class="col-12">
-        <button *ngIf="rolID=='miembro' || rolID=='admin'" [routerLink]="['/publicaciones/create']"
+        <button *ngIf="rolID==='miembro' || rolID==='admin'" [routerLink]="['/publicaciones/create']"
           class="btn btn-primary">Nueva publicación</button>
         <button class="btn btn-dark" (click)="goBack()">Regresar</button>
         <button class="btn btn-info" [routerLink]="['/publicaciones']">TimeLine</button>

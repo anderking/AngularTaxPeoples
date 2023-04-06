@@ -61,7 +61,7 @@
                       <td>{{user.email}}</td>
                       <td>{{user.description}}</td>
                       <td><span class="badge"
-                          [ngClass]="{ 'badge-primary': user.tipo=='cliente', 'badge-success': user.tipo=='miembro', 'badge-dark': user.tipo=='admin' }">{{user.tipo}}</span>
+                          [ngClass]="{ 'badge-primary': user.tipo==='cliente', 'badge-success': user.tipo==='miembro', 'badge-dark': user.tipo==='admin' }">{{user.tipo}}</span>
                       </td>
                       <td><button [routerLink]="['/users/edit', user._id]" class="btn btn-info">Editar</button></td>
                       <td><a class="btn btn-danger" (click)="deleteConfirmation(user._id)">Eliminar</a></td>

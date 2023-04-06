@@ -9,9 +9,10 @@
     <div class="row justify-content-center my-3">
       <div class="col-12">
         <button class="btn btn-dark" (click)="goBack()">Regresar</button>
-        <button *ngIf="(ispost || rolID=='admin') && publication" class="btn btn-info"
+        <button *ngIf="(ispost || rolID==='admin') && publication" class="btn btn-info"
           [routerLink]="['/publicaciones/edit',publication._id]">Editar</button>
-        <a *ngIf="(ispost || rolID=='admin') && publication" (click)="deleteConfirmationPublication(publication._id)" class="btn btn-danger">Eliminar</a>
+        <a *ngIf="(ispost || rolID==='admin') && publication" (click)="deleteConfirmationPublication(publication._id)"
+          class="btn btn-danger">Eliminar</a>
       </div>
     </div>
     <hr>
@@ -76,11 +77,11 @@
                 <p class="mb-2">
                   <fa-icon [icon]="['fas', 'user']"></fa-icon>
                   <b>Publicado por: </b>
-                  <a *ngIf="publication.userID._id!=resID" [routerLink]="['/follow/perfil', publication.userID._id]">
+                  <a *ngIf="publication.userID._id!==resID" [routerLink]="['/follow/perfil', publication.userID._id]">
                     <span class="badge badge-primary">{{ publication.userID.email }}</span>
                   </a>
 
-                  <a *ngIf="publication.userID._id==resID" [routerLink]="['/perfil', publication.userID._id]">
+                  <a *ngIf="publication.userID._id===resID" [routerLink]="['/perfil', publication.userID._id]">
                     <span class="badge badge-primary">Tú</span>
                   </a>
                 </p>
@@ -133,7 +134,7 @@
 
                 <p class="mb-2">
                   <a [routerLink]="['/follow/perfil', publication.userID._id]" class="btn btn-info btn-sm"
-                    *ngIf="resID!=publication.userID._id">Calificar</a>
+                    *ngIf="resID!==publication.userID._id">Calificar</a>
                   <a href="#listaCalificaciones" data-toggle="modal" class="btn btn-secondary btn-sm">Usuarios que
                     calificaron</a>
                 </p>
@@ -154,11 +155,11 @@
                           <img *ngIf="!calificacionR.userEmisorID.image" class="img_profiel align-self-center mr-3"
                             src="../../../../assets/img/user.png" alt="Imagen del usuario">
                           <div class="media-body d-flex align-items-center">
-                            <h5 *ngIf="calificacionR.userEmisorID._id!=resID" class="mt-0"><a
+                            <h5 *ngIf="calificacionR.userEmisorID._id!==resID" class="mt-0"><a
                                 [routerLink]="['/follow/perfil', calificacionR.userEmisorID._id]"
                                 (click)="removerModal()">{{ calificacionR.userEmisorID.email }}</a></h5>
 
-                            <h5 *ngIf="calificacionR.userEmisorID._id==resID" class="mt-0"><a
+                            <h5 *ngIf="calificacionR.userEmisorID._id===resID" class="mt-0"><a
                                 [routerLink]="['/perfil', calificacionR.userEmisorID._id]"
                                 (click)="removerModal()">Tú</a></h5>
                           </div>
@@ -200,11 +201,11 @@
                                 src="../../../../assets/img/user.png" alt="Imagen del usuario">
                               <div class="media-body d-flex align-items-center">
 
-                                <h5 *ngIf="likePublication.userID._id!=resID" class="mt-0"><a
+                                <h5 *ngIf="likePublication.userID._id!==resID" class="mt-0"><a
                                     [routerLink]="['/follow/perfil', likePublication.userID._id]"
                                     (click)="removerModal()">{{ likePublication.userID.email }}</a></h5>
 
-                                <h5 *ngIf="likePublication.userID._id==resID" class="mt-0"><a
+                                <h5 *ngIf="likePublication.userID._id===resID" class="mt-0"><a
                                     [routerLink]="['/perfil', likePublication.userID._id]"
                                     (click)="removerModal()">Tú</a></h5>
 
@@ -312,20 +313,23 @@
                         <img *ngIf="!comentPublication.userID.image" class="img_profiel_media"
                           src="../../../../assets/img/user.png" alt="Imagen del usuario">
                         <div class="media-body media-body-coment">
-                          <form id="mostrarUpdate-{{comentPublication._id}}" class="ocultarUpdateFormComent" #updateForm="ngForm">
+                          <form id="mostrarUpdate-{{comentPublication._id}}" class="ocultarUpdateFormComent"
+                            #updateForm="ngForm">
                             <textarea rows="5" cols="100" id="inputComent-{{comentPublication._id}}" type="text"
                               class="form-control" name="text" #validationComent="ngModel"
                               placeholder="Escribe tu comentario" [(ngModel)]="comentPublication.text"
                               required></textarea>
-                            <button class="btn btn-dark btn-sm btn-coment-update" (click)="cancelarUpdate(comentPublication._id)">Cancelar</button>
-                            <button class="btn btn-primary btn-sm btn-coment-update" (click)="updateComent(updateForm)">Enviar</button>
+                            <button class="btn btn-dark btn-sm btn-coment-update"
+                              (click)="cancelarUpdate(comentPublication._id)">Cancelar</button>
+                            <button class="btn btn-primary btn-sm btn-coment-update"
+                              (click)="updateComent(updateForm)">Enviar</button>
                             <input type="hidden" name="_id" [(ngModel)]="comentPublication._id">
                           </form>
                           <p id="mostrarComent-{{comentPublication._id}}" class="fondoComentarios">
-                            <b *ngIf=" comentPublication.userID._id!=resID "><a
+                            <b *ngIf=" comentPublication.userID._id!==resID "><a
                                 [routerLink]="['/follow/perfil', comentPublication.userID._id]">{{
                                 comentPublication.userID.email }} </a></b>
-                            <b *ngIf=" comentPublication.userID._id==resID "><a
+                            <b *ngIf=" comentPublication.userID._id===resID "><a
                                 [routerLink]="['/perfil', comentPublication.userID._id]">Tú </a></b>
                             {{comentPublication.text}}
                           </p>
@@ -336,7 +340,8 @@
                             (click)="mostrarUpdate(comentPublication._id)">
                             <fa-icon [icon]="['fas', 'pencil-alt']"></fa-icon>
                           </button>
-                          <a type="button" class="close close-button-coment" (click)="deleteConfirmationComment(comentPublication._id)">
+                          <a type="button" class="close close-button-coment"
+                            (click)="deleteConfirmationComment(comentPublication._id)">
                             <fa-icon [icon]="['fas', 'trash-alt']"></fa-icon></a>
                         </div>
                       </div>
