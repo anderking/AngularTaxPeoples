@@ -8,11 +8,11 @@
     </div>
     <div class="row justify-content-center my-3">
       <div class="col-12">
-        <button class="btn btn-dark" (click)="goBack()">Regresar</button>
-        <button *ngIf="(ispost || rolID==='admin') && publication" class="btn btn-info"
+        <button class="btn btn-dark mt-3" (click)="goBack()">Regresar</button>
+        <button *ngIf="(ispost || rolID==='admin') && publication" class="btn btn-info mt-3"
           [routerLink]="['/publicaciones/edit',publication._id]">Editar</button>
-        <a *ngIf="(ispost || rolID==='admin') && publication" (click)="deleteConfirmationPublication(publication._id)"
-          class="btn btn-danger">Eliminar</a>
+        <button *ngIf="(ispost || rolID==='admin') && publication" (click)="deleteConfirmationPublication(publication._id)"
+          class="btn btn-danger mt-3">Eliminar</button>
       </div>
     </div>
     <hr>
@@ -33,8 +33,8 @@
                   <div class="col-8 col-lg-9">
                     <h4 class="card-title font-weight-bold">{{ publication.title }}</h4>
                   </div>
+                  <button href="#mostrarContratar" data-toggle="modal" class="btn btn-primary">Contratar</button>
                   <div class="col-4 col-lg-3">
-                    <a href="#mostrarContratar" data-toggle="modal" class="btn btn-primary">Contratar</a>
                     <div class="modal fade" id="mostrarContratar" tabindex="-1" role="dialog"
                       aria-labelledby="mostrarLikesUsers2" aria-hidden="true">
                       <div class="modal-dialog" role="document">
